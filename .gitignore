@@ -1,0 +1,15 @@
+# Build artifacts
+dist/*.zip
+dist/*.tgz
+*.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local env (never commit secrets)
+.env
+.env.*

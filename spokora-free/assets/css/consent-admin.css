@@ -1,0 +1,116 @@
+.spokora-consent-admin {
+	max-width: 52rem;
+}
+
+.spokora-consent-admin__lead {
+	max-width: 46rem;
+	line-height: 1.55;
+	margin: 0.5rem 0 1.25rem;
+}
+
+.spokora-consent-admin__grid {
+	display: grid;
+	gap: 1rem;
+	margin: 1.25rem 0 1.5rem;
+}
+
+@media (min-width: 48rem) {
+	.spokora-consent-admin__grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.spokora-consent-admin__card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 8px;
+	padding: 1rem 1.15rem;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.spokora-consent-admin__card h2 {
+	margin: 0 0 0.5rem;
+	font-size: 1.05rem;
+}
+
+.spokora-consent-admin__card p {
+	margin: 0 0 0.65rem;
+	line-height: 1.5;
+	color: #1d2327;
+}
+
+.spokora-consent-admin__card p:last-child {
+	margin-bottom: 0;
+}
+
+.spokora-consent-admin__checklist {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.spokora-consent-admin__checklist li {
+	display: flex;
+	gap: 0.65rem;
+	align-items: flex-start;
+	padding: 0.55rem 0;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.spokora-consent-admin__checklist li:last-child {
+	border-bottom: 0;
+}
+
+.spokora-consent-admin__mark {
+	flex-shrink: 0;
+	width: 1.35rem;
+	height: 1.35rem;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 0.85rem;
+	line-height: 1;
+}
+
+.spokora-consent-admin__mark.is-ok {
+	background: #d5f2e3;
+	color: #1e4620;
+}
+
+.spokora-consent-admin__mark.is-pending {
+	background: #f0f0f1;
+	color: #646970;
+}
+
+.spokora-consent-admin__checklist strong {
+	display: block;
+	margin-bottom: 0.15rem;
+}
+
+.spokora-consent-admin__checklist .description {
+	display: block;
+	margin: 0.2rem 0 0;
+}
+
+.spokora-consent-admin__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+}
+
+.spokora-consent-admin__actions .button {
+	margin: 0;
+}
+
+.spokora-consent-admin__form-card {
+	margin-top: 1.25rem;
+}
+
+.spokora-consent-admin__disclaimer {
+	margin-top: 1rem;
+	font-size: 12px;
+	color: #646970;
+}

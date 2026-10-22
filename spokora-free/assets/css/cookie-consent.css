@@ -1,0 +1,95 @@
+.spk-consent {
+	position: fixed;
+	inset: auto 0 0 0;
+	z-index: 100000;
+	padding: 0.75rem;
+	background: #1d2327;
+	color: #f6f7f7;
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.spk-consent__inner {
+	max-width: 52rem;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.spk-consent p {
+	margin: 0;
+	flex: 1 1 16rem;
+	font-size: 0.95rem;
+	line-height: 1.45;
+	color: #f6f7f7;
+}
+
+.spk-consent a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.spk-consent a:focus-visible {
+	outline: 2px solid #72aee6;
+	outline-offset: 2px;
+}
+
+.spk-consent__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: stretch;
+}
+
+.spk-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 0.65rem 1.05rem;
+	border-radius: 8px;
+	font: inherit;
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.spk-btn--consent {
+	min-width: 11rem;
+	flex: 1 1 auto;
+}
+
+.spk-btn--reject {
+	background: transparent;
+	color: #f6f7f7;
+	border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.spk-btn--reject:hover,
+.spk-btn--reject:focus-visible {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: #fff;
+	outline: none;
+}
+
+.spk-btn--accept {
+	background: #2271b1;
+	border: 2px solid #2271b1;
+	color: #fff;
+}
+
+.spk-btn--accept:hover,
+.spk-btn--accept:focus-visible {
+	background: #135e96;
+	border-color: #135e96;
+	outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.spk-consent,
+	.spk-btn {
+		transition: none;
+	}
+}
