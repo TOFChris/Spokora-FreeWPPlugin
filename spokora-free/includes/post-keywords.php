@@ -163,12 +163,16 @@ function spokora_post_keywords_for_scoring( $post_id, array $overrides = array()
  * @return array{primary: string, additional: string[], all: string[]}
  */
 function spokora_save_post_keywords_from_request( $post_id ) {
+	$nonce = isset( $_POST['spokora_seo_meta_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['spokora_seo_meta_nonce'] ) ) : '';
+	if ( '' === $nonce || ! wp_verify_nonce( $nonce, 'spokora_seo_save_meta' ) ) {
+		return spokora_get_post_keywords( $post_id );
+	}
 	$primary = isset( $_POST['spokora_focus_keyword'] )
 		? trim( sanitize_text_field( wp_unslash( $_POST['spokora_focus_keyword'] ) ) )
 		: '';
 
 	$additional_raw = isset( $_POST['spokora_additional_keywords'] )
-		? wp_unslash( $_POST['spokora_additional_keywords'] )
+		? sanitize_textarea_field( wp_unslash( $_POST['spokora_additional_keywords'] ) )
 		: '';
 	$additional = spokora_parse_keyword_input( $additional_raw );
 	$additional = array_values(

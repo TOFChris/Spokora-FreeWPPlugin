@@ -222,7 +222,7 @@ class Spokora_Redirect_Engine {
     public function process_301_redirects() {
         if ( is_admin() ) return; // Don't redirect the dashboard
 
-        $current_path = isset( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+        $current_path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
         if ( is_string( $current_path ) ) {
             $current_path = '/' . ltrim( $current_path, '/' );
             if ( '/llms.txt' === $current_path || preg_match( '#^/ai-docs/.+\.md$#', $current_path ) || preg_match( '#^/md/.+\.md$#', $current_path ) ) {
@@ -233,7 +233,7 @@ class Spokora_Redirect_Engine {
         $rules = get_option( 'spokora_redirect_rules' );
         if ( empty( $rules ) || ! is_string( $rules ) ) return;
 
-        $request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
+        $request_uri  = function_exists( 'spokora_request_uri' ) ? spokora_request_uri() : '/';
         $current_path = (string) wp_parse_url( $request_uri, PHP_URL_PATH );
         if ( '' === $current_path ) {
             $current_path = '/';

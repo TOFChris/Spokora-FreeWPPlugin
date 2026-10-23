@@ -58,7 +58,7 @@ function spokora_indexnow_maybe_serve() {
 	if ( is_admin() || ! spokora_indexnow_is_enabled() ) {
 		return;
 	}
-	$path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+	$path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
 	$key  = spokora_indexnow_key();
 	if ( '/' . $key . '.txt' !== $path ) {
 		return;
@@ -66,7 +66,7 @@ function spokora_indexnow_maybe_serve() {
 	status_header( 200 );
 	header( 'Content-Type: text/plain; charset=utf-8' );
 	header( 'X-Robots-Tag: noindex' );
-	echo $key;
+	echo esc_html( $key );
 	exit;
 }
 

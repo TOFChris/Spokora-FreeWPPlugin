@@ -75,6 +75,7 @@ if ( ! function_exists( 'spokora_ga_measurement_config_args' ) ) {
 			'anonymize_ip' => true,
 		);
 		if (
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin-only debug flag for Tag Assistant.
 			isset( $_GET['spokora_ga_debug'] )
 			&& function_exists( 'current_user_can' )
 			&& current_user_can( 'manage_options' )
@@ -85,85 +86,62 @@ if ( ! function_exists( 'spokora_ga_measurement_config_args' ) ) {
 	}
 }
 
-if ( ! function_exists( 'spokora_print_ga4_gtag_loader' ) ) {
+if ( ! function_exists( 'spokora_enqueue_ga4' ) ) {
 	/**
-	 * @param string $measurement_id GA4 ID.
+	 * Enqueue local GA4 loader (optional; only after a Measurement ID is stored).
+	 *
+	 * @param bool $analytics_granted Whether analytics_storage is granted.
 	 */
-	function spokora_print_ga4_gtag_loader( $measurement_id ) {
-		static $loader_printed = false;
-		if ( $loader_printed ) {
+	function spokora_enqueue_ga4( $analytics_granted ) {
+		static $done = false;
+		if ( $done || is_admin() ) {
 			return;
 		}
-		$measurement_id = spokora_sanitize_ga_measurement_id( $measurement_id );
-		if ( '' === $measurement_id ) {
+		$id = spokora_analytics_measurement_id();
+		if ( '' === $id || ! defined( 'SPOKORA_PLUGIN_URL' ) ) {
 			return;
 		}
-		$loader_printed = true;
-		printf(
-			"<script async src='https://www.googletagmanager.com/gtag/js?id=%s'></script>\n",
-			esc_attr( $measurement_id )
+		$done = true;
+		$ver  = defined( 'SPOKORA_VERSION' ) ? SPOKORA_VERSION : '0.1.24';
+		wp_enqueue_script(
+			'spokora-ga4',
+			SPOKORA_PLUGIN_URL . 'assets/js/ga4-loader.js',
+			array(),
+			$ver,
+			false
 		);
-	}
-}
-
-if ( ! function_exists( 'spokora_print_ga4_inline_bootstrap' ) ) {
-	/**
-	 * @param string $measurement_id GA4 ID.
-	 * @param bool   $analytics_granted Whether analytics_storage is granted.
-	 */
-	function spokora_print_ga4_inline_bootstrap( $measurement_id, $analytics_granted ) {
-		static $bootstrap_printed = false;
-		if ( $bootstrap_printed ) {
-			return;
-		}
-		$measurement_id = spokora_sanitize_ga_measurement_id( $measurement_id );
-		if ( '' === $measurement_id ) {
-			return;
-		}
-		$bootstrap_printed = true;
-		$config = wp_json_encode( spokora_ga_measurement_config_args() );
-		if ( false === $config ) {
-			$config = '{"anonymize_ip":true}';
-		}
-		$storage = $analytics_granted ? 'granted' : 'denied';
-		$wait    = $analytics_granted ? '' : ",'wait_for_update':500";
-		echo "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'" . esc_js( $storage ) . "','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'" . $wait . '});gtag(\'js\',new Date());gtag(\'config\',\'' . esc_js( $measurement_id ) . '\',' . $config . ');</script>' . "\n";
+		wp_localize_script(
+			'spokora-ga4',
+			'spokoraGa4',
+			array(
+				'id'      => $id,
+				'granted' => $analytics_granted ? 1 : 0,
+				'config'  => spokora_ga_measurement_config_args(),
+			)
+		);
 	}
 }
 
 if ( ! function_exists( 'spokora_print_ga4_head_after_consent' ) ) {
 	/**
-	 * Print GA4 gtag for returning visitors (after accept).
+	 * GA4 for returning visitors who already accepted.
 	 */
 	function spokora_print_ga4_head_after_consent() {
-		if ( is_admin() || ! function_exists( 'spokora_has_analytics_consent' ) || ! spokora_has_analytics_consent() ) {
+		if ( ! function_exists( 'spokora_has_analytics_consent' ) || ! spokora_has_analytics_consent() ) {
 			return;
 		}
-		$id = spokora_analytics_measurement_id();
-		if ( '' === $id ) {
-			return;
-		}
-		spokora_print_ga4_gtag_loader( $id );
-		spokora_print_ga4_inline_bootstrap( $id, true );
+		spokora_enqueue_ga4( true );
 	}
 }
 
 if ( ! function_exists( 'spokora_print_ga4_consent_mode_defaults' ) ) {
 	/**
-	 * Consent Mode + Google tag before accept (storage denied until Accept).
+	 * Consent Mode defaults (storage denied) until Accept.
 	 */
 	function spokora_print_ga4_consent_mode_defaults() {
-		if ( is_admin() ) {
-			return;
-		}
-		$id = spokora_analytics_measurement_id();
-		if ( '' === $id ) {
-			return;
-		}
 		if ( function_exists( 'spokora_has_analytics_consent' ) && spokora_has_analytics_consent() ) {
 			return;
 		}
-		spokora_print_ga4_gtag_loader( $id );
-		spokora_print_ga4_inline_bootstrap( $id, false );
+		spokora_enqueue_ga4( false );
 	}
 }

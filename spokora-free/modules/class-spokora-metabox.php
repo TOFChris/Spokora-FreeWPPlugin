@@ -111,7 +111,10 @@ class Spokora_MetaBox_Engine {
     }
 
     public function save_seo_meta_data( $post_id ) {
-        if ( ! isset( $_POST['spokora_seo_meta_nonce'] ) || ! wp_verify_nonce( $_POST['spokora_seo_meta_nonce'], 'spokora_seo_save_meta' ) ) return;
+        $nonce = isset( $_POST['spokora_seo_meta_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['spokora_seo_meta_nonce'] ) ) : '';
+        if ( '' === $nonce || ! wp_verify_nonce( $nonce, 'spokora_seo_save_meta' ) ) {
+            return;
+        }
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
         if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 
@@ -138,8 +141,12 @@ class Spokora_MetaBox_Engine {
             }
         }
 
-        if ( isset( $_POST['spokora_seo_title'] ) ) update_post_meta( $post_id, '_spokora_seo_title', sanitize_text_field( $_POST['spokora_seo_title'] ) );
-        if ( isset( $_POST['spokora_seo_desc'] ) ) update_post_meta( $post_id, '_spokora_seo_desc', sanitize_textarea_field( $_POST['spokora_seo_desc'] ) );
+        if ( isset( $_POST['spokora_seo_title'] ) ) {
+            update_post_meta( $post_id, '_spokora_seo_title', sanitize_text_field( wp_unslash( $_POST['spokora_seo_title'] ) ) );
+        }
+        if ( isset( $_POST['spokora_seo_desc'] ) ) {
+            update_post_meta( $post_id, '_spokora_seo_desc', sanitize_textarea_field( wp_unslash( $_POST['spokora_seo_desc'] ) ) );
+        }
 
         if ( isset( $_POST['spokora_custom_schema'] ) ) {
             $schema_data = wp_strip_all_tags( wp_unslash( $_POST['spokora_custom_schema'] ) );

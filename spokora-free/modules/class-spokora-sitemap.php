@@ -20,7 +20,7 @@ class Spokora_Sitemap_Engine {
     }
 
     public function generate_custom_sitemap() {
-        $path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+        $path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
         if ( preg_match( '#/sitemap\.xml$#', $path ) ) {
             
             status_header( 200 );

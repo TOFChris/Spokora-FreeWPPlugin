@@ -50,11 +50,17 @@ class Spokora_Performance_Engine {
     }
 
     public function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
-        if ( 'dns-prefetch' == $relation_type ) {
-            $emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
-            $urls = array_diff( $urls, array( $emoji_svg_url ) );
+        if ( 'dns-prefetch' !== $relation_type || ! is_array( $urls ) ) {
+            return $urls;
         }
-        return $urls;
+        return array_values(
+            array_filter(
+                $urls,
+                static function ( $url ) {
+                    return false === strpos( (string) $url, '/images/core/emoji/' );
+                }
+            )
+        );
     }
 
     // --- 2. REMOVE DASHICONS ---

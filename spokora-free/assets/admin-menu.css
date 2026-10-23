@@ -173,9 +173,12 @@
 	border: 1px solid #c3c4c7;
 }
 
-#adminmenu #toplevel_page_spokora .wp-menu-image img {
+#adminmenu #toplevel_page_spokora .wp-menu-image img,
+#adminmenu #toplevel_page_spokora-free .wp-menu-image img {
 	width: 20px;
 	height: 20px;
+	max-width: 20px;
+	max-height: 20px;
 	padding: 7px 0 0;
 	opacity: 1;
 	object-fit: contain;
@@ -420,7 +423,8 @@
 	width: fit-content;
 }
 
-#adminmenu #toplevel_page_spokora .wp-submenu a[href*="page=spokora-go-pro"] {
+#adminmenu #toplevel_page_spokora .wp-submenu a[href*="page=spokora-go-pro"],
+#adminmenu #toplevel_page_spokora-free .wp-submenu a[href*="page=spokora-go-pro"] {
 	font-weight: 600;
 }
 

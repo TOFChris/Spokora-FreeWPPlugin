@@ -120,7 +120,7 @@ class Spokora_Llms_Engine {
 		}
 
 		// Fallback when rewrite rules are not flushed yet.
-		$path = isset( $_SERVER['REQUEST_URI'] ) ? wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+		$path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
 		if ( ! is_string( $path ) ) {
 			return;
 		}

@@ -15,8 +15,6 @@ class Spokora_Consent {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ), 23 );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin' ) );
-		add_action( 'wp_head', array( $this, 'consent_mode_defaults' ), 4 );
-		add_action( 'wp_head', array( $this, 'analytics_head' ), 5 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_front' ), 20 );
 	}
 
@@ -346,7 +344,14 @@ class Spokora_Consent {
 			SPOKORA_VERSION,
 			true
 		);
-		$debug = current_user_can( 'manage_options' ) && isset( $_GET['spokora_ga_debug'] );
+		$debug = current_user_can( 'manage_options' ) && function_exists( 'spokora_query_arg' ) && null !== spokora_query_arg( 'spokora_ga_debug' );
+		if ( function_exists( 'spokora_has_analytics_consent' ) && spokora_has_analytics_consent() ) {
+			if ( function_exists( 'spokora_print_ga4_head_after_consent' ) ) {
+				spokora_print_ga4_head_after_consent();
+			}
+		} elseif ( function_exists( 'spokora_print_ga4_consent_mode_defaults' ) ) {
+			spokora_print_ga4_consent_mode_defaults();
+		}
 		wp_localize_script(
 			'spokora-free-consent',
 			'spokoraConsent',
@@ -363,24 +368,6 @@ class Spokora_Consent {
 				),
 			)
 		);
-	}
-
-	public function consent_mode_defaults() {
-		if ( ! $this->banner_enabled() ) {
-			return;
-		}
-		if ( function_exists( 'spokora_print_ga4_consent_mode_defaults' ) ) {
-			spokora_print_ga4_consent_mode_defaults();
-		}
-	}
-
-	public function analytics_head() {
-		if ( ! $this->banner_enabled() ) {
-			return;
-		}
-		if ( function_exists( 'spokora_print_ga4_head_after_consent' ) ) {
-			spokora_print_ga4_head_after_consent();
-		}
 	}
 }
 

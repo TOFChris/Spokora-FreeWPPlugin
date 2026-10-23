@@ -81,13 +81,14 @@ class Spokora_Onboarding {
 			return;
 		}
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( $screen && ( 'toplevel_page_spokora' === $screen->id || 'spokora_page_spokora-setup' === $screen->id ) ) {
+		if ( $screen && in_array( $screen->id, array( 'toplevel_page_spokora', 'toplevel_page_spokora-free', 'spokora_page_spokora-setup', 'spokora-free_page_spokora-setup' ), true ) ) {
 			return;
 		}
 		$url = admin_url( 'admin.php?page=spokora-setup&step=1' );
 		echo '<div class="notice notice-info"><p>';
 		echo wp_kses_post(
 			sprintf(
+				/* translators: 1: opening anchor tag, 2: closing anchor tag */
 				__( 'Spokora Free: run %1$sQuick setup%2$s for baseline SEO.', 'spokora-free' ),
 				'<a href="' . esc_url( $url ) . '">',
 				'</a>'
@@ -139,8 +140,9 @@ class Spokora_Onboarding {
 			$opts['global_desc'] = sanitize_textarea_field( wp_unslash( $_POST['global_desc'] ) );
 		}
 		if ( isset( $_POST['schema_type'] ) ) {
+			$raw_type = sanitize_text_field( wp_unslash( $_POST['schema_type'] ) );
 			$opts['schema_type'] = function_exists( 'spokora_sanitize_schema_type' )
-				? spokora_sanitize_schema_type( wp_unslash( $_POST['schema_type'] ) )
+				? spokora_sanitize_schema_type( $raw_type )
 				: 'ProfessionalService';
 		}
 		$org = isset( $opts['hwc_org_name'] ) ? trim( (string) $opts['hwc_org_name'] ) : '';
@@ -290,6 +292,7 @@ class Spokora_Onboarding {
 		}
 		$seq      = $this->sequence();
 		$max      = count( $seq );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Wizard step is read-only navigation.
 		$step     = isset( $_GET['step'] ) ? absint( wp_unslash( $_GET['step'] ) ) : 1;
 		$step     = max( 1, min( $max, $step ) );
 		$opts     = $this->get_opts();
@@ -377,7 +380,10 @@ class Spokora_Onboarding {
 		?>
 		<h2><?php echo esc_html__( 'Protect the old setup, then import it', 'spokora-free' ); ?></h2>
 		<p><?php echo esc_html__( 'Do this before Business Info. Download a backup first. Then copy titles, descriptions, and exact 301s out of the old SEO plugin. You can come back to either button.', 'spokora-free' ); ?></p>
-		<?php if ( isset( $_GET['migration'] ) && 'success' === $_GET['migration'] ) : ?>
+		<?php
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Post-import flash message after verified POST.
+		if ( isset( $_GET['migration'] ) && 'success' === $_GET['migration'] ) :
+			?>
 			<div class="notice notice-success inline"><p>
 				<?php
 				echo esc_html(
@@ -441,6 +447,7 @@ class Spokora_Onboarding {
 	private function render_step_business_info( array $opts ) {
 		$legacy = function_exists( 'spokora_detect_active_legacy_seo_plugins' ) ? spokora_detect_active_legacy_seo_plugins() : array();
 		$v      = $this->business_info_values( $opts );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Validation flash after POST.
 		$err    = isset( $_GET['setup_err'] ) && 'org' === sanitize_key( wp_unslash( $_GET['setup_err'] ) );
 		?>
 		<h2><?php echo esc_html__( 'Business Info', 'spokora-free' ); ?></h2>
@@ -478,7 +485,6 @@ class Spokora_Onboarding {
 							'id'          => 'schema_type',
 							'class'       => 'large-text',
 							'style'       => 'max-width: 100%; width: 32em;',
-							'text_domain' => 'spokora-free',
 						)
 					);
 				}

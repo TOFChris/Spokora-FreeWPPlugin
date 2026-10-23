@@ -115,7 +115,7 @@ function spokora_article_md_find( $slug ) {
  */
 function spokora_article_md_body( WP_Post $post ) {
 	setup_postdata( $post );
-	$html = apply_filters( 'the_content', $post->post_content );
+	$html = apply_filters( 'the_content', $post->post_content ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core content filter.
 	wp_reset_postdata();
 	$body = spokora_article_html_to_markdown( is_string( $html ) ? $html : '' );
 	if ( '' === $body ) {
@@ -151,7 +151,7 @@ function spokora_article_md_maybe_serve() {
 	}
 	$slug = get_query_var( 'spokora_article_md' );
 	if ( ! is_string( $slug ) || '' === $slug ) {
-		$path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+		$path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
 		if ( preg_match( '#^/md/([^/]+)\.md$#', $path, $match ) ) {
 			$slug = rawurldecode( $match[1] );
 		}
@@ -173,6 +173,7 @@ function spokora_article_md_maybe_serve() {
 		echo "Not found\n";
 		exit;
 	}
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Raw markdown response; body is generated from post content.
 	echo spokora_article_md_body( $post );
 	exit;
 }
@@ -193,7 +194,7 @@ function spokora_article_md_link_header() {
 		}
 	}
 	if ( ! $post instanceof WP_Post ) {
-		$path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+		$path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
 		$slug = trim( $path, '/' );
 		if ( '' === $slug || str_contains( $slug, '/' ) ) {
 			return;

@@ -131,6 +131,7 @@ function spokora_content_schema() {
 		JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
 	);
 	if ( is_string( $json ) ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD from wp_json_encode with hex flags.
 		echo "\n" . '<script type="application/ld+json">' . $json . '</script>' . "\n";
 	}
 }
@@ -140,7 +141,7 @@ add_action( 'wp_head', 'spokora_content_schema', 20 );
  * News and video sitemaps. Runs before the general sitemap, which also matches these paths.
  */
 function spokora_content_sitemaps() {
-	$path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
+	$path = function_exists( 'spokora_request_path' ) ? spokora_request_path() : '';
 	if ( preg_match( '#/news-sitemap\.xml$#', $path ) ) {
 		spokora_content_news_sitemap();
 	}

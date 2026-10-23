@@ -38,15 +38,17 @@ class Spokora_Legacy_Import_Admin {
 			<p class="description"><?php esc_html_e( 'Take over a site from Yoast, Rank Math, AIOSEO, or SEOPress. Copy titles, descriptions, focus and additional keyphrases, and exact 301 redirects into Spokora, then turn the old plugins off.', 'spokora-free' ); ?></p>
 
 			<?php
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin flash messages after verified POST redirects.
 			if ( isset( $_GET['migration'] ) && 'success' === $_GET['migration'] ) {
 				$count = isset( $_GET['count'] ) ? absint( $_GET['count'] ) : 0;
+				$redirect_note = function_exists( 'spokora_legacy_redirect_result_sentence' ) ? spokora_legacy_redirect_result_sentence() : '';
 				echo '<div class="notice notice-success"><p><strong>' . esc_html__( 'Success:', 'spokora-free' ) . '</strong> ';
 				echo esc_html(
 					sprintf(
-						/* translators: %d: meta fields imported */
-						__( 'Imported %d SEO fields from legacy plugins. %s', 'spokora-free' ),
+						/* translators: 1: number of meta fields imported, 2: redirect import sentence */
+						__( 'Imported %1$d SEO fields from legacy plugins. %2$s', 'spokora-free' ),
 						$count,
-						function_exists( 'spokora_legacy_redirect_result_sentence' ) ? spokora_legacy_redirect_result_sentence() : ''
+						$redirect_note
 					)
 				);
 				echo '</p></div>';
@@ -54,7 +56,13 @@ class Spokora_Legacy_Import_Admin {
 			if ( isset( $_GET['legacy_seo'] ) && 'deactivated' === $_GET['legacy_seo'] ) {
 				$count = isset( $_GET['count'] ) ? absint( $_GET['count'] ) : 0;
 				echo '<div class="notice notice-success"><p>';
-				echo esc_html( sprintf( __( 'Deactivated %d legacy SEO plugin(s).', 'spokora-free' ), $count ) );
+				echo esc_html(
+					sprintf(
+						/* translators: %d: number of plugins deactivated */
+						__( 'Deactivated %d legacy SEO plugin(s).', 'spokora-free' ),
+						$count
+					)
+				);
 				if ( function_exists( 'spokora_legacy_redirect_result_sentence' ) ) {
 					echo ' ' . esc_html( spokora_legacy_redirect_result_sentence() );
 				}

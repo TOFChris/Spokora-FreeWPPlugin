@@ -179,7 +179,7 @@ function spokora_render_admin_tip( $message, array $links = array() ) {
 		foreach ( $links as $label => $url ) {
 			$parts[] = '<a href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a>';
 		}
-		echo implode( ' · ', $parts );
+		echo wp_kses_post( implode( ' · ', $parts ) );
 	}
 	echo '</p></div>';
 }

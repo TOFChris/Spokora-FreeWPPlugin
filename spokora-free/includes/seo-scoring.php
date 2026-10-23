@@ -259,6 +259,7 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			__( 'SEO title', 'spokora-free' ),
 			'warn',
 			sprintf(
+				/* translators: %1$d: title character count */
 				__( 'Acceptable length (%1$d chars). Ideal is 50–60.', 'spokora-free' ),
 				$title_len
 			),
@@ -271,6 +272,7 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			__( 'SEO title', 'spokora-free' ),
 			'warn',
 			sprintf(
+				/* translators: %1$d: title character count */
 				__( 'Length is %1$d characters. Aim for 50–60.', 'spokora-free' ),
 				$title_len
 			),
@@ -295,7 +297,11 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			'meta_desc',
 			__( 'Meta description', 'spokora-free' ),
 			'pass',
-			sprintf( __( 'Good length (%d characters).', 'spokora-free' ), $desc_len ),
+			sprintf(
+				/* translators: %d: meta description character count */
+				__( 'Good length (%d characters).', 'spokora-free' ),
+				$desc_len
+			),
 			20,
 			20
 		);
@@ -304,7 +310,11 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			'meta_desc',
 			__( 'Meta description', 'spokora-free' ),
 			'warn',
-			sprintf( __( '%1$d characters — close; aim for 120–160.', 'spokora-free' ), $desc_len ),
+			sprintf(
+				/* translators: %1$d: meta description character count */
+				__( '%1$d characters — close; aim for 120–160.', 'spokora-free' ),
+				$desc_len
+			),
 			20,
 			spokora_score_points_for_status( 'warn', 20 )
 		);
@@ -313,7 +323,11 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			'meta_desc',
 			__( 'Meta description', 'spokora-free' ),
 			'warn',
-			sprintf( __( '%1$d characters — adjust toward 120–160.', 'spokora-free' ), $desc_len ),
+			sprintf(
+				/* translators: %1$d: meta description character count */
+				__( '%1$d characters — adjust toward 120–160.', 'spokora-free' ),
+				$desc_len
+			),
 			20,
 			spokora_score_points_for_status( 'warn', 20 )
 		);
@@ -342,6 +356,7 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			__( 'Content depth', 'spokora-free' ),
 			'warn',
 			sprintf(
+				/* translators: %1$d: word count in post body */
 				__( '%1$d words — thin for SEO. Add more substantive copy.', 'spokora-free' ),
 				$word_count
 			),
@@ -354,7 +369,11 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			__( 'Content depth', 'spokora-free' ),
 			'fail',
 			$word_count > 0
-				? sprintf( __( 'Only %1$d words detected.', 'spokora-free' ), $word_count )
+				? sprintf(
+					/* translators: %1$d: word count in post body */
+					__( 'Only %1$d words detected.', 'spokora-free' ),
+					$word_count
+				)
 				: __( 'No indexable body text found.', 'spokora-free' ),
 			25,
 			0
@@ -744,7 +763,11 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 			'source_text',
 			__( 'Source content', 'spokora-free' ),
 			'pass',
-			sprintf( __( '%1$d words available to derive AI docs.', 'spokora-free' ), $words ),
+			sprintf(
+				/* translators: %1$d: word count used for AI docs */
+				__( '%1$d words available to derive AI docs.', 'spokora-free' ),
+				$words
+			),
 			10,
 			10
 		);

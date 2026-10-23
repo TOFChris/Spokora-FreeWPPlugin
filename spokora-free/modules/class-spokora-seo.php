@@ -110,6 +110,7 @@ class SPOKORA_SEO {
 		if ( ! is_string( $json ) ) {
 			return;
 		}
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD from wp_json_encode with hex flags.
 		echo "\n" . '<script type="application/ld+json">' . $json . '</script>' . "\n";
 	}
 

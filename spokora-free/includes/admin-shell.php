@@ -103,7 +103,10 @@ function spokora_free_render_home() {
 			);
 			?>
 		</p>
-		<?php if ( isset( $_GET['spokora_note'] ) && 'snoozed' === sanitize_key( wp_unslash( $_GET['spokora_note'] ) ) ) : ?>
+		<?php
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Dismissible admin notice flash.
+		if ( isset( $_GET['spokora_note'] ) && 'snoozed' === sanitize_key( wp_unslash( $_GET['spokora_note'] ) ) ) :
+			?>
 			<div class="notice notice-success is-dismissible"><p><?php echo esc_html__( 'Got it. This note will come back in about a month.', 'spokora-free' ); ?></p></div>
 		<?php endif; ?>
 		<?php

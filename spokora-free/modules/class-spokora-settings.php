@@ -119,10 +119,10 @@ class Spokora_Settings_Engine {
             return;
         }
         if ( empty( $_POST['spokora_legacy_import_confirmed'] ) ) {
-            wp_redirect( admin_url( 'admin.php?page=spokora-legacy-import&legacy_seo=confirm_required' ) );
+            wp_safe_redirect( admin_url( 'admin.php?page=spokora-legacy-import&legacy_seo=confirm_required' ) );
             exit;
         }
-        $selected  = isset( $_POST['spokora_legacy_plugins'] ) ? (array) wp_unslash( $_POST['spokora_legacy_plugins'] ) : array();
+        $selected  = isset( $_POST['spokora_legacy_plugins'] ) ? array_map( 'sanitize_text_field', (array) wp_unslash( $_POST['spokora_legacy_plugins'] ) ) : array();
         $redirects = spokora_import_legacy_redirects();
         $result    = spokora_deactivate_legacy_seo_plugins( $selected );
         $args      = array(
@@ -134,7 +134,7 @@ class Spokora_Settings_Engine {
         if ( $result['failed'] ) {
             $args['legacy_failed'] = rawurlencode( implode( ', ', $result['failed'] ) );
         }
-        wp_redirect( add_query_arg( $args, admin_url( 'admin.php?page=spokora-legacy-import' ) ) );
+        wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php?page=spokora-legacy-import' ) ) );
         exit;
     }
 
@@ -152,10 +152,11 @@ class Spokora_Settings_Engine {
                 <h1 style="margin-top: 0; font-weight: 800; letter-spacing: -0.5px;"><?php echo esc_html__( 'Business Info', 'spokora-free' ); ?></h1>
                 <p style="color: #666; font-size: 16px;"><?php echo esc_html__( 'Organization schema, global SEO fallbacks, and site identity. Legacy plugin import lives under Configure → Import SEO.', 'spokora-free' ); ?></p>
                 
-                <?php 
-                if ( isset( $_GET['migration'] ) && $_GET['migration'] == 'success' ) {
-                    $count = isset( $_GET['count'] ) ? intval( $_GET['count'] ) : 0;
-                    echo '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px; border-left: 4px solid #28a745;"><strong>Success:</strong> Imported ' . $count . ' SEO data points from legacy plugins. ' . esc_html( spokora_legacy_redirect_result_sentence() ) . '</div>';
+                <?php
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin flash messages after verified POST redirects.
+                if ( isset( $_GET['migration'] ) && 'success' === $_GET['migration'] ) {
+                    $count = isset( $_GET['count'] ) ? absint( $_GET['count'] ) : 0;
+                    echo '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px; border-left: 4px solid #28a745;"><strong>Success:</strong> Imported ' . esc_html( (string) $count ) . ' SEO data points from legacy plugins. ' . esc_html( spokora_legacy_redirect_result_sentence() ) . '</div>';
                 }
                 if ( isset( $_GET['legacy_seo'] ) && 'deactivated' === $_GET['legacy_seo'] ) {
                     $count = isset( $_GET['count'] ) ? absint( $_GET['count'] ) : 0;
@@ -243,7 +244,6 @@ class Spokora_Settings_Engine {
                                             'name'        => 'spokora_options[schema_type]',
                                             'id'          => 'spokora_schema_type',
                                             'style'       => 'width: 100%; max-width: 36em;',
-                                            'text_domain' => 'spokora-free',
                                         )
                                     );
                                 }

@@ -4,6 +4,15 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.24] - 2026-10-23
+
+### Fixed
+
+- WordPress.org **Plugin Check** / PHPCS: i18n translators comments, ordered placeholders, escaping and redirect hygiene, backup export annotations, GA4 local enqueue, schema-type text domain literals.
+- Admin sidebar Spokora icon sized to 20×20 (Free menu slug `spokora-free` was missing from the CSS).
+
+---
+
 ## [0.1.23] - 2026-10-23
 
 ### Changed
