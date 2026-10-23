@@ -7,6 +7,10 @@ Thank you for helping improve **Spokora Free**. This repo contains **only** the 
 - Bug fixes, accessibility, security hardening, and documentation improvements are welcome.
 - Features that belong in [Spokora Pro](https://spokora.com) (API vault, rank tracking, GSC integration, etc.) will be declined here.
 
+## That One Firm agents (internal)
+
+Spokora Free is developed in the nested clone at `crew-webhooks/that-one-firm/projects/Spokora-FreeWPPlugin/`. **Every Free release must be committed and pushed to `main` on this GitHub repo** (and tagged with a release zip), not only deployed to spokora.com. Full checklist: [agent-notes/spokora-free.md](https://github.com/TOFChris/teamswarm/blob/main/agent-notes/spokora-free.md) in the teamswarm monorepo.
+
 ## Before you open a PR
 
 1. Test on a clean WordPress 6.x site with PHP 7.4+.
