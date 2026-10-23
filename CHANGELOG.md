@@ -4,6 +4,14 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.26] - 2026-10-23
+
+### Added
+
+- WordPress **multisite**: `Network: true`. Network Activate seeds every blog (rewrites for `/llms.txt`, `/ai-docs/`, `/md/`). New sites in the network get the same seed. Each site keeps its own Business Info, sitemap, and redirects. ThreeWP Broadcast copies hidden `_spokora_*` (and `_hw_seo_*`) SEO fields with the post.
+
+---
+
 ## [0.1.25] - 2026-10-23
 
 ### Fixed

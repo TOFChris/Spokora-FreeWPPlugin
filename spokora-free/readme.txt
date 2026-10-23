@@ -5,7 +5,7 @@ Tags: seo, schema, sitemap, redirects, xml-sitemap
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.25
+Stable tag: 0.1.26
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,8 +49,8 @@ Optional extra forum: [forum.spokora.com](https://forum.spokora.com/)
 == Installation ==
 
 1. Install from Plugins → Add New, or upload the `spokora-free` folder to `/wp-content/plugins/`.
-2. Activate **Spokora Free**.
-3. Open **Spokora → Quick setup** and follow the wizard.
+2. Activate **Spokora Free**. On **multisite**, use **Network Activate** so every site in the network gets SEO, sitemap, redirects, and `/llms.txt`.
+3. Open **Spokora → Quick setup** on each site that needs its own Business Info (shop NAP is per site).
 4. Optional: **Cookies & privacy** to show a banner; **Search ping** to enable IndexNow.
 
 == Frequently Asked Questions ==
@@ -75,7 +75,14 @@ No. Import copies data into Spokora. Deactivating the old plugin is a separate, 
 
 No. It is off on new installs until you enable it under Cookies & privacy.
 
+= Does it work on WordPress multisite / subdomains? =
+
+Yes. Network Activate so each site in the network runs the plugin. Titles, schema, sitemap, redirects, and `/llms.txt` are per site — a shop subdomain keeps its own Business Info. If you use ThreeWP Broadcast, SEO box fields copy with the post. Do not run Free next to Spokora Pro.
+
 == Changelog ==
+
+= 0.1.26 =
+* Multisite: Network Activate seeds every site; Broadcast copies hidden SEO/LLMS post meta.
 
 = 0.1.25 =
 * Remove “Tested up to” from the plugin PHP header (WordPress.org scan: that field belongs only in readme.txt).
@@ -107,6 +114,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 * Honest copy about version checks (removed in 0.1.20 for the directory).
 
 == Upgrade Notice ==
+
+= 0.1.26 =
+Multisite-ready: Network Activate; SEO fields travel with ThreeWP Broadcast.
 
 = 0.1.25 =
 WordPress.org: Tested up to lives only in the readme.

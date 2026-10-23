@@ -49,7 +49,7 @@ See [docs/PRODUCT.md](docs/PRODUCT.md) and [docs/MODULE-CUT.md](docs/MODULE-CUT.
 
 ## Requirements
 
-- WordPress **6.0+**
+- WordPress **6.0+** (single site or **multisite** — Network Activate)
 - PHP **7.4+**
 - Not compatible with **Spokora Pro** active at the same time (`spokora/spokora.php`)
 
@@ -61,7 +61,7 @@ See [docs/PRODUCT.md](docs/PRODUCT.md) and [docs/MODULE-CUT.md](docs/MODULE-CUT.
 
 1. Download the latest `spokora-free-x.y.z.zip` from [Releases](https://github.com/TOFChris/Spokora-FreeWPPlugin/releases) or [spokora.com](https://spokora.com).
 2. In wp-admin: **Plugins → Add New → Upload Plugin**, choose the zip, install, activate.
-3. Open **Spokora → Quick setup** and follow the wizard.
+3. Open **Spokora → Quick setup** and follow the wizard. On multisite, Network Activate, then run Quick setup on each site that needs its own Business Info.
 
 The zip layout is `spokora-free/spokora-free.php` (Linux-safe paths).
 
@@ -69,7 +69,7 @@ The zip layout is `spokora-free/spokora-free.php` (Linux-safe paths).
 
 1. Clone this repo.
 2. Copy the `spokora-free/` folder into `wp-content/plugins/`.
-3. Activate **Spokora Free** in **Plugins**.
+3. Activate **Spokora Free** in **Plugins**. On a network, **Network Activate**.
 
 Or build a zip (Windows or CI):
 

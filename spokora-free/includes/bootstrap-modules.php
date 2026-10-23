@@ -125,14 +125,38 @@ function spokora_sync_version_and_prompt( $from_activation = false ) {
 }
 
 /**
- * Activation: llms / markdown rewrites.
+ * Rewrites + first-run flags for the current blog.
+ *
+ * @param bool $offer_wizard True to set the Quick setup redirect on this request.
  */
-function spokora_on_activate() {
+function spokora_activate_current_blog( $offer_wizard = true ) {
 	add_rewrite_rule( '^llms\.txt$', 'index.php?spokora_llms_hub=1', 'top' );
 	add_rewrite_rule( '^ai-docs/([^/]+)\.md$', 'index.php?spokora_ai_doc_slug=$matches[1]', 'top' );
 	add_rewrite_rule( '^md/([^/]+)\.md$', 'index.php?spokora_article_md=$matches[1]', 'top' );
 	flush_rewrite_rules();
-	spokora_sync_version_and_prompt( true );
+	if ( $offer_wizard ) {
+		spokora_sync_version_and_prompt( true );
+		return;
+	}
+	if ( false === get_option( 'spokora_modules', false ) ) {
+		add_option( 'spokora_modules', spokora_get_default_modules() );
+		update_option( 'spokora_onboarding_pending', '1' );
+	}
+	$current = defined( 'SPOKORA_VERSION' ) ? SPOKORA_VERSION : '0';
+	update_option( 'spokora_free_plugin_version_stored', $current );
+}
+
+/**
+ * Activation. Network Activate seeds every site in the network.
+ *
+ * @param bool $network_wide True when Network Activate runs.
+ */
+function spokora_on_activate( $network_wide = false ) {
+	if ( is_multisite() && $network_wide && function_exists( 'spokora_free_bootstrap_network' ) ) {
+		spokora_free_bootstrap_network( get_current_blog_id() );
+		return;
+	}
+	spokora_activate_current_blog( true );
 }
 
 add_action(

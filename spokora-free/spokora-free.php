@@ -3,9 +3,10 @@
  * Plugin Name: Spokora Free
  * Plugin URI: https://spokora.com
  * Description: Free SEO, schema, sitemap, and redirects for WordPress websites. No account, no license key.
- * Version: 0.1.25
+ * Version: 0.1.26
  * Requires at least: 6.0
  * Requires PHP: 7.4
+ * Network: true
  * Author: That One Firm
  * Author URI: https://thatonefirm.com
  * License: GPL-2.0-or-later
@@ -92,7 +93,8 @@ function spokora_free_pro_is_present() {
 	if ( ! function_exists( 'is_plugin_active' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
-	return is_plugin_active( spokora_free_pro_plugin_file() );
+	$file = spokora_free_pro_plugin_file();
+	return is_plugin_active( $file ) || is_plugin_active_for_network( $file );
 }
 
 if ( spokora_free_pro_is_present() ) {
@@ -145,6 +147,7 @@ require_once SPOKORA_PLUGIN_DIR . 'includes/http-request.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/module-help.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/module-manifest.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/bootstrap-modules.php';
+require_once SPOKORA_PLUGIN_DIR . 'includes/multisite.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/theme-compat.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/gemini-content.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/post-keywords.php';
