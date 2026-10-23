@@ -14,7 +14,7 @@
 
 **Paragraph 1**
 
-This one is on the house. Titles, schema, sitemap, redirects — the SEO stack, no meter, no account. You do not register this site with us, so we cannot push a plugin update here the way Pro does with a key. We are submitting Spokora Free to WordPress.org soon. After it is in the directory, turn on automatic updates on the Plugins screen (or Dashboard → Updates) like any other .org plugin. Until then, download a new zip from spokora.com, or sign up so we can email you when a build ships.
+This one is on the house. Titles, schema, sitemap, redirects — the SEO stack, no meter, no account. You do not register this site and you do not need a key. The plugin still checks spokora.com for a newer zip when you open Plugins or tap Check for updates. That is a version check, not a login. After we list on WordPress.org, you can also use automatic updates like any other .org plugin. Optional: sign up so we can email you when a build ships.
 
 **Paragraph 2**
 
