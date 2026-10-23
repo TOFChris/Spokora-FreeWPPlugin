@@ -102,7 +102,7 @@ if ( ! function_exists( 'spokora_enqueue_ga4' ) ) {
 			return;
 		}
 		$done = true;
-		$ver  = defined( 'SPOKORA_VERSION' ) ? SPOKORA_VERSION : '0.1.24';
+		$ver  = defined( 'SPOKORA_VERSION' ) ? SPOKORA_VERSION : '0.1.25';
 		wp_enqueue_script(
 			'spokora-ga4',
 			SPOKORA_PLUGIN_URL . 'assets/js/ga4-loader.js',

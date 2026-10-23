@@ -4,6 +4,14 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.25] - 2026-10-23
+
+### Fixed
+
+- WordPress.org plugin scan: removed `Tested up to` from the main PHP plugin header. It stays in `readme.txt` only.
+
+---
+
 ## [0.1.24] - 2026-10-23
 
 ### Fixed

@@ -5,7 +5,7 @@ Tags: seo, schema, sitemap, redirects, xml-sitemap
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.24
+Stable tag: 0.1.25
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 
 == Changelog ==
 
+= 0.1.25 =
+* Remove “Tested up to” from the plugin PHP header (WordPress.org scan: that field belongs only in readme.txt).
+
 = 0.1.24 =
 * WordPress.org Plugin Check: PHPCS fixes (i18n, escaping, redirects, backup export, GA4 enqueue).
 * Admin menu icon scaled to match other dashboard icons.
@@ -104,6 +107,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 * Honest copy about version checks (removed in 0.1.20 for the directory).
 
 == Upgrade Notice ==
+
+= 0.1.25 =
+WordPress.org: Tested up to lives only in the readme.
 
 = 0.1.24 =
 Plugin Check PHPCS fixes for WordPress.org review.

@@ -3,10 +3,9 @@
  * Plugin Name: Spokora Free
  * Plugin URI: https://spokora.com
  * Description: Free SEO, schema, sitemap, and redirects for WordPress websites. No account, no license key.
- * Version: 0.1.24
+ * Version: 0.1.25
  * Requires at least: 6.0
  * Requires PHP: 7.4
- * Tested up to: 7.1
  * Author: That One Firm
  * Author URI: https://thatonefirm.com
  * License: GPL-2.0-or-later
