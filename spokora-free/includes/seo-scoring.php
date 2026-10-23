@@ -68,7 +68,7 @@ function spokora_get_scoring_content( $post_id, array $overrides = array() ) {
 		return array(
 			'text'   => '',
 			'source' => 'none',
-			'label'  => __( 'No content', 'spokora' ),
+			'label'  => __( 'No content', 'spokora-free' ),
 		);
 	}
 
@@ -78,7 +78,7 @@ function spokora_get_scoring_content( $post_id, array $overrides = array() ) {
 		return array(
 			'text'   => trim( $body ),
 			'source' => 'post_content',
-			'label'  => __( 'Saved post content', 'spokora' ),
+			'label'  => __( 'Saved post content', 'spokora-free' ),
 		);
 	}
 	$resolved = spokora_resolve_ai_content( $post_id, $editor );
@@ -94,7 +94,7 @@ function spokora_get_scoring_content( $post_id, array $overrides = array() ) {
 		return array(
 			'text'   => $body,
 			'source' => 'post_content',
-			'label'  => __( 'Saved post content', 'spokora' ),
+			'label'  => __( 'Saved post content', 'spokora-free' ),
 		);
 	}
 
@@ -209,9 +209,9 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			'checks'          => array(
 				spokora_score_check(
 					'excluded',
-					__( 'Excluded from scoring', 'spokora' ),
+					__( 'Excluded from scoring', 'spokora-free' ),
 					'na',
-					__( 'This page is excluded from SEO scoring.', 'spokora' ),
+					__( 'This page is excluded from SEO scoring.', 'spokora-free' ),
 					100,
 					100
 				),
@@ -234,20 +234,20 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( $title === '' ) {
 		$checks[] = spokora_score_check(
 			'title_present',
-			__( 'SEO title', 'spokora' ),
+			__( 'SEO title', 'spokora-free' ),
 			'fail',
-			__( 'Add a custom SEO title or ensure the page title is set.', 'spokora' ),
+			__( 'Add a custom SEO title or ensure the page title is set.', 'spokora-free' ),
 			15,
 			0
 		);
 	} elseif ( $title_len >= 50 && $title_len <= 60 ) {
 		$checks[] = spokora_score_check(
 			'title_present',
-			__( 'SEO title', 'spokora' ),
+			__( 'SEO title', 'spokora-free' ),
 			'pass',
 			sprintf(
 				/* translators: %d: character count */
-				__( 'Good length (%d characters).', 'spokora' ),
+				__( 'Good length (%d characters).', 'spokora-free' ),
 				$title_len
 			),
 			15,
@@ -256,10 +256,10 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	} elseif ( $title_len >= 40 && $title_len <= 70 ) {
 		$checks[] = spokora_score_check(
 			'title_present',
-			__( 'SEO title', 'spokora' ),
+			__( 'SEO title', 'spokora-free' ),
 			'warn',
 			sprintf(
-				__( 'Acceptable length (%1$d chars). Ideal is 50–60.', 'spokora' ),
+				__( 'Acceptable length (%1$d chars). Ideal is 50–60.', 'spokora-free' ),
 				$title_len
 			),
 			15,
@@ -268,10 +268,10 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	} else {
 		$checks[] = spokora_score_check(
 			'title_present',
-			__( 'SEO title', 'spokora' ),
+			__( 'SEO title', 'spokora-free' ),
 			'warn',
 			sprintf(
-				__( 'Length is %1$d characters. Aim for 50–60.', 'spokora' ),
+				__( 'Length is %1$d characters. Aim for 50–60.', 'spokora-free' ),
 				$title_len
 			),
 			15,
@@ -284,36 +284,36 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( $desc === '' ) {
 		$checks[] = spokora_score_check(
 			'meta_desc',
-			__( 'Meta description', 'spokora' ),
+			__( 'Meta description', 'spokora-free' ),
 			'fail',
-			__( 'Add a meta description (120–160 characters).', 'spokora' ),
+			__( 'Add a meta description (120–160 characters).', 'spokora-free' ),
 			20,
 			0
 		);
 	} elseif ( $desc_len >= 120 && $desc_len <= 160 ) {
 		$checks[] = spokora_score_check(
 			'meta_desc',
-			__( 'Meta description', 'spokora' ),
+			__( 'Meta description', 'spokora-free' ),
 			'pass',
-			sprintf( __( 'Good length (%d characters).', 'spokora' ), $desc_len ),
+			sprintf( __( 'Good length (%d characters).', 'spokora-free' ), $desc_len ),
 			20,
 			20
 		);
 	} elseif ( $desc_len >= 90 && $desc_len <= 180 ) {
 		$checks[] = spokora_score_check(
 			'meta_desc',
-			__( 'Meta description', 'spokora' ),
+			__( 'Meta description', 'spokora-free' ),
 			'warn',
-			sprintf( __( '%1$d characters — close; aim for 120–160.', 'spokora' ), $desc_len ),
+			sprintf( __( '%1$d characters — close; aim for 120–160.', 'spokora-free' ), $desc_len ),
 			20,
 			spokora_score_points_for_status( 'warn', 20 )
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'meta_desc',
-			__( 'Meta description', 'spokora' ),
+			__( 'Meta description', 'spokora-free' ),
 			'warn',
-			sprintf( __( '%1$d characters — adjust toward 120–160.', 'spokora' ), $desc_len ),
+			sprintf( __( '%1$d characters — adjust toward 120–160.', 'spokora-free' ), $desc_len ),
 			20,
 			spokora_score_points_for_status( 'warn', 20 )
 		);
@@ -325,11 +325,11 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( $word_count >= $min_words ) {
 		$checks[] = spokora_score_check(
 			'content_depth',
-			__( 'Content depth', 'spokora' ),
+			__( 'Content depth', 'spokora-free' ),
 			'pass',
 			sprintf(
 				/* translators: 1: word count, 2: content source label */
-				__( '%1$d words (%2$s).', 'spokora' ),
+				__( '%1$d words (%2$s).', 'spokora-free' ),
 				$word_count,
 				$content_bundle['label']
 			),
@@ -339,10 +339,10 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	} elseif ( $word_count >= $warn_words ) {
 		$checks[] = spokora_score_check(
 			'content_depth',
-			__( 'Content depth', 'spokora' ),
+			__( 'Content depth', 'spokora-free' ),
 			'warn',
 			sprintf(
-				__( '%1$d words — thin for SEO. Add more substantive copy.', 'spokora' ),
+				__( '%1$d words — thin for SEO. Add more substantive copy.', 'spokora-free' ),
 				$word_count
 			),
 			25,
@@ -351,11 +351,11 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	} else {
 		$checks[] = spokora_score_check(
 			'content_depth',
-			__( 'Content depth', 'spokora' ),
+			__( 'Content depth', 'spokora-free' ),
 			'fail',
 			$word_count > 0
-				? sprintf( __( 'Only %1$d words detected.', 'spokora' ), $word_count )
-				: __( 'No indexable body text found.', 'spokora' ),
+				? sprintf( __( 'Only %1$d words detected.', 'spokora-free' ), $word_count )
+				: __( 'No indexable body text found.', 'spokora-free' ),
 			25,
 			0
 		);
@@ -367,18 +367,18 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( $has_h1 || ( $post && trim( (string) $post->post_title ) !== '' ) ) {
 		$checks[] = spokora_score_check(
 			'headings',
-			__( 'Title / H1', 'spokora' ),
+			__( 'Title / H1', 'spokora-free' ),
 			'pass',
-			$has_h1 ? __( 'H1 found in content.', 'spokora' ) : __( 'Page title serves as primary heading.', 'spokora' ),
+			$has_h1 ? __( 'H1 found in content.', 'spokora-free' ) : __( 'Page title serves as primary heading.', 'spokora-free' ),
 			10,
 			10
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'headings',
-			__( 'Title / H1', 'spokora' ),
+			__( 'Title / H1', 'spokora-free' ),
 			'warn',
-			__( 'Add an H1 or clear page title.', 'spokora' ),
+			__( 'Add an H1 or clear page title.', 'spokora-free' ),
 			10,
 			spokora_score_points_for_status( 'warn', 10 )
 		);
@@ -391,18 +391,18 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 		if ( $alt !== '' ) {
 			$checks[] = spokora_score_check(
 				'featured_image',
-				__( 'Featured image', 'spokora' ),
+				__( 'Featured image', 'spokora-free' ),
 				'pass',
-				__( 'Featured image has alt text.', 'spokora' ),
+				__( 'Featured image has alt text.', 'spokora-free' ),
 				10,
 				10
 			);
 		} else {
 			$checks[] = spokora_score_check(
 				'featured_image',
-				__( 'Featured image', 'spokora' ),
+				__( 'Featured image', 'spokora-free' ),
 				'warn',
-				__( 'Featured image missing alt text.', 'spokora' ),
+				__( 'Featured image missing alt text.', 'spokora-free' ),
 				10,
 				spokora_score_points_for_status( 'warn', 10 )
 			);
@@ -410,9 +410,9 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	} else {
 		$checks[] = spokora_score_check(
 			'featured_image',
-			__( 'Featured image', 'spokora' ),
+			__( 'Featured image', 'spokora-free' ),
 			'warn',
-			__( 'No featured image set.', 'spokora' ),
+			__( 'No featured image set.', 'spokora-free' ),
 			10,
 			spokora_score_points_for_status( 'warn', 10 )
 		);
@@ -429,9 +429,9 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( $primary_kw === '' ) {
 		$checks[] = spokora_score_check(
 			'focus_keyphrase',
-			__( 'Primary keyphrase', 'spokora' ),
+			__( 'Primary keyphrase', 'spokora-free' ),
 			'na',
-			__( 'Add a primary keyphrase to score keyphrase usage.', 'spokora' ),
+			__( 'Add a primary keyphrase to score keyphrase usage.', 'spokora-free' ),
 			15,
 			15
 		);
@@ -444,18 +444,18 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 		if ( $in_title ) {
 			$checks[] = spokora_score_check(
 				'focus_in_title',
-				__( 'Keyphrase in SEO title', 'spokora' ),
+				__( 'Keyphrase in SEO title', 'spokora-free' ),
 				'pass',
-				__( 'Primary keyphrase appears in the SEO title.', 'spokora' ),
+				__( 'Primary keyphrase appears in the SEO title.', 'spokora-free' ),
 				5,
 				5
 			);
 		} else {
 			$checks[] = spokora_score_check(
 				'focus_in_title',
-				__( 'Keyphrase in SEO title', 'spokora' ),
+				__( 'Keyphrase in SEO title', 'spokora-free' ),
 				'warn',
-				__( 'Use the primary keyphrase in the SEO title.', 'spokora' ),
+				__( 'Use the primary keyphrase in the SEO title.', 'spokora-free' ),
 				5,
 				spokora_score_points_for_status( 'warn', 5 )
 			);
@@ -464,18 +464,18 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 		if ( $in_desc ) {
 			$checks[] = spokora_score_check(
 				'focus_in_desc',
-				__( 'Keyphrase in meta description', 'spokora' ),
+				__( 'Keyphrase in meta description', 'spokora-free' ),
 				'pass',
-				__( 'Primary keyphrase appears in the meta description.', 'spokora' ),
+				__( 'Primary keyphrase appears in the meta description.', 'spokora-free' ),
 				5,
 				5
 			);
 		} else {
 			$checks[] = spokora_score_check(
 				'focus_in_desc',
-				__( 'Keyphrase in meta description', 'spokora' ),
+				__( 'Keyphrase in meta description', 'spokora-free' ),
 				'warn',
-				__( 'Use the primary keyphrase in the meta description.', 'spokora' ),
+				__( 'Use the primary keyphrase in the meta description.', 'spokora-free' ),
 				5,
 				spokora_score_points_for_status( 'warn', 5 )
 			);
@@ -484,20 +484,20 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 		if ( $in_body || $in_slug ) {
 			$checks[] = spokora_score_check(
 				'focus_in_content',
-				__( 'Keyphrase in content', 'spokora' ),
+				__( 'Keyphrase in content', 'spokora-free' ),
 				'pass',
 				$in_body
-					? __( 'Primary keyphrase appears in the body.', 'spokora' )
-					: __( 'Primary keyphrase appears in the URL slug.', 'spokora' ),
+					? __( 'Primary keyphrase appears in the body.', 'spokora-free' )
+					: __( 'Primary keyphrase appears in the URL slug.', 'spokora-free' ),
 				5,
 				5
 			);
 		} else {
 			$checks[] = spokora_score_check(
 				'focus_in_content',
-				__( 'Keyphrase in content', 'spokora' ),
+				__( 'Keyphrase in content', 'spokora-free' ),
 				'fail',
-				__( 'Use the primary keyphrase in the body or slug.', 'spokora' ),
+				__( 'Use the primary keyphrase in the body or slug.', 'spokora-free' ),
 				5,
 				0
 			);
@@ -513,20 +513,20 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 			if ( empty( $missing ) ) {
 				$checks[] = spokora_score_check(
 					'additional_keyphrases',
-					__( 'Additional keyphrases', 'spokora' ),
+					__( 'Additional keyphrases', 'spokora-free' ),
 					'pass',
-					__( 'All additional keyphrases appear in title, description, or body.', 'spokora' ),
+					__( 'All additional keyphrases appear in title, description, or body.', 'spokora-free' ),
 					0,
 					0
 				);
 			} else {
 				$checks[] = spokora_score_check(
 					'additional_keyphrases',
-					__( 'Additional keyphrases', 'spokora' ),
+					__( 'Additional keyphrases', 'spokora-free' ),
 					'warn',
 					sprintf(
 						/* translators: %s: comma-separated keyphrases */
-						__( 'Missing from content: %s', 'spokora' ),
+						__( 'Missing from content: %s', 'spokora-free' ),
 						implode( ', ', array_slice( $missing, 0, 3 ) )
 					),
 					0,
@@ -544,20 +544,20 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( $custom_schema !== '' || $global_schema !== '' || $org_name !== '' ) {
 		$checks[] = spokora_score_check(
 			'schema',
-			__( 'Structured data', 'spokora' ),
+			__( 'Structured data', 'spokora-free' ),
 			'pass',
 			$custom_schema !== ''
-				? __( 'Custom JSON-LD on this page.', 'spokora' )
-				: __( 'Global entity schema configured.', 'spokora' ),
+				? __( 'Custom JSON-LD on this page.', 'spokora-free' )
+				: __( 'Global entity schema configured.', 'spokora-free' ),
 			10,
 			10
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'schema',
-			__( 'Structured data', 'spokora' ),
+			__( 'Structured data', 'spokora-free' ),
 			'warn',
-			__( 'Configure global schema or per-page JSON-LD.', 'spokora' ),
+			__( 'Configure global schema or per-page JSON-LD.', 'spokora-free' ),
 			10,
 			spokora_score_points_for_status( 'warn', 10 )
 		);
@@ -567,18 +567,18 @@ function spokora_calculate_search_seo_score( $post_id, array $overrides = array(
 	if ( function_exists( 'spokora_should_output_seo' ) && spokora_should_output_seo() ) {
 		$checks[] = spokora_score_check(
 			'spokora_output',
-			__( 'Spokora SEO output', 'spokora' ),
+			__( 'Spokora SEO output', 'spokora-free' ),
 			'pass',
-			__( 'Spokora will output meta on the front end.', 'spokora' ),
+			__( 'Spokora will output meta on the front end.', 'spokora-free' ),
 			10,
 			10
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'spokora_output',
-			__( 'Spokora SEO output', 'spokora' ),
+			__( 'Spokora SEO output', 'spokora-free' ),
 			'na',
-			__( 'Theme owns front-end SEO — meta here is for reference/import only.', 'spokora' ),
+			__( 'Theme owns front-end SEO — meta here is for reference/import only.', 'spokora-free' ),
 			10,
 			10
 		);
@@ -620,9 +620,9 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 			'checks'  => array(
 				spokora_score_check(
 					'llms_module',
-					__( 'LLMS module', 'spokora' ),
+					__( 'LLMS module', 'spokora-free' ),
 					'na',
-					__( 'Enable the LLMS module to score AI readiness.', 'spokora' ),
+					__( 'Enable the LLMS module to score AI readiness.', 'spokora-free' ),
 					100,
 					0
 				),
@@ -640,18 +640,18 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 	if ( $public ) {
 		$checks[] = spokora_score_check(
 			'llms_public',
-			__( 'Public AI document', 'spokora' ),
+			__( 'Public AI document', 'spokora-free' ),
 			'pass',
-			__( 'Enabled — eligible for /llms.txt and /ai-docs/{slug}.md', 'spokora' ),
+			__( 'Enabled — eligible for /llms.txt and /ai-docs/{slug}.md', 'spokora-free' ),
 			25,
 			25
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'llms_public',
-			__( 'Public AI document', 'spokora' ),
+			__( 'Public AI document', 'spokora-free' ),
 			'fail',
-			__( 'Enable Public AI document for crawler-facing docs.', 'spokora' ),
+			__( 'Enable Public AI document for crawler-facing docs.', 'spokora-free' ),
 			25,
 			0
 		);
@@ -660,27 +660,27 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 	if ( $summary !== '' && strlen( $summary ) <= 200 ) {
 		$checks[] = spokora_score_check(
 			'llms_summary',
-			__( 'LLMS summary line', 'spokora' ),
+			__( 'LLMS summary line', 'spokora-free' ),
 			'pass',
-			__( 'One-line summary is set for /llms.txt.', 'spokora' ),
+			__( 'One-line summary is set for /llms.txt.', 'spokora-free' ),
 			25,
 			25
 		);
 	} elseif ( $summary !== '' ) {
 		$checks[] = spokora_score_check(
 			'llms_summary',
-			__( 'LLMS summary line', 'spokora' ),
+			__( 'LLMS summary line', 'spokora-free' ),
 			'warn',
-			__( 'Summary is long — keep hub lines under ~200 characters.', 'spokora' ),
+			__( 'Summary is long — keep hub lines under ~200 characters.', 'spokora-free' ),
 			25,
 			spokora_score_points_for_status( 'warn', 25 )
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'llms_summary',
-			__( 'LLMS summary line', 'spokora' ),
+			__( 'LLMS summary line', 'spokora-free' ),
 			'fail',
-			__( 'Add a one-line summary for the llms.txt index.', 'spokora' ),
+			__( 'Add a one-line summary for the llms.txt index.', 'spokora-free' ),
 			25,
 			0
 		);
@@ -689,27 +689,27 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 	if ( strlen( $md ) >= 200 ) {
 		$checks[] = spokora_score_check(
 			'llms_md',
-			__( 'AI doc body', 'spokora' ),
+			__( 'AI doc body', 'spokora-free' ),
 			'pass',
-			__( 'Markdown body is substantial.', 'spokora' ),
+			__( 'Markdown body is substantial.', 'spokora-free' ),
 			30,
 			30
 		);
 	} elseif ( strlen( $md ) >= 80 ) {
 		$checks[] = spokora_score_check(
 			'llms_md',
-			__( 'AI doc body', 'spokora' ),
+			__( 'AI doc body', 'spokora-free' ),
 			'warn',
-			__( 'Markdown body is short — expand for assistants.', 'spokora' ),
+			__( 'Markdown body is short — expand for assistants.', 'spokora-free' ),
 			30,
 			spokora_score_points_for_status( 'warn', 30 )
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'llms_md',
-			__( 'AI doc body', 'spokora' ),
+			__( 'AI doc body', 'spokora-free' ),
 			'fail',
-			__( 'Add markdown for /ai-docs/{slug}.md or use Generate LLMS doc.', 'spokora' ),
+			__( 'Add markdown for /ai-docs/{slug}.md or use Generate LLMS doc.', 'spokora-free' ),
 			30,
 			0
 		);
@@ -720,18 +720,18 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 	if ( $preamble !== '' ) {
 		$checks[] = spokora_score_check(
 			'site_preamble',
-			__( 'Site llms preamble', 'spokora' ),
+			__( 'Site llms preamble', 'spokora-free' ),
 			'pass',
-			__( 'Hub preamble configured in Spokora → LLMS.', 'spokora' ),
+			__( 'Hub preamble configured in Spokora → LLMS.', 'spokora-free' ),
 			10,
 			10
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'site_preamble',
-			__( 'Site llms preamble', 'spokora' ),
+			__( 'Site llms preamble', 'spokora-free' ),
 			'warn',
-			__( 'Optional: add hub preamble under LLMS / AI docs.', 'spokora' ),
+			__( 'Optional: add hub preamble under LLMS / AI docs.', 'spokora-free' ),
 			10,
 			spokora_score_points_for_status( 'warn', 10 )
 		);
@@ -742,18 +742,18 @@ function spokora_calculate_ai_readiness_score( $post_id, array $overrides = arra
 	if ( $words >= 100 ) {
 		$checks[] = spokora_score_check(
 			'source_text',
-			__( 'Source content', 'spokora' ),
+			__( 'Source content', 'spokora-free' ),
 			'pass',
-			sprintf( __( '%1$d words available to derive AI docs.', 'spokora' ), $words ),
+			sprintf( __( '%1$d words available to derive AI docs.', 'spokora-free' ), $words ),
 			10,
 			10
 		);
 	} else {
 		$checks[] = spokora_score_check(
 			'source_text',
-			__( 'Source content', 'spokora' ),
+			__( 'Source content', 'spokora-free' ),
 			'warn',
-			__( 'Little source text — the model may produce thin AI docs.', 'spokora' ),
+			__( 'Little source text — the model may produce thin AI docs.', 'spokora-free' ),
 			10,
 			spokora_score_points_for_status( 'warn', 10 )
 		);

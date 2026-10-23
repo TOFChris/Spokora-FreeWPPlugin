@@ -46,8 +46,8 @@ class Spokora_SEO_Score_Engine {
 						<span class="spokora-seo-gauge__value"><?php echo (int) $search['score']; ?></span>
 					</div>
 					<div>
-						<div class="spokora-seo-gauge__label"><?php esc_html_e( 'Search SEO', 'spokora' ); ?></div>
-						<div class="spokora-seo-gauge__sublabel"><?php esc_html_e( 'Classic on-page', 'spokora' ); ?></div>
+						<div class="spokora-seo-gauge__label"><?php esc_html_e( 'Search SEO', 'spokora-free' ); ?></div>
+						<div class="spokora-seo-gauge__sublabel"><?php esc_html_e( 'Classic on-page', 'spokora-free' ); ?></div>
 					</div>
 				</div>
 				<div class="spokora-seo-gauge spokora-seo-gauge--ai <?php echo esc_attr( $this->status_css_class( $ai['status'] ) ); ?>">
@@ -55,8 +55,8 @@ class Spokora_SEO_Score_Engine {
 						<span class="spokora-seo-gauge__value"><?php echo (int) $ai['score']; ?></span>
 					</div>
 					<div>
-						<div class="spokora-seo-gauge__label"><?php esc_html_e( 'AI readiness', 'spokora' ); ?></div>
-						<div class="spokora-seo-gauge__sublabel"><?php esc_html_e( 'LLMS / ai-docs', 'spokora' ); ?></div>
+						<div class="spokora-seo-gauge__label"><?php esc_html_e( 'AI readiness', 'spokora-free' ); ?></div>
+						<div class="spokora-seo-gauge__sublabel"><?php esc_html_e( 'LLMS / ai-docs', 'spokora-free' ); ?></div>
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,7 @@ class Spokora_SEO_Score_Engine {
 					echo esc_html(
 						sprintf(
 							/* translators: %s: content source label */
-							__( 'Scoring content from: %s', 'spokora' ),
+							__( 'Scoring content from: %s', 'spokora-free' ),
 							$search['content_source']['label']
 						)
 					);
@@ -78,19 +78,19 @@ class Spokora_SEO_Score_Engine {
 			<p style="margin:0 0 8px;">
 				<label>
 					<input type="checkbox" name="spokora_seo_score_exclude" value="1" <?php checked( $excluded ); ?> />
-					<?php esc_html_e( 'Exclude from SEO scoring (contact/legal pages)', 'spokora' ); ?>
+					<?php esc_html_e( 'Exclude from SEO scoring (contact/legal pages)', 'spokora-free' ); ?>
 				</label>
 			</p>
 
 			<details class="spokora-fold" open style="margin-bottom:8px;">
-				<summary><strong><?php esc_html_e( 'Search SEO checks', 'spokora' ); ?></strong></summary>
+				<summary><strong><?php esc_html_e( 'Search SEO checks', 'spokora-free' ); ?></strong></summary>
 				<ul class="spokora-seo-checklist spokora-seo-checklist--search">
 					<?php $this->render_checklist_items( $search['checks'] ); ?>
 				</ul>
 			</details>
 
 			<details class="spokora-fold" style="margin-bottom:8px;">
-				<summary><strong><?php esc_html_e( 'AI readiness checks', 'spokora' ); ?></strong></summary>
+				<summary><strong><?php esc_html_e( 'AI readiness checks', 'spokora-free' ); ?></strong></summary>
 				<ul class="spokora-seo-checklist spokora-seo-checklist--ai">
 					<?php $this->render_checklist_items( $ai['checks'] ); ?>
 				</ul>
@@ -98,7 +98,7 @@ class Spokora_SEO_Score_Engine {
 
 			<p style="margin:8px 0 0;">
 				<button type="button" class="button button-secondary" id="spokora-seo-explain-btn">
-					<?php esc_html_e( 'Explain scores', 'spokora' ); ?>
+					<?php esc_html_e( 'Explain scores', 'spokora-free' ); ?>
 				</button>
 				<span id="spokora-seo-explain-result" class="description" style="display:block;margin-top:8px;"></span>
 			</p>
@@ -133,8 +133,8 @@ class Spokora_SEO_Score_Engine {
 		$scores = spokora_get_page_scores( $post->ID );
 		$serp   = $scores['search']['serp'] ?? array();
 		?>
-		<div class="spokora-serp-preview" aria-label="<?php esc_attr_e( 'Search result preview', 'spokora' ); ?>">
-			<p class="description" style="margin:0 0 8px;"><?php esc_html_e( 'Google preview (approximate)', 'spokora' ); ?></p>
+		<div class="spokora-serp-preview" aria-label="<?php esc_attr_e( 'Search result preview', 'spokora-free' ); ?>">
+			<p class="description" style="margin:0 0 8px;"><?php esc_html_e( 'Google preview (approximate)', 'spokora-free' ); ?></p>
 			<p class="spokora-serp-preview__title"><?php echo esc_html( $serp['title'] ?? '' ); ?></p>
 			<p class="spokora-serp-preview__url"><?php echo esc_url( $serp['url'] ?? home_url( '/' ) ); ?></p>
 			<p class="spokora-serp-preview__desc"><?php echo esc_html( $serp['description'] ?? '' ); ?></p>
@@ -230,7 +230,7 @@ class Spokora_SEO_Score_Engine {
 				'nonce'   => wp_create_nonce( 'spokora_seo_score_nonce' ),
 				'postId'  => $post_id,
 				'i18n'    => array(
-					'scoringFrom' => __( 'Scoring content from:', 'spokora' ),
+					'scoringFrom' => __( 'Scoring content from:', 'spokora-free' ),
 				),
 			)
 		);
@@ -239,7 +239,7 @@ class Spokora_SEO_Score_Engine {
 			'spokora-seo-score-admin',
 			"jQuery(function($){ $('#spokora-seo-explain-btn').on('click', function(){
 				var btn=$(this), out=$('#spokora-seo-explain-result');
-				btn.prop('disabled',true); out.text('" . esc_js( __( 'Asking the model…', 'spokora' ) ) . "');
+				btn.prop('disabled',true); out.text('" . esc_js( __( 'Asking the model…', 'spokora-free' ) ) . "');
 				$.post(hwSeoScore.ajaxUrl, {
 					action:'spokora_explain_seo_score', nonce:hwSeoScore.nonce, post_id:hwSeoScore.postId
 				}).done(function(r){ out.text(r.success ? r.data : r.data); })
@@ -253,7 +253,7 @@ class Spokora_SEO_Score_Engine {
 		check_ajax_referer( 'spokora_seo_score_nonce', 'nonce' );
 		$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 		if ( $post_id <= 0 || ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_send_json_error( __( 'Permission denied.', 'spokora' ) );
+			wp_send_json_error( __( 'Permission denied.', 'spokora-free' ) );
 		}
 
 		$overrides = isset( $_POST['overrides'] ) && is_array( $_POST['overrides'] )
@@ -274,7 +274,7 @@ class Spokora_SEO_Score_Engine {
 		check_ajax_referer( 'spokora_seo_score_nonce', 'nonce' );
 		$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 		if ( $post_id <= 0 || ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_send_json_error( __( 'Permission denied.', 'spokora' ) );
+			wp_send_json_error( __( 'Permission denied.', 'spokora-free' ) );
 		}
 
 		$scores = spokora_get_page_scores( $post_id );
@@ -290,7 +290,7 @@ class Spokora_SEO_Score_Engine {
 		$prompt = "You are an SEO coach for WordPress editors. Given these checklist results, give 3-5 short, actionable bullet points to improve the page. Be specific and concise.\n\n" . implode( "\n", $lines );
 
 		if ( ! function_exists( 'spokora_model_complete' ) ) {
-			wp_send_json_error( __( 'Model client is not loaded.', 'spokora' ) );
+			wp_send_json_error( __( 'Model client is not loaded.', 'spokora-free' ) );
 		}
 
 		$text = spokora_model_complete( $prompt, 45 );
@@ -298,7 +298,7 @@ class Spokora_SEO_Score_Engine {
 			wp_send_json_error( $text->get_error_message() );
 		}
 		if ( trim( (string) $text ) === '' ) {
-			wp_send_json_error( __( 'The model could not explain scores.', 'spokora' ) );
+			wp_send_json_error( __( 'The model could not explain scores.', 'spokora-free' ) );
 		}
 
 		wp_send_json_success( trim( (string) $text ) );
@@ -313,8 +313,8 @@ class Spokora_SEO_Score_Engine {
 		foreach ( $columns as $key => $label ) {
 			$new[ $key ] = $label;
 			if ( 'title' === $key ) {
-				$new['spokora_seo_score'] = __( 'SEO', 'spokora' );
-				$new['spokora_ai_score']  = __( 'AI', 'spokora' );
+				$new['spokora_seo_score'] = __( 'SEO', 'spokora-free' );
+				$new['spokora_ai_score']  = __( 'AI', 'spokora-free' );
 			}
 		}
 		return $new;
@@ -349,8 +349,8 @@ class Spokora_SEO_Score_Engine {
 	public function register_overview_page() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'Page scores', 'spokora' ),
-			__( 'Page scores', 'spokora' ),
+			__( 'Page scores', 'spokora-free' ),
+			__( 'Page scores', 'spokora-free' ),
 			'manage_options',
 			'spokora-seo-scores',
 			array( $this, 'render_overview_page' )
@@ -374,8 +374,8 @@ class Spokora_SEO_Score_Engine {
 
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Page scores', 'spokora' ); ?></h1>
-			<p class="description"><?php esc_html_e( 'Site-wide view of saved Search SEO and AI readiness scores. Edit a page to refresh its checklist.', 'spokora' ); ?></p>
+			<h1><?php esc_html_e( 'Page scores', 'spokora-free' ); ?></h1>
+			<p class="description"><?php esc_html_e( 'Site-wide view of saved Search SEO and AI readiness scores. Edit a page to refresh its checklist.', 'spokora-free' ); ?></p>
 			<?php
 			if ( function_exists( 'spokora_render_pro_teaser' ) ) {
 				spokora_render_pro_teaser( 'keys' );
@@ -384,17 +384,17 @@ class Spokora_SEO_Score_Engine {
 			<table class="widefat striped" style="margin-top:16px;">
 				<thead>
 					<tr>
-						<th><?php esc_html_e( 'Title', 'spokora' ); ?></th>
-						<th><?php esc_html_e( 'Type', 'spokora' ); ?></th>
-						<th><?php esc_html_e( 'Search SEO', 'spokora' ); ?></th>
-						<th><?php esc_html_e( 'AI readiness', 'spokora' ); ?></th>
-						<th><?php esc_html_e( 'Updated', 'spokora' ); ?></th>
+						<th><?php esc_html_e( 'Title', 'spokora-free' ); ?></th>
+						<th><?php esc_html_e( 'Type', 'spokora-free' ); ?></th>
+						<th><?php esc_html_e( 'Search SEO', 'spokora-free' ); ?></th>
+						<th><?php esc_html_e( 'AI readiness', 'spokora-free' ); ?></th>
+						<th><?php esc_html_e( 'Updated', 'spokora-free' ); ?></th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php if ( ! $posts ) : ?>
-					<tr><td colspan="6"><?php esc_html_e( 'No scored content yet.', 'spokora' ); ?></td></tr>
+					<tr><td colspan="6"><?php esc_html_e( 'No scored content yet.', 'spokora-free' ); ?></td></tr>
 				<?php else : ?>
 					<?php
 					foreach ( $posts as $p ) {
@@ -414,7 +414,7 @@ class Spokora_SEO_Score_Engine {
 							<td><?php $this->render_score_pill( $seo, spokora_score_status_from_number( $seo ) ); ?></td>
 							<td><?php $this->render_score_pill( $ai, spokora_score_status_from_number( $ai ) ); ?></td>
 							<td><?php echo $ts ? esc_html( gmdate( 'Y-m-d H:i', $ts ) ) : '—'; ?></td>
-							<td><a href="<?php echo esc_url( get_edit_post_link( $p->ID ) ); ?>"><?php esc_html_e( 'Edit', 'spokora' ); ?></a></td>
+							<td><a href="<?php echo esc_url( get_edit_post_link( $p->ID ) ); ?>"><?php esc_html_e( 'Edit', 'spokora-free' ); ?></a></td>
 						</tr>
 						<?php
 					}

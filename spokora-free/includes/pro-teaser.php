@@ -29,30 +29,30 @@ function spokora_go_pro_page_slug() {
 function spokora_pro_teaser_groups() {
 	return array(
 		array(
-			'title' => __( 'Your keys, your models', 'spokora' ),
-			'body'  => __( 'Free scores the page. Pro writes drafts from the endpoint you paste — OpenRouter, Gemini, or whatever you already pay for. Keys can lock in wp-config.php.', 'spokora' ),
+			'title' => __( 'Your keys, your models', 'spokora-free' ),
+			'body'  => __( 'Free scores the page. Pro writes drafts from the endpoint you paste — OpenRouter, Gemini, or whatever you already pay for. Keys can lock in wp-config.php.', 'spokora-free' ),
 			'items' => array(
-				__( 'API Vault', 'spokora' ),
-				__( 'Title, meta, and AI-doc drafts', 'spokora' ),
-				__( 'Vision alt text in Media Lab', 'spokora' ),
+				__( 'API Vault', 'spokora-free' ),
+				__( 'Title, meta, and AI-doc drafts', 'spokora-free' ),
+				__( 'Vision alt text in Media Lab', 'spokora-free' ),
 			),
 		),
 		array(
-			'title' => __( 'The rest of a client week', 'spokora' ),
-			'body'  => __( 'Search Console, ranks, media, social, and a lead inbox live next to the SEO you already have. Same plugin, not a second install.', 'spokora' ),
+			'title' => __( 'The rest of a client week', 'spokora-free' ),
+			'body'  => __( 'Search Console, ranks, media, social, and a lead inbox live next to the SEO you already have. Same plugin, not a second install.', 'spokora-free' ),
 			'items' => array(
-				__( 'Search Performance (your GSC)', 'spokora' ),
-				__( 'Rank tracker, X-Ray, backlinks', 'spokora' ),
-				__( 'Social Studio and lead router', 'spokora' ),
+				__( 'Search Performance (your GSC)', 'spokora-free' ),
+				__( 'Rank tracker, X-Ray, backlinks', 'spokora-free' ),
+				__( 'Social Studio and lead router', 'spokora-free' ),
 			),
 		),
 		array(
-			'title' => __( 'Agency ops', 'spokora' ),
-			'body'  => __( 'Programmatic pages, MCP extras, and the telemetry screens we kept out of Free so this install stays a clean SEO plugin.', 'spokora' ),
+			'title' => __( 'Agency ops', 'spokora-free' ),
+			'body'  => __( 'Programmatic pages, MCP extras, and the telemetry screens we kept out of Free so this install stays a clean SEO plugin.', 'spokora-free' ),
 			'items' => array(
-				__( 'Deployment Matrix', 'spokora' ),
-				__( 'Site Pulse, visits, tracking', 'spokora' ),
-				__( 'MCP / Agent Ready extras', 'spokora' ),
+				__( 'Deployment Matrix', 'spokora-free' ),
+				__( 'Site Pulse, visits, tracking', 'spokora-free' ),
+				__( 'MCP / Agent Ready extras', 'spokora-free' ),
 			),
 		),
 	);
@@ -66,36 +66,36 @@ function spokora_pro_teaser_groups() {
 function spokora_pro_locked_modules() {
 	return array(
 		'api_vault'           => array(
-			'label'   => __( 'API Vault', 'spokora' ),
-			'summary' => __( 'Paste keys once. Optional wp-config.php lock. Free never asks for this.', 'spokora' ),
+			'label'   => __( 'API Vault', 'spokora-free' ),
+			'summary' => __( 'Paste keys once. Optional wp-config.php lock. Free never asks for this.', 'spokora-free' ),
 		),
 		'ai'                  => array(
-			'label'   => __( 'AI content', 'spokora' ),
-			'summary' => __( 'Model drafts for titles, descriptions, and /ai-docs markdown.', 'spokora' ),
+			'label'   => __( 'AI content', 'spokora-free' ),
+			'summary' => __( 'Model drafts for titles, descriptions, and /ai-docs markdown.', 'spokora-free' ),
 		),
 		'search_performance'  => array(
-			'label'   => __( 'Search Performance', 'spokora' ),
-			'summary' => __( 'Google Search Console in wp-admin, using your OAuth.', 'spokora' ),
+			'label'   => __( 'Search Performance', 'spokora-free' ),
+			'summary' => __( 'Google Search Console in wp-admin, using your OAuth.', 'spokora-free' ),
 		),
 		'rank_tracker'        => array(
-			'label'   => __( 'Rank tracker', 'spokora' ),
-			'summary' => __( 'Keyword positions on their DataForSEO bill, not ours.', 'spokora' ),
+			'label'   => __( 'Rank tracker', 'spokora-free' ),
+			'summary' => __( 'Keyword positions on their DataForSEO bill, not ours.', 'spokora-free' ),
 		),
 		'media_lab'           => array(
-			'label'   => __( 'Media Lab', 'spokora' ),
-			'summary' => __( 'Vision alt text and WebP as a week deliverable.', 'spokora' ),
+			'label'   => __( 'Media Lab', 'spokora-free' ),
+			'summary' => __( 'Vision alt text and WebP as a week deliverable.', 'spokora-free' ),
 		),
 		'social'              => array(
-			'label'   => __( 'Social Studio', 'spokora' ),
-			'summary' => __( 'Webhook posts you choose. Not silent auto-spam.', 'spokora' ),
+			'label'   => __( 'Social Studio', 'spokora-free' ),
+			'summary' => __( 'Webhook posts you choose. Not silent auto-spam.', 'spokora-free' ),
 		),
 		'lead_router'         => array(
-			'label'   => __( 'Lead inbox', 'spokora' ),
-			'summary' => __( 'Form leads into the week, not a second CRM login.', 'spokora' ),
+			'label'   => __( 'Lead inbox', 'spokora-free' ),
+			'summary' => __( 'Form leads into the week, not a second CRM login.', 'spokora-free' ),
 		),
 		'live_dashboard'      => array(
-			'label'   => __( 'Live Dashboard', 'spokora' ),
-			'summary' => __( 'Telemetry when keys exist. Free Home stays an SEO map on purpose.', 'spokora' ),
+			'label'   => __( 'Live Dashboard', 'spokora-free' ),
+			'summary' => __( 'Telemetry when keys exist. Free Home stays an SEO map on purpose.', 'spokora-free' ),
 		),
 	);
 }
@@ -107,7 +107,7 @@ function spokora_pro_locked_modules() {
  */
 function spokora_pro_cta_html( $include_internal = false ) {
 	unset( $include_internal );
-	return '<a class="button button-primary" href="' . esc_url( spokora_pro_url() ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'See Spokora Pro', 'spokora' ) . '</a>';
+	return '<a class="button button-primary" href="' . esc_url( spokora_pro_url() ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'See Spokora Pro', 'spokora-free' ) . '</a>';
 }
 
 /**
@@ -120,8 +120,8 @@ function spokora_render_pro_teaser( $variant = 'compact', $context = '' ) {
 
 	if ( 'keys' === $variant ) {
 		echo '<div class="spokora-pro-teaser spokora-pro-teaser--keys">';
-		echo '<p><span class="spokora-pro-badge">' . esc_html__( 'Pro', 'spokora' ) . '</span> ';
-		echo esc_html__( 'Scores and /llms.txt run here. Model drafts need Spokora Pro and a key you already pay for.', 'spokora' );
+		echo '<p><span class="spokora-pro-badge">' . esc_html__( 'Pro', 'spokora-free' ) . '</span> ';
+		echo esc_html__( 'Scores and /llms.txt run here. Model drafts need Spokora Pro and a key you already pay for.', 'spokora-free' );
 		echo '</p><p class="spokora-pro-teaser__actions">' . wp_kses_post( spokora_pro_cta_html() ) . '</p>';
 		echo '</div>';
 		return;
@@ -129,22 +129,22 @@ function spokora_render_pro_teaser( $variant = 'compact', $context = '' ) {
 
 	if ( 'compact' === $variant ) {
 		echo '<div class="spokora-pro-teaser spokora-pro-teaser--compact">';
-		echo '<p><span class="spokora-pro-badge">' . esc_html__( 'Pro', 'spokora' ) . '</span> ';
-		echo esc_html__( 'Free is the SEO plugin. Pro is the rest of a client week: keys, Search Console, media, leads.', 'spokora' );
+		echo '<p><span class="spokora-pro-badge">' . esc_html__( 'Pro', 'spokora-free' ) . '</span> ';
+		echo esc_html__( 'Free is the SEO plugin. Pro is the rest of a client week: keys, Search Console, media, leads.', 'spokora-free' );
 		echo '</p><p class="spokora-pro-teaser__actions">' . wp_kses_post( spokora_pro_cta_html() ) . '</p>';
 		echo '</div>';
 		return;
 	}
 
 	echo '<aside class="spokora-pro-teaser spokora-pro-teaser--card" aria-labelledby="spokora-pro-teaser-title">';
-	echo '<p class="spokora-pro-teaser__kicker"><span class="spokora-pro-badge">' . esc_html__( 'Pro', 'spokora' ) . '</span></p>';
-	echo '<h2 id="spokora-pro-teaser-title">' . esc_html__( 'Need the rest of the week?', 'spokora' ) . '</h2>';
-	echo '<p>' . esc_html__( 'Titles, schema, sitemap, and redirects stay free. Upgrade when you want your own models and the agency screens we kept out of this install.', 'spokora' ) . '</p>';
+	echo '<p class="spokora-pro-teaser__kicker"><span class="spokora-pro-badge">' . esc_html__( 'Pro', 'spokora-free' ) . '</span></p>';
+	echo '<h2 id="spokora-pro-teaser-title">' . esc_html__( 'Need the rest of the week?', 'spokora-free' ) . '</h2>';
+	echo '<p>' . esc_html__( 'Titles, schema, sitemap, and redirects stay free. Upgrade when you want your own models and the agency screens we kept out of this install.', 'spokora-free' ) . '</p>';
 	echo '<ul class="spokora-pro-teaser__list">';
 	foreach ( array(
-		__( 'BYOK vault — we do not resell tokens', 'spokora' ),
-		__( 'Search Console and rank tools', 'spokora' ),
-		__( 'Media Lab, social, lead inbox', 'spokora' ),
+		__( 'BYOK vault — we do not resell tokens', 'spokora-free' ),
+		__( 'Search Console and rank tools', 'spokora-free' ),
+		__( 'Media Lab, social, lead inbox', 'spokora-free' ),
 	) as $item ) {
 		echo '<li>' . esc_html( $item ) . '</li>';
 	}
@@ -179,7 +179,7 @@ class Spokora_Go_Pro {
 		if ( ! is_array( $links ) ) {
 			$links = array();
 		}
-		$links[] = '<a href="' . esc_url( spokora_pro_url() ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Spokora Pro', 'spokora' ) . '</a>';
+		$links[] = '<a href="' . esc_url( spokora_pro_url() ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Spokora Pro', 'spokora-free' ) . '</a>';
 		return $links;
 	}
 }

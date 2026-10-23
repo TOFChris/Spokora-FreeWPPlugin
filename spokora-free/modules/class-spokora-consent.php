@@ -23,10 +23,10 @@ class Spokora_Consent {
 	public function admin_menu() {
 		$page_title = function_exists( 'spokora_consent_admin_page_title' )
 			? spokora_consent_admin_page_title()
-			: __( 'Cookie banner & privacy', 'spokora' );
+			: __( 'Cookie banner & privacy', 'spokora-free' );
 		$menu_title = function_exists( 'spokora_consent_admin_menu_title' )
 			? spokora_consent_admin_menu_title()
-			: __( 'Cookies & privacy', 'spokora' );
+			: __( 'Cookies & privacy', 'spokora-free' );
 		add_submenu_page(
 			spokora_admin_menu_slug(),
 			$page_title,
@@ -65,12 +65,13 @@ class Spokora_Consent {
 	}
 
 	/**
-	 * @return array{privacy_url: string, ga_id: string}
+	 * @return array{privacy_url: string, ga_id: string, banner_enabled: bool}
 	 */
 	private function defaults() {
 		return array(
-			'privacy_url' => '',
-			'ga_id'       => '',
+			'privacy_url'     => '',
+			'ga_id'           => '',
+			'banner_enabled'  => false,
 		);
 	}
 
@@ -105,7 +106,7 @@ class Spokora_Consent {
 					'spokora_ga_code',
 					sprintf(
 						/* translators: %s: GA4 Measurement ID */
-						__( 'Saved Google Analytics as %s. Spokora loads the official gtag with Consent Mode after the visitor accepts — we do not print the pasted snippet as-is (that would skip the banner).', 'spokora' ),
+						__( 'Saved Google Analytics as %s. Spokora loads the official gtag with Consent Mode after the visitor accepts — we do not print the pasted snippet as-is (that would skip the banner).', 'spokora-free' ),
 						$extracted
 					),
 					'success'
@@ -119,22 +120,41 @@ class Spokora_Consent {
 			add_settings_error(
 				'spokora_consent_settings',
 				'spokora_ga_code',
-				__( 'Could not find a GA4 Measurement ID (starts with G-) in what you pasted. Paste the ID itself, or Google’s full tag that includes G-XXXX. Universal Analytics (UA-) is not supported.', 'spokora' ),
+				__( 'Could not find a GA4 Measurement ID (starts with G-) in what you pasted. Paste the ID itself, or Google’s full tag that includes G-XXXX. Universal Analytics (UA-) is not supported.', 'spokora-free' ),
 				'error'
 			);
+		}
+		$out['banner_enabled'] = ! empty( $value['banner_enabled'] );
+		return $out;
+	}
+
+	/**
+	 * @return array{privacy_url: string, ga_id: string, banner_enabled: bool}
+	 */
+	private function settings() {
+		$saved = get_option( 'spokora_consent_settings', false );
+		if ( ! is_array( $saved ) ) {
+			return $this->defaults();
+		}
+		$out = wp_parse_args( $saved, $this->defaults() );
+		if ( ! array_key_exists( 'banner_enabled', $saved ) ) {
+			$out['banner_enabled'] = true;
+		} else {
+			$out['banner_enabled'] = ! empty( $saved['banner_enabled'] );
 		}
 		return $out;
 	}
 
 	/**
-	 * @return array{privacy_url: string, ga_id: string}
+	 * Front-end banner is off until the site owner turns it on (WordPress.org guideline 11).
+	 *
+	 * Existing installs that already saved cookie settings keep the banner.
+	 *
+	 * @return bool
 	 */
-	private function settings() {
-		$saved = get_option( 'spokora_consent_settings', array() );
-		if ( ! is_array( $saved ) ) {
-			$saved = array();
-		}
-		return wp_parse_args( $saved, $this->defaults() );
+	private function banner_enabled() {
+		$s = $this->settings();
+		return ! empty( $s['banner_enabled'] );
 	}
 
 	public function render_admin() {
@@ -144,7 +164,7 @@ class Spokora_Consent {
 		$s             = $this->settings();
 		$page_title    = function_exists( 'spokora_consent_admin_page_title' )
 			? spokora_consent_admin_page_title()
-			: __( 'Cookie banner & privacy', 'spokora' );
+			: __( 'Cookie banner & privacy', 'spokora-free' );
 		$fallback_url  = function_exists( 'spokora_consent_fallback_privacy_url' )
 			? spokora_consent_fallback_privacy_url()
 			: $this->fallback_privacy_url();
@@ -161,15 +181,15 @@ class Spokora_Consent {
 				<?php
 				echo esc_html__(
 					'Set up a clear cookie banner for visitors in the UK, EU, and similar regions: Reject and Accept are equally easy, essential cookies keep the site running, and analytics tags load only after Accept. Pair this with a real privacy policy — Spokora gives you the technical controls; your counsel or client decides legal wording.',
-					'spokora'
+					'spokora-free'
 				);
 				?>
 			</p>
 
 			<div class="spokora-consent-admin__grid">
 				<section class="spokora-consent-admin__card" aria-labelledby="spokora-consent-checklist-title">
-					<h2 id="spokora-consent-checklist-title"><?php esc_html_e( 'Compliance checklist', 'spokora' ); ?></h2>
-					<p><?php esc_html_e( 'Work through these before you call the site done. Optional steps stay optional.', 'spokora' ); ?></p>
+					<h2 id="spokora-consent-checklist-title"><?php esc_html_e( 'Compliance checklist', 'spokora-free' ); ?></h2>
+					<p><?php esc_html_e( 'Work through these before you call the site done. Optional steps stay optional.', 'spokora-free' ); ?></p>
 					<?php if ( $checklist ) : ?>
 						<ul class="spokora-consent-admin__checklist">
 							<?php foreach ( $checklist as $row ) : ?>
@@ -195,21 +215,21 @@ class Spokora_Consent {
 				</section>
 
 				<section class="spokora-consent-admin__card" aria-labelledby="spokora-consent-how-title">
-					<h2 id="spokora-consent-how-title"><?php esc_html_e( 'What to do here', 'spokora' ); ?></h2>
+					<h2 id="spokora-consent-how-title"><?php esc_html_e( 'What to do here', 'spokora-free' ); ?></h2>
 					<ol>
-						<li><?php esc_html_e( 'Confirm Cookies & privacy is enabled under Modules.', 'spokora' ); ?></li>
-						<li><?php esc_html_e( 'Publish a privacy policy and link it (WordPress privacy page or URL below).', 'spokora' ); ?></li>
-						<li><?php esc_html_e( 'Open your site in a private window — you should see Reject and Accept before any analytics runs.', 'spokora' ); ?></li>
-						<li><?php esc_html_e( 'Add a GA4 ID or Google’s tag below only if you need analytics; they wait for the same Accept cookie.', 'spokora' ); ?></li>
+						<li><?php esc_html_e( 'Confirm Cookies & privacy is enabled under Modules.', 'spokora-free' ); ?></li>
+						<li><?php esc_html_e( 'Publish a privacy policy and link it (WordPress privacy page or URL below).', 'spokora-free' ); ?></li>
+						<li><?php esc_html_e( 'Open your site in a private window — you should see Reject and Accept before any analytics runs.', 'spokora-free' ); ?></li>
+						<li><?php esc_html_e( 'Add a GA4 ID or Google’s tag below only if you need analytics; they wait for the same Accept cookie.', 'spokora-free' ); ?></li>
 					</ol>
 					<?php if ( function_exists( 'spokora_theme_handles_cookie_consent' ) && spokora_theme_handles_cookie_consent() ) : ?>
-						<div class="notice notice-info inline"><p><?php esc_html_e( 'The active Spokora theme already shows this banner. Settings below still control the privacy link and GA4 ID the theme uses.', 'spokora' ); ?></p></div>
+						<div class="notice notice-info inline"><p><?php esc_html_e( 'The active Spokora theme already shows this banner. Settings below still control the privacy link and GA4 ID the theme uses.', 'spokora-free' ); ?></p></div>
 					<?php endif; ?>
 					<p class="description">
 						<?php
 						printf(
 							/* translators: %s: privacy policy URL */
-							esc_html__( 'Banner will link to: %s', 'spokora' ),
+							esc_html__( 'Banner will link to: %s', 'spokora-free' ),
 							esc_html( $effective_url )
 						);
 						?>
@@ -218,16 +238,27 @@ class Spokora_Consent {
 			</div>
 
 			<section class="spokora-consent-admin__card spokora-consent-admin__form-card" id="spokora-consent-banner">
-				<h2><?php esc_html_e( 'Banner settings', 'spokora' ); ?></h2>
+				<h2><?php esc_html_e( 'Banner settings', 'spokora-free' ); ?></h2>
 				<form method="post" action="options.php">
 					<?php settings_fields( 'spokora_consent_group' ); ?>
 					<table class="form-table" role="presentation">
 						<tr>
-							<th scope="row"><label for="spokora_consent_privacy_url"><?php esc_html_e( 'Privacy policy URL', 'spokora' ); ?></label></th>
+							<th scope="row"><?php esc_html_e( 'Front-end banner', 'spokora-free' ); ?></th>
+							<td>
+								<label for="spokora_consent_banner_enabled">
+									<input type="hidden" name="spokora_consent_settings[banner_enabled]" value="0" />
+									<input type="checkbox" id="spokora_consent_banner_enabled" name="spokora_consent_settings[banner_enabled]" value="1" <?php checked( ! empty( $s['banner_enabled'] ) ); ?> />
+									<?php esc_html_e( 'Show the cookie banner on the public site', 'spokora-free' ); ?>
+								</label>
+								<p class="description"><?php esc_html_e( 'Off by default on new installs. Turn this on if you want Reject / Accept on the front end. Optional Google Analytics still loads only after Accept.', 'spokora-free' ); ?></p>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row"><label for="spokora_consent_privacy_url"><?php esc_html_e( 'Privacy policy URL', 'spokora-free' ); ?></label></th>
 							<td>
 								<input type="url" class="large-text" id="spokora_consent_privacy_url" name="spokora_consent_settings[privacy_url]" value="<?php echo esc_attr( $s['privacy_url'] ); ?>" placeholder="<?php echo esc_attr( $fallback_url ); ?>" />
 								<p class="description">
-									<?php esc_html_e( 'Leave blank to use the WordPress privacy page when set, otherwise /privacy-policy/.', 'spokora' ); ?>
+									<?php esc_html_e( 'Leave blank to use the WordPress privacy page when set, otherwise /privacy-policy/.', 'spokora-free' ); ?>
 									<?php
 									if ( $privacy_page > 0 ) {
 										$edit_privacy = get_edit_post_link( $privacy_page, 'raw' );
@@ -235,39 +266,39 @@ class Spokora_Consent {
 											printf(
 												' <a href="%1$s">%2$s</a>',
 												esc_url( $edit_privacy ),
-												esc_html__( 'Edit assigned privacy page', 'spokora' )
+												esc_html__( 'Edit assigned privacy page', 'spokora-free' )
 											);
 										}
 									}
 									?>
 								</p>
 								<p>
-									<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'options-privacy.php' ) ); ?>"><?php esc_html_e( 'Open Settings → Privacy', 'spokora' ); ?></a>
+									<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'options-privacy.php' ) ); ?>"><?php esc_html_e( 'Open Settings → Privacy', 'spokora-free' ); ?></a>
 									<?php if ( $privacy_page <= 0 ) : ?>
-										<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>"><?php esc_html_e( 'Create a new page', 'spokora' ); ?></a>
+										<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>"><?php esc_html_e( 'Create a new page', 'spokora-free' ); ?></a>
 									<?php endif; ?>
 								</p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><label for="spokora_consent_ga_code"><?php esc_html_e( 'GA4 Measurement ID (optional)', 'spokora' ); ?></label></th>
+							<th scope="row"><label for="spokora_consent_ga_code"><?php esc_html_e( 'GA4 Measurement ID (optional)', 'spokora-free' ); ?></label></th>
 							<td>
 								<?php if ( defined( 'SPOKORA_GA_MEASUREMENT_ID' ) && is_string( SPOKORA_GA_MEASUREMENT_ID ) && '' !== SPOKORA_GA_MEASUREMENT_ID ) : ?>
 									<code><?php echo esc_html( $this->ga_id() ); ?></code>
-									<p class="description"><?php esc_html_e( 'Locked by SPOKORA_GA_MEASUREMENT_ID in wp-config.php.', 'spokora' ); ?></p>
+									<p class="description"><?php esc_html_e( 'Locked by SPOKORA_GA_MEASUREMENT_ID in wp-config.php.', 'spokora-free' ); ?></p>
 								<?php else : ?>
-									<textarea class="large-text code" rows="8" id="spokora_consent_ga_code" name="spokora_consent_settings[ga_code]" placeholder="<?php echo esc_attr( "G-XXXXXXXXXX\n\n" . __( 'or paste the whole Google tag (gtag.js) from Admin → Data streams.', 'spokora' ) ); ?>" autocomplete="off"><?php echo esc_textarea( isset( $s['ga_id'] ) ? $s['ga_id'] : '' ); ?></textarea>
-									<p class="description"><?php esc_html_e( 'Paste the Measurement ID (G-…) or the full script Google gives you. We pull out the ID and load gtag with Consent Mode only after Accept. Leave empty to skip analytics. Universal Analytics (UA-) is not supported.', 'spokora' ); ?></p>
+									<textarea class="large-text code" rows="8" id="spokora_consent_ga_code" name="spokora_consent_settings[ga_code]" placeholder="<?php echo esc_attr( "G-XXXXXXXXXX\n\n" . __( 'or paste the whole Google tag (gtag.js) from Admin → Data streams.', 'spokora-free' ) ); ?>" autocomplete="off"><?php echo esc_textarea( isset( $s['ga_id'] ) ? $s['ga_id'] : '' ); ?></textarea>
+									<p class="description"><?php esc_html_e( 'Paste the Measurement ID (G-…) or the full script Google gives you. We pull out the ID and load gtag with Consent Mode only after Accept. Leave empty to skip analytics. Universal Analytics (UA-) is not supported.', 'spokora-free' ); ?></p>
 								<?php endif; ?>
 							</td>
 						</tr>
 					</table>
-					<?php submit_button( __( 'Save banner settings', 'spokora' ) ); ?>
+					<?php submit_button( __( 'Save banner settings', 'spokora-free' ) ); ?>
 				</form>
 			</section>
 
 			<p class="spokora-consent-admin__disclaimer">
-				<?php esc_html_e( 'Engineering controls only — not legal advice. Have your client or counsel review the privacy policy and cookie wording for their jurisdiction.', 'spokora' ); ?>
+				<?php esc_html_e( 'Engineering controls only — not legal advice. Have your client or counsel review the privacy policy and cookie wording for their jurisdiction.', 'spokora-free' ); ?>
 			</p>
 		</div>
 		<?php
@@ -299,7 +330,7 @@ class Spokora_Consent {
 	}
 
 	public function enqueue_front() {
-		if ( is_admin() || spokora_theme_handles_cookie_consent() ) {
+		if ( is_admin() || spokora_theme_handles_cookie_consent() || ! $this->banner_enabled() ) {
 			return;
 		}
 		wp_enqueue_style(
@@ -324,23 +355,29 @@ class Spokora_Consent {
 				'debugMode'     => $debug,
 				'privacyUrl'    => $this->privacy_url(),
 				'strings'       => array(
-					'dialogLabel' => __( 'Cookie choices', 'spokora' ),
-					'body'        => __( 'This site uses essential cookies so WordPress can run (login and security). With your permission we may also use analytics cookies. Reject or accept non-essential cookies below — either choice is as easy as the other.', 'spokora' ),
-					'privacyLink' => __( 'Privacy Policy', 'spokora' ),
-					'reject'      => __( 'Reject non-essential cookies', 'spokora' ),
-					'accept'      => __( 'Accept all cookies', 'spokora' ),
+					'dialogLabel' => __( 'Cookie choices', 'spokora-free' ),
+					'body'        => __( 'This site uses essential cookies so WordPress can run (login and security). With your permission we may also use analytics cookies. Reject or accept non-essential cookies below — either choice is as easy as the other.', 'spokora-free' ),
+					'privacyLink' => __( 'Privacy Policy', 'spokora-free' ),
+					'reject'      => __( 'Reject non-essential cookies', 'spokora-free' ),
+					'accept'      => __( 'Accept all cookies', 'spokora-free' ),
 				),
 			)
 		);
 	}
 
 	public function consent_mode_defaults() {
+		if ( ! $this->banner_enabled() ) {
+			return;
+		}
 		if ( function_exists( 'spokora_print_ga4_consent_mode_defaults' ) ) {
 			spokora_print_ga4_consent_mode_defaults();
 		}
 	}
 
 	public function analytics_head() {
+		if ( ! $this->banner_enabled() ) {
+			return;
+		}
 		if ( function_exists( 'spokora_print_ga4_head_after_consent' ) ) {
 			spokora_print_ga4_head_after_consent();
 		}

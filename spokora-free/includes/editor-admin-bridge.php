@@ -67,7 +67,7 @@ function spokora_render_editor_bridge_banner( $post ) {
 	if ( 'spokora_show' === $type && $post->ID > 0 && function_exists( 'spokora_show_feed_url' ) ) {
 		$feed = spokora_show_feed_url( $post->ID );
 		if ( '' !== $feed ) {
-			$context = __( 'RSS feed is live for this show.', 'spokora' );
+			$context = __( 'RSS feed is live for this show.', 'spokora-free' );
 		}
 	}
 	if ( 'spokora_episode' === $type ) {
@@ -79,15 +79,15 @@ function spokora_render_editor_bridge_banner( $post ) {
 			$show_title = get_the_title( $show_id );
 			$context    = sprintf(
 				/* translators: %s: show title */
-				__( 'Episode for show: %s', 'spokora' ),
+				__( 'Episode for show: %s', 'spokora-free' ),
 				'' !== $show_title ? $show_title : '#' . $show_id
 			);
 		}
 	}
 	?>
-	<div class="spokora-editor-bridge" role="navigation" aria-label="<?php esc_attr_e( 'Spokora', 'spokora' ); ?>"<?php echo function_exists( 'spokora_telemetry_brand_style_attr' ) ? spokora_telemetry_brand_style_attr() : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+	<div class="spokora-editor-bridge" role="navigation" aria-label="<?php esc_attr_e( 'Spokora', 'spokora-free' ); ?>"<?php echo function_exists( 'spokora_telemetry_brand_style_attr' ) ? spokora_telemetry_brand_style_attr() : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 		<div class="spokora-editor-bridge__row">
-			<a class="spokora-editor-bridge__brand" href="<?php echo esc_url( $dash ); ?>"><?php esc_html_e( 'Spokora', 'spokora' ); ?></a>
+			<a class="spokora-editor-bridge__brand" href="<?php echo esc_url( $dash ); ?>"><?php esc_html_e( 'Spokora', 'spokora-free' ); ?></a>
 			<span class="spokora-editor-bridge__type"><?php echo esc_html( $label ); ?></span>
 			<?php if ( '' !== $context ) : ?>
 				<span class="spokora-editor-bridge__context">
@@ -95,14 +95,14 @@ function spokora_render_editor_bridge_banner( $post ) {
 					<?php if ( 'spokora_show' === $type && $post->ID > 0 && function_exists( 'spokora_show_feed_url' ) ) : ?>
 						<?php $feed = spokora_show_feed_url( $post->ID ); ?>
 						<?php if ( '' !== $feed ) : ?>
-							<a href="<?php echo esc_url( $feed ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Open feed', 'spokora' ); ?></a>
+							<a href="<?php echo esc_url( $feed ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Open feed', 'spokora-free' ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
 				</span>
 			<?php endif; ?>
 			<span class="spokora-editor-bridge__links">
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ); ?>"><?php esc_html_e( 'Quick setup', 'spokora' ); ?></a>
-				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=page' ) ); ?>"><?php esc_html_e( 'Pages', 'spokora' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ); ?>"><?php esc_html_e( 'Quick setup', 'spokora-free' ); ?></a>
+				<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=page' ) ); ?>"><?php esc_html_e( 'Pages', 'spokora-free' ); ?></a>
 			</span>
 		</div>
 	</div>

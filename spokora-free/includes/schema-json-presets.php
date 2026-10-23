@@ -15,13 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 function spokora_json_ld_preset_templates() {
 	$templates = array(
 		'' => array(
-			'label'       => __( '— Custom (paste or edit JSON) —', 'spokora' ),
+			'label'       => __( '— Custom (paste or edit JSON) —', 'spokora-free' ),
 			'description' => '',
 			'json'        => '',
 		),
 		'article' => array(
-			'label'       => __( 'Article / blog post', 'spokora' ),
-			'description' => __( 'BlogPosting with headline, URL, and publisher.', 'spokora' ),
+			'label'       => __( 'Article / blog post', 'spokora-free' ),
+			'description' => __( 'BlogPosting with headline, URL, and publisher.', 'spokora-free' ),
 			'json'        => '{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -40,8 +40,8 @@ function spokora_json_ld_preset_templates() {
 }',
 		),
 		'faq' => array(
-			'label'       => __( 'FAQ page', 'spokora' ),
-			'description' => __( 'FAQPage with two sample questions — replace copy before publish.', 'spokora' ),
+			'label'       => __( 'FAQ page', 'spokora-free' ),
+			'description' => __( 'FAQPage with two sample questions — replace copy before publish.', 'spokora-free' ),
 			'json'        => '{
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -66,8 +66,8 @@ function spokora_json_ld_preset_templates() {
 }',
 		),
 		'service' => array(
-			'label'       => __( 'Service page', 'spokora' ),
-			'description' => __( 'Service offered by your organization on this URL.', 'spokora' ),
+			'label'       => __( 'Service page', 'spokora-free' ),
+			'description' => __( 'Service offered by your organization on this URL.', 'spokora-free' ),
 			'json'        => '{
   "@context": "https://schema.org",
   "@type": "Service",
@@ -85,8 +85,8 @@ function spokora_json_ld_preset_templates() {
 }',
 		),
 		'local_landing' => array(
-			'label'       => __( 'Local landing page', 'spokora' ),
-			'description' => __( 'WebPage + LocalBusiness reference for geo pages.', 'spokora' ),
+			'label'       => __( 'Local landing page', 'spokora-free' ),
+			'description' => __( 'WebPage + LocalBusiness reference for geo pages.', 'spokora-free' ),
 			'json'        => '{
   "@context": "https://schema.org",
   "@graph": [
@@ -107,8 +107,8 @@ function spokora_json_ld_preset_templates() {
 }',
 		),
 		'howto' => array(
-			'label'       => __( 'How-to', 'spokora' ),
-			'description' => __( 'HowTo with one step — add more steps as needed.', 'spokora' ),
+			'label'       => __( 'How-to', 'spokora-free' ),
+			'description' => __( 'HowTo with one step — add more steps as needed.', 'spokora-free' ),
 			'json'        => '{
   "@context": "https://schema.org",
   "@type": "HowTo",
@@ -124,8 +124,8 @@ function spokora_json_ld_preset_templates() {
 }',
 		),
 		'breadcrumb' => array(
-			'label'       => __( 'Breadcrumb list', 'spokora' ),
-			'description' => __( 'BreadcrumbList (pair with visible breadcrumbs on the page).', 'spokora' ),
+			'label'       => __( 'Breadcrumb list', 'spokora-free' ),
+			'description' => __( 'BreadcrumbList (pair with visible breadcrumbs on the page).', 'spokora-free' ),
 			'json'        => '{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -204,7 +204,7 @@ function spokora_render_json_ld_preset_field( $textarea_id, $post_id = 0, $selec
 		'selectId'    => $select_id,
 		'textareaId'  => $textarea_id,
 		'presets'     => $filled,
-		'confirmText' => __( 'Replace the current JSON in the editor with this starter?', 'spokora' ),
+		'confirmText' => __( 'Replace the current JSON in the editor with this starter?', 'spokora-free' ),
 	);
 
 	if ( ! $script_enqueued ) {
@@ -233,7 +233,7 @@ function spokora_render_json_ld_preset_field( $textarea_id, $post_id = 0, $selec
 	}
 
 	echo '<p style="margin: 0 0 8px;">';
-	echo '<label for="' . esc_attr( $select_id ) . '" style="font-weight:600;display:block;margin-bottom:4px;">' . esc_html__( 'JSON-LD starter', 'spokora' ) . '</label>';
+	echo '<label for="' . esc_attr( $select_id ) . '" style="font-weight:600;display:block;margin-bottom:4px;">' . esc_html__( 'JSON-LD starter', 'spokora-free' ) . '</label>';
 	echo '<select id="' . esc_attr( $select_id ) . '" class="spokora-schema-json-preset" style="width:100%;max-width:100%;">';
 	foreach ( $presets as $id => $preset ) {
 		echo '<option value="' . esc_attr( (string) $id ) . '">' . esc_html( $preset['label'] ) . '</option>';

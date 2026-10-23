@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Top-level admin menu slug.
  */
 function spokora_admin_menu_slug() {
-	return apply_filters( 'spokora_admin_menu_slug', 'spokora' );
+	return apply_filters( 'spokora_admin_menu_slug', 'spokora-free' );
 }
 
 /**
@@ -37,8 +37,8 @@ function spokora_free_register_menu() {
 	$parent = spokora_admin_menu_slug();
 	$cap    = 'manage_options';
 	add_menu_page(
-		__( 'Spokora Free', 'spokora' ),
-		__( 'Spokora', 'spokora' ),
+		__( 'Spokora Free', 'spokora-free' ),
+		__( 'Spokora', 'spokora-free' ),
 		$cap,
 		$parent,
 		'spokora_free_render_home',
@@ -47,8 +47,8 @@ function spokora_free_register_menu() {
 	);
 	add_submenu_page(
 		$parent,
-		__( 'Home', 'spokora' ),
-		__( 'Home', 'spokora' ),
+		__( 'Home', 'spokora-free' ),
+		__( 'Home', 'spokora-free' ),
 		$cap,
 		$parent,
 		'spokora_free_render_home'
@@ -68,7 +68,7 @@ function spokora_home_note_snooze_seconds() {
  */
 function spokora_handle_snooze_home_note() {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'Permission denied.', 'spokora' ) );
+		wp_die( esc_html__( 'Permission denied.', 'spokora-free' ) );
 	}
 	check_admin_referer( 'spokora_snooze_home_note' );
 	update_user_meta( get_current_user_id(), 'spokora_home_note_hidden_until', time() + spokora_home_note_snooze_seconds() );
@@ -91,20 +91,20 @@ function spokora_free_render_home() {
 	$host = wp_parse_url( home_url(), PHP_URL_HOST );
 	?>
 	<div class="wrap spokora-free-home">
-		<h1><?php echo esc_html__( 'Spokora Free', 'spokora' ); ?></h1>
+		<h1><?php echo esc_html__( 'Spokora Free', 'spokora-free' ); ?></h1>
 		<p class="description">
 			<?php
 			echo esc_html(
 				sprintf(
 					/* translators: %s: site hostname */
-					__( 'SEO on this WordPress website (%s). No account and no license key.', 'spokora' ),
+					__( 'SEO on this WordPress website (%s). No account and no license key.', 'spokora-free' ),
 					$host ? $host : home_url()
 				)
 			);
 			?>
 		</p>
 		<?php if ( isset( $_GET['spokora_note'] ) && 'snoozed' === sanitize_key( wp_unslash( $_GET['spokora_note'] ) ) ) : ?>
-			<div class="notice notice-success is-dismissible"><p><?php echo esc_html__( 'Got it. This note will come back in about a month.', 'spokora' ); ?></p></div>
+			<div class="notice notice-success is-dismissible"><p><?php echo esc_html__( 'Got it. This note will come back in about a month.', 'spokora-free' ); ?></p></div>
 		<?php endif; ?>
 		<?php
 		if ( function_exists( 'spokora_render_home_intro' ) ) {
@@ -113,20 +113,20 @@ function spokora_free_render_home() {
 		?>
 		<div class="spokora-home-grid">
 			<section class="spokora-home-panel">
-				<h2><?php echo esc_html__( 'What is running', 'spokora' ); ?></h2>
+				<h2><?php echo esc_html__( 'What is running', 'spokora-free' ); ?></h2>
 				<p>
-					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ); ?>"><?php echo esc_html__( 'Quick setup', 'spokora' ); ?></a>
-					<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO', 'spokora' ); ?></a>
-					<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-redirects' ) ); ?>"><?php echo esc_html__( 'Redirects', 'spokora' ); ?></a>
-					<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-llms' ) ); ?>"><?php echo esc_html__( 'LLMS / AI docs', 'spokora' ); ?></a>
+					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ); ?>"><?php echo esc_html__( 'Quick setup', 'spokora-free' ); ?></a>
+					<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO', 'spokora-free' ); ?></a>
+					<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-redirects' ) ); ?>"><?php echo esc_html__( 'Redirects', 'spokora-free' ); ?></a>
+					<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-llms' ) ); ?>"><?php echo esc_html__( 'LLMS / AI docs', 'spokora-free' ); ?></a>
 				</p>
 				<ul>
-					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-settings' ) ); ?>"><?php echo esc_html__( 'Business Info', 'spokora' ); ?></a></li>
-					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-seo-scores' ) ); ?>"><?php echo esc_html__( 'SEO scores', 'spokora' ); ?></a></li>
-					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-markdown' ) ); ?>"><?php echo esc_html__( 'Markdown copies', 'spokora' ); ?></a></li>
-					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-indexnow' ) ); ?>"><?php echo esc_html__( 'Search ping (IndexNow)', 'spokora' ); ?></a></li>
-					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-consent' ) ); ?>"><?php echo esc_html__( 'Cookies & privacy', 'spokora' ); ?></a></li>
-					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-help' ) ); ?>"><?php echo esc_html__( 'Help', 'spokora' ); ?></a></li>
+					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-settings' ) ); ?>"><?php echo esc_html__( 'Business Info', 'spokora-free' ); ?></a></li>
+					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-seo-scores' ) ); ?>"><?php echo esc_html__( 'SEO scores', 'spokora-free' ); ?></a></li>
+					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-markdown' ) ); ?>"><?php echo esc_html__( 'Markdown copies', 'spokora-free' ); ?></a></li>
+					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-indexnow' ) ); ?>"><?php echo esc_html__( 'Search ping (IndexNow)', 'spokora-free' ); ?></a></li>
+					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-consent' ) ); ?>"><?php echo esc_html__( 'Cookies & privacy', 'spokora-free' ); ?></a></li>
+					<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-help' ) ); ?>"><?php echo esc_html__( 'Help', 'spokora-free' ); ?></a></li>
 				</ul>
 			</section>
 			<?php

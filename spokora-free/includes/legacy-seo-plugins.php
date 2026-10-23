@@ -405,13 +405,13 @@ function spokora_legacy_redirect_result_sentence() {
 	$left  = isset( $_GET['redirects_left'] ) ? absint( wp_unslash( $_GET['redirects_left'] ) ) : 0;
 	$text  = sprintf(
 		/* translators: %d: redirects copied */
-		__( 'Brought in %d redirects.', 'spokora' ),
+		__( 'Brought in %d redirects.', 'spokora-free' ),
 		$added
 	);
 	if ( $left > 0 ) {
 		$text .= ' ' . sprintf(
 			/* translators: %d: redirects left behind */
-			__( 'Left %d pattern or temporary redirects.', 'spokora' ),
+			__( 'Left %d pattern or temporary redirects.', 'spokora-free' ),
 			$left
 		);
 	}

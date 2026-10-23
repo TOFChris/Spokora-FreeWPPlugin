@@ -21,8 +21,8 @@ class Spokora_Help {
 	public function register_submenu() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'Help', 'spokora' ),
-			__( 'Help', 'spokora' ),
+			__( 'Help', 'spokora-free' ),
+			__( 'Help', 'spokora-free' ),
 			'manage_options',
 			'spokora-help',
 			array( $this, 'render_page' )
@@ -37,17 +37,17 @@ class Spokora_Help {
 		$blurbs   = spokora_get_module_help_blurbs();
 		?>
 		<div class="wrap" style="max-width:800px;">
-			<h1><?php echo esc_html__( 'Spokora Free — Help', 'spokora' ); ?></h1>
-			<p><?php echo esc_html__( 'This plugin prints titles, schema, a sitemap, exact 301s, and /llms.txt on WordPress websites. It does not need an account or a license key.', 'spokora' ); ?></p>
-			<h2><?php echo esc_html__( 'Start here', 'spokora' ); ?></h2>
+			<h1><?php echo esc_html__( 'Spokora Free — Help', 'spokora-free' ); ?></h1>
+			<p><?php echo esc_html__( 'This plugin prints titles, schema, a sitemap, exact 301s, and /llms.txt on WordPress websites. It does not need an account or a license key.', 'spokora-free' ); ?></p>
+			<h2><?php echo esc_html__( 'Start here', 'spokora-free' ); ?></h2>
 			<ul>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ); ?>"><?php echo esc_html__( 'Quick setup', 'spokora' ); ?></a></li>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO from Yoast, Rank Math, AIOSEO, or SEOPress', 'spokora' ); ?></a></li>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-redirects' ) ); ?>"><?php echo esc_html__( 'Redirects', 'spokora' ); ?></a></li>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-consent' ) ); ?>"><?php echo esc_html__( 'Cookies & privacy', 'spokora' ); ?></a></li>
-				<li><a href="<?php echo esc_url( admin_url( 'options-permalink.php' ) ); ?>"><?php echo esc_html__( 'Settings → Permalinks → Save (after install)', 'spokora' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ); ?>"><?php echo esc_html__( 'Quick setup', 'spokora-free' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO from Yoast, Rank Math, AIOSEO, or SEOPress', 'spokora-free' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-redirects' ) ); ?>"><?php echo esc_html__( 'Redirects', 'spokora-free' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-consent' ) ); ?>"><?php echo esc_html__( 'Cookies & privacy', 'spokora-free' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'options-permalink.php' ) ); ?>"><?php echo esc_html__( 'Settings → Permalinks → Save (after install)', 'spokora-free' ); ?></a></li>
 			</ul>
-			<h2><?php echo esc_html__( 'Modules', 'spokora' ); ?></h2>
+			<h2><?php echo esc_html__( 'Modules', 'spokora-free' ); ?></h2>
 			<table class="widefat striped">
 				<tbody>
 					<?php foreach ( $manifest as $id => $meta ) : ?>
@@ -64,7 +64,7 @@ class Spokora_Help {
 			}
 			?>
 			<p>
-				<?php echo esc_html__( 'If a Rank Math Pro site ran a tainted 3.0.123 package, restore from a clean backup before you migrate.', 'spokora' ); ?>
+				<?php echo esc_html__( 'If a Rank Math Pro site ran a tainted 3.0.123 package, restore from a clean backup before you migrate.', 'spokora-free' ); ?>
 			</p>
 		</div>
 		<?php

@@ -20,7 +20,7 @@ class Spokora_MetaBox_Engine {
         foreach ( $screens as $screen ) {
             add_meta_box(
                 'spokora_seo_meta_box',
-                __( 'SEO', 'spokora' ),
+                __( 'SEO', 'spokora-free' ),
                 array( $this, 'render_meta_box' ),
                 $screen,
                 'normal',
@@ -44,14 +44,14 @@ class Spokora_MetaBox_Engine {
         $seo_desc      = get_post_meta( $post->ID, '_spokora_seo_desc', true );
         $custom_schema = get_post_meta( $post->ID, '_spokora_custom_schema', true );
 
-        echo '<p style="color: #666;">' . esc_html__( 'Override global fallbacks for this page.', 'spokora' ) . '</p>';
+        echo '<p style="color: #666;">' . esc_html__( 'Override global fallbacks for this page.', 'spokora-free' ) . '</p>';
 
-        echo '<label for="spokora_seo_title" style="font-weight: bold; display: block; margin-top: 15px;">' . esc_html__( 'Custom SEO Title', 'spokora' ) . '</label>';
-        echo '<input type="text" id="spokora_seo_title" name="spokora_seo_title" value="' . esc_attr( $seo_title ) . '" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px;" placeholder="' . esc_attr__( 'Max 60 characters…', 'spokora' ) . '" />';
+        echo '<label for="spokora_seo_title" style="font-weight: bold; display: block; margin-top: 15px;">' . esc_html__( 'Custom SEO Title', 'spokora-free' ) . '</label>';
+        echo '<input type="text" id="spokora_seo_title" name="spokora_seo_title" value="' . esc_attr( $seo_title ) . '" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px;" placeholder="' . esc_attr__( 'Max 60 characters…', 'spokora-free' ) . '" />';
         echo '<div id="spokora-seo-title-count" class="spokora-seo-char-count">0/60</div>';
 
-        echo '<label for="spokora_seo_desc" style="font-weight: bold; display: block; margin-top: 15px;">' . esc_html__( 'Custom Meta Description', 'spokora' ) . '</label>';
-        echo '<textarea id="spokora_seo_desc" name="spokora_seo_desc" rows="3" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px;" placeholder="' . esc_attr__( 'Max 160 characters…', 'spokora' ) . '">' . esc_textarea( $seo_desc ) . '</textarea>';
+        echo '<label for="spokora_seo_desc" style="font-weight: bold; display: block; margin-top: 15px;">' . esc_html__( 'Custom Meta Description', 'spokora-free' ) . '</label>';
+        echo '<textarea id="spokora_seo_desc" name="spokora_seo_desc" rows="3" style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px;" placeholder="' . esc_attr__( 'Max 160 characters…', 'spokora-free' ) . '">' . esc_textarea( $seo_desc ) . '</textarea>';
         echo '<div id="spokora-seo-desc-count" class="spokora-seo-char-count">0/160</div>';
 
         if ( function_exists( 'spokora_is_module_enabled' ) && spokora_is_module_enabled( 'seo_score' ) ) {
@@ -62,48 +62,48 @@ class Spokora_MetaBox_Engine {
             $watchlist = get_post_meta( $post->ID, '_spokora_visibility_watchlist', true );
             $track     = get_post_meta( $post->ID, '_spokora_track_visibility', true );
             echo '<hr style="margin: 20px 0;">';
-            echo '<h4 style="margin:0 0 10px;">' . esc_html__( 'Market Visibility', 'spokora' ) . '</h4>';
-            echo '<p style="font-size:12px;color:#666;">' . esc_html__( 'When enabled, all keyphrases above are tracked for this page in Market Visibility.', 'spokora' ) . '</p>';
-            echo '<label for="spokora_visibility_watchlist" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Watchlist', 'spokora' ) . '</label>';
+            echo '<h4 style="margin:0 0 10px;">' . esc_html__( 'Market Visibility', 'spokora-free' ) . '</h4>';
+            echo '<p style="font-size:12px;color:#666;">' . esc_html__( 'When enabled, all keyphrases above are tracked for this page in Market Visibility.', 'spokora-free' ) . '</p>';
+            echo '<label for="spokora_visibility_watchlist" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Watchlist', 'spokora-free' ) . '</label>';
             echo '<select id="spokora_visibility_watchlist" name="spokora_visibility_watchlist" style="width:100%;margin-top:5px;">';
             $groups = array(
-                ''        => __( '— None —', 'spokora' ),
-                'bridge'  => __( 'Bridge pages', 'spokora' ),
-                'local'   => __( 'Local', 'spokora' ),
-                'brand'   => __( 'Brand', 'spokora' ),
-                'product' => __( 'Product', 'spokora' ),
+                ''        => __( '— None —', 'spokora-free' ),
+                'bridge'  => __( 'Bridge pages', 'spokora-free' ),
+                'local'   => __( 'Local', 'spokora-free' ),
+                'brand'   => __( 'Brand', 'spokora-free' ),
+                'product' => __( 'Product', 'spokora-free' ),
             );
             foreach ( $groups as $val => $label ) {
                 echo '<option value="' . esc_attr( $val ) . '"' . selected( (string) $watchlist, (string) $val, false ) . '>' . esc_html( $label ) . '</option>';
             }
             echo '</select>';
-            echo '<label style="display:block;margin-top:12px;"><input type="checkbox" name="spokora_track_visibility" value="1"' . checked( $track, '1', false ) . ' /> ' . esc_html__( 'Track in Market Visibility', 'spokora' ) . '</label>';
+            echo '<label style="display:block;margin-top:12px;"><input type="checkbox" name="spokora_track_visibility" value="1"' . checked( $track, '1', false ) . ' /> ' . esc_html__( 'Track in Market Visibility', 'spokora-free' ) . '</label>';
         }
 
         $kind     = (string) get_post_meta( $post->ID, '_spokora_content_kind', true );
         $video    = (string) get_post_meta( $post->ID, '_spokora_video_url', true );
         $seconds  = (string) get_post_meta( $post->ID, '_spokora_video_seconds', true );
         echo '<hr style="margin: 20px 0;">';
-        echo '<label for="spokora_content_kind" style="font-weight:bold;display:block;">' . esc_html__( 'What is this?', 'spokora' ) . '</label>';
+        echo '<label for="spokora_content_kind" style="font-weight:bold;display:block;">' . esc_html__( 'What is this?', 'spokora-free' ) . '</label>';
         echo '<select id="spokora_content_kind" name="spokora_content_kind" style="margin-top:5px;">';
         foreach ( array(
-            ''        => __( 'Ordinary page or post', 'spokora' ),
-            'article' => __( 'Article', 'spokora' ),
-            'news'    => __( 'News article', 'spokora' ),
-            'video'   => __( 'Video', 'spokora' ),
+            ''        => __( 'Ordinary page or post', 'spokora-free' ),
+            'article' => __( 'Article', 'spokora-free' ),
+            'news'    => __( 'News article', 'spokora-free' ),
+            'video'   => __( 'Video', 'spokora-free' ),
         ) as $val => $label ) {
             echo '<option value="' . esc_attr( $val ) . '"' . selected( $kind, $val, false ) . '>' . esc_html( $label ) . '</option>';
         }
         echo '</select>';
-        echo '<p style="font-size:12px;color:#666;">' . esc_html__( 'News articles from the last two days are listed in the news sitemap. A video link is listed in the video sitemap and marked up for search.', 'spokora' ) . '</p>';
-        echo '<label for="spokora_video_url" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Video file or watch page', 'spokora' ) . '</label>';
+        echo '<p style="font-size:12px;color:#666;">' . esc_html__( 'News articles from the last two days are listed in the news sitemap. A video link is listed in the video sitemap and marked up for search.', 'spokora-free' ) . '</p>';
+        echo '<label for="spokora_video_url" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Video file or watch page', 'spokora-free' ) . '</label>';
         echo '<input type="url" id="spokora_video_url" name="spokora_video_url" value="' . esc_attr( $video ) . '" style="width:100%;padding:8px;margin-top:5px;" placeholder="https://" />';
-        echo '<label for="spokora_video_seconds" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Length in seconds', 'spokora' ) . '</label>';
+        echo '<label for="spokora_video_seconds" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Length in seconds', 'spokora-free' ) . '</label>';
         echo '<input type="number" min="0" id="spokora_video_seconds" name="spokora_video_seconds" value="' . esc_attr( $seconds ) . '" style="width:8rem;padding:8px;margin-top:5px;" />';
 
         echo '<hr style="margin: 20px 0;">';
-        echo '<label for="spokora_custom_schema" style="font-weight: bold; display: block; color: #0056D2;">' . esc_html__( 'Custom JSON-LD Schema (Optional)', 'spokora' ) . '</label>';
-        echo '<p style="font-size: 12px; color: #666;">' . esc_html__( 'Choose a starter below or paste raw JSON-LD to override the dynamic schema generator for this page.', 'spokora' ) . '</p>';
+        echo '<label for="spokora_custom_schema" style="font-weight: bold; display: block; color: #0056D2;">' . esc_html__( 'Custom JSON-LD Schema (Optional)', 'spokora-free' ) . '</label>';
+        echo '<p style="font-size: 12px; color: #666;">' . esc_html__( 'Choose a starter below or paste raw JSON-LD to override the dynamic schema generator for this page.', 'spokora-free' ) . '</p>';
         if ( function_exists( 'spokora_render_json_ld_preset_field' ) ) {
             spokora_render_json_ld_preset_field( 'spokora_custom_schema', (int) $post->ID, 'spokora_schema_json_preset' );
         }

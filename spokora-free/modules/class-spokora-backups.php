@@ -21,8 +21,8 @@ class Spokora_Backups {
 	public function admin_menu() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'Backups', 'spokora' ),
-			__( 'Backups', 'spokora' ),
+			__( 'Backups', 'spokora-free' ),
+			__( 'Backups', 'spokora-free' ),
 			'manage_options',
 			'spokora-backups',
 			array( $this, 'render_page' )
@@ -35,10 +35,10 @@ class Spokora_Backups {
 		}
 		?>
 		<div class="wrap" style="max-width: 40rem;">
-			<h1><?php echo esc_html__( 'Backups', 'spokora' ); ?></h1>
-			<p><?php echo esc_html__( 'One button: download the database and wp-content as a zip. Use this before you hijack an old SEO plugin. wp-config.php is not in the zip.', 'spokora' ); ?></p>
+			<h1><?php echo esc_html__( 'Backups', 'spokora-free' ); ?></h1>
+			<p><?php echo esc_html__( 'One button: download the database and wp-content as a zip. Use this before you import an old SEO plugin. wp-config.php is not in the zip.', 'spokora-free' ); ?></p>
 			<?php spokora_free_render_backup_form(); ?>
-			<p class="description"><?php echo esc_html__( 'A large media library can take a few minutes. Stay on this page until the file starts.', 'spokora' ); ?></p>
+			<p class="description"><?php echo esc_html__( 'A large media library can take a few minutes. Stay on this page until the file starts.', 'spokora-free' ); ?></p>
 		</div>
 		<?php
 	}
@@ -56,10 +56,10 @@ function spokora_free_render_backup_form() {
 		<p>
 			<label>
 				<input type="checkbox" name="spokora_backup_confirm" value="1" required />
-				<?php echo esc_html__( 'Download the database and wp-content. This includes pages, media, and settings stored in WordPress.', 'spokora' ); ?>
+				<?php echo esc_html__( 'Download the database and wp-content. This includes pages, media, and settings stored in WordPress.', 'spokora-free' ); ?>
 			</label>
 		</p>
-		<p><?php submit_button( __( 'Download backup', 'spokora' ), 'secondary', 'submit', false ); ?></p>
+		<p><?php submit_button( __( 'Download backup', 'spokora-free' ), 'secondary', 'submit', false ); ?></p>
 	</form>
 	<?php
 }

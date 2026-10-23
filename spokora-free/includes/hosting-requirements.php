@@ -22,6 +22,6 @@ function spokora_requirements_url() {
 function spokora_self_hosted_admin_notice_text() {
 	return __(
 		'Spokora Free is for WordPress websites.',
-		'spokora'
+		'spokora-free'
 	);
 }

@@ -197,23 +197,23 @@ function spokora_has_alternate_content_source( $post_id ) {
 function spokora_resolve_ai_content( $post_id, $editor_content = '' ) {
 	$post_id = (int) $post_id;
 	if ( $post_id <= 0 ) {
-		return new WP_Error( 'spokora_ai_no_post', __( 'Invalid post.', 'spokora' ) );
+		return new WP_Error( 'spokora_ai_no_post', __( 'Invalid post.', 'spokora-free' ) );
 	}
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
-		return new WP_Error( 'spokora_ai_forbidden', __( 'You cannot edit this post.', 'spokora' ) );
+		return new WP_Error( 'spokora_ai_forbidden', __( 'You cannot edit this post.', 'spokora-free' ) );
 	}
 
 	if ( ! spokora_is_editor_content_placeholder( $editor_content ) ) {
 		return array(
 			'text'   => spokora_normalize_ai_text( $editor_content ),
 			'source' => 'editor',
-			'label'  => __( 'WordPress editor', 'spokora' ),
+			'label'  => __( 'WordPress editor', 'spokora-free' ),
 		);
 	}
 
 	$post = get_post( $post_id );
 	if ( ! $post ) {
-		return new WP_Error( 'spokora_ai_no_post', __( 'Post not found.', 'spokora' ) );
+		return new WP_Error( 'spokora_ai_no_post', __( 'Post not found.', 'spokora-free' ) );
 	}
 
 	$slug = spokora_get_bundled_slug_for_post( $post_id );
@@ -225,7 +225,7 @@ function spokora_resolve_ai_content( $post_id, $editor_content = '' ) {
 				'source' => 'bundled_html',
 				'label'  => sprintf(
 					/* translators: %s: bundled file slug */
-					__( 'Bundled HTML (%s)', 'spokora' ),
+					__( 'Bundled HTML (%s)', 'spokora-free' ),
 					$slug
 				),
 			);
@@ -239,7 +239,7 @@ function spokora_resolve_ai_content( $post_id, $editor_content = '' ) {
 					'source' => 'screen_map',
 					'label'  => sprintf(
 						/* translators: %s: screen slug */
-						__( 'Screen map (%s)', 'spokora' ),
+						__( 'Screen map (%s)', 'spokora-free' ),
 						$slug
 					),
 				);
@@ -252,7 +252,7 @@ function spokora_resolve_ai_content( $post_id, $editor_content = '' ) {
 		return array(
 			'text'   => spokora_normalize_ai_text( $excerpt ),
 			'source' => 'excerpt',
-			'label'  => __( 'Post excerpt', 'spokora' ),
+			'label'  => __( 'Post excerpt', 'spokora-free' ),
 		);
 	}
 
@@ -261,7 +261,7 @@ function spokora_resolve_ai_content( $post_id, $editor_content = '' ) {
 		return array(
 			'text'   => $body,
 			'source' => 'post_content',
-			'label'  => __( 'Saved post content', 'spokora' ),
+			'label'  => __( 'Saved post content', 'spokora-free' ),
 		);
 	}
 
@@ -270,13 +270,13 @@ function spokora_resolve_ai_content( $post_id, $editor_content = '' ) {
 		return array(
 			'text'   => spokora_normalize_ai_text( (string) $filtered['text'] ),
 			'source' => isset( $filtered['source'] ) ? (string) $filtered['source'] : 'filter',
-			'label'  => isset( $filtered['label'] ) ? (string) $filtered['label'] : __( 'Custom source', 'spokora' ),
+			'label'  => isset( $filtered['label'] ) ? (string) $filtered['label'] : __( 'Custom source', 'spokora-free' ),
 		);
 	}
 
 	return new WP_Error(
 		'spokora_ai_no_content',
-		__( 'No content found. Add editor text, a bundled HTML file, or an excerpt.', 'spokora' )
+		__( 'No content found. Add editor text, a bundled HTML file, or an excerpt.', 'spokora-free' )
 	);
 }
 

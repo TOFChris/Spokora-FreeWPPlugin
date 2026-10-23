@@ -23,14 +23,14 @@ function spokora_backup_skip_dirs() {
  */
 function spokora_backup_download() {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( esc_html__( 'You need to be an administrator to download this site.', 'spokora' ) );
+		wp_die( esc_html__( 'You need to be an administrator to download this site.', 'spokora-free' ) );
 	}
 	check_admin_referer( 'spokora_backup_download' );
 	if ( empty( $_POST['spokora_backup_confirm'] ) ) {
-		wp_die( esc_html__( 'Confirm the download on the Backups screen, then try again.', 'spokora' ) );
+		wp_die( esc_html__( 'Confirm the download on the Backups screen, then try again.', 'spokora-free' ) );
 	}
 	if ( ! class_exists( 'ZipArchive' ) ) {
-		wp_die( esc_html__( 'The zip tool is missing on this server.', 'spokora' ) );
+		wp_die( esc_html__( 'The zip tool is missing on this server.', 'spokora-free' ) );
 	}
 	if ( function_exists( 'set_time_limit' ) ) {
 		set_time_limit( 0 );
@@ -55,7 +55,7 @@ function spokora_backup_download() {
 
 	$zip = new ZipArchive();
 	if ( true !== $zip->open( $zip_path, ZipArchive::CREATE ) ) {
-		wp_die( esc_html__( 'The download could not be prepared.', 'spokora' ) );
+		wp_die( esc_html__( 'The download could not be prepared.', 'spokora-free' ) );
 	}
 	foreach ( array( 'database.sql', 'manifest.json', 'MOVE.txt' ) as $name ) {
 		$zip->addFile( $dir . '/' . $name, $name );
@@ -111,7 +111,7 @@ function spokora_backup_write_sql( $path, $scrub_secrets = false ) {
 	global $wpdb;
 	$handle = fopen( $path, 'wb' );
 	if ( ! $handle ) {
-		wp_die( esc_html__( 'The database export could not be started.', 'spokora' ) );
+		wp_die( esc_html__( 'The database export could not be started.', 'spokora-free' ) );
 	}
 	$scrub_option_names = array(
 		'spokora_api_keys',

@@ -17,25 +17,26 @@ if ( ! defined( 'WPINC' ) ) {
 function spokora_get_home_intro_copy() {
 	$copy = array(
 		'paragraphs' => array(
-			__( 'This one is on the house. Titles, schema, sitemap, redirects — the SEO stack, no meter, no account. You do not register this site and you do not need a key. The plugin still checks spokora.com for a newer zip when you open Plugins or tap Check for updates. That is a version check, not a login. After we list on WordPress.org, you can also use automatic updates like any other .org plugin. Optional: sign up so we can email you when a build ships.', 'spokora' ),
-			__( 'If it saves you a headache, the kindest thank-you is a Pro license when you need the rest of a client week. If you like it, leave us a review. If you just want to buy the next pot of coffee, that works too. Old school. We still notice.', 'spokora' ),
+			__( 'This one is on the house. Titles, schema, sitemap, redirects — the SEO stack, no meter, no account. You do not register this site and you do not need a key. Updates come through WordPress like any other directory plugin. Optional: sign up so we can email you when a build ships.', 'spokora-free' ),
+			__( 'If it saves you a headache, the kindest thank-you is a Pro license when you need the rest of a client week. If you like it, leave us a review. If you just want to buy the next pot of coffee, that works too. Old school. We still notice.', 'spokora-free' ),
 		),
-		'signoff'    => __( '— Chris, That One Firm', 'spokora' ),
+		'signoff'    => __( '— Chris, That One Firm', 'spokora-free' ),
 		'tabs'       => array(
 			array(
-				'label' => __( 'Sign up for updates', 'spokora' ),
+				'label' => __( 'Sign up for updates', 'spokora-free' ),
 				'url'   => spokora_updates_signup_url(),
 			),
 			array(
-				'label' => __( 'Support', 'spokora' ),
-				'url'   => spokora_forum_url(),
+				'label' => __( 'Support', 'spokora-free' ),
+				'url'   => function_exists( 'spokora_wporg_support_url' ) ? spokora_wporg_support_url() : 'https://wordpress.org/support/plugin/spokora-free/',
+				'external' => true,
 			),
 			array(
-				'label' => __( 'Updates', 'spokora' ),
+				'label' => __( 'Updates', 'spokora-free' ),
 				'url'   => spokora_updates_page_url(),
 			),
 			array(
-				'label' => __( 'Leave a review', 'spokora' ),
+				'label' => __( 'Leave a review', 'spokora-free' ),
 				'url'   => spokora_free_review_url(),
 			),
 		),
@@ -68,7 +69,7 @@ function spokora_render_home_intro() {
 			<input type="hidden" name="action" value="spokora_snooze_home_note" />
 			<?php wp_nonce_field( 'spokora_snooze_home_note' ); ?>
 			<button type="submit" class="spokora-home-coffee__hide">
-				<span class="screen-reader-text"><?php echo esc_html__( 'Hide this note for a month', 'spokora' ); ?></span>
+				<span class="screen-reader-text"><?php echo esc_html__( 'Hide this note for a month', 'spokora-free' ); ?></span>
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</form>
@@ -79,7 +80,7 @@ function spokora_render_home_intro() {
 			<p class="spokora-home-coffee__thanks"><?php echo esc_html( (string) $copy['signoff'] ); ?></p>
 		<?php endif; ?>
 		<?php if ( ! empty( $copy['tabs'] ) ) : ?>
-			<nav class="spokora-home-coffee__tabs" aria-label="<?php echo esc_attr__( 'Stay in touch', 'spokora' ); ?>">
+			<nav class="spokora-home-coffee__tabs" aria-label="<?php echo esc_attr__( 'Stay in touch', 'spokora-free' ); ?>">
 				<?php foreach ( $copy['tabs'] as $tab ) : ?>
 					<a
 						class="spokora-home-coffee__tab"

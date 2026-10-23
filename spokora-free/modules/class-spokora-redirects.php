@@ -294,7 +294,7 @@ class Spokora_Redirect_Engine {
                     <?php wp_nonce_field( 'spokora_import_legacy_redirects', 'spokora_import_legacy_redirects_nonce' ); ?>
                     <input type="hidden" name="spokora_import_legacy_redirects" value="1" />
                     <button type="submit" class="button">Bring in redirects from Yoast, Rank Math, AIOSEO, or SEOPress</button>
-                    <p style="font-size: 13px; color: #555; margin: 8px 0 0;">Exact permanent redirects only. A redirect already in this list is left as it is. Pattern and temporary redirects are not copied. Hijack and turning those plugins off do this too.</p>
+                    <p style="font-size: 13px; color: #555; margin: 8px 0 0;">Exact permanent redirects only. A redirect already in this list is left as it is. Pattern and temporary redirects are not copied. Import SEO and turning those plugins off do this too.</p>
                 </form>
                 <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
 

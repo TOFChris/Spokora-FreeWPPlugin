@@ -18,8 +18,8 @@ class Spokora_Markdown {
 	public function admin_menu() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'Markdown library', 'spokora' ),
-			__( 'Markdown library', 'spokora' ),
+			__( 'Markdown library', 'spokora-free' ),
+			__( 'Markdown library', 'spokora-free' ),
 			'manage_options',
 			'spokora-markdown',
 			array( $this, 'render_page' )
@@ -43,17 +43,17 @@ class Spokora_Markdown {
 		?>
 		<div class="wrap">
 			<?php spokora_render_subnav( 'markdown' ); ?>
-			<h1><?php echo esc_html__( 'Markdown library', 'spokora' ); ?></h1>
-			<p><?php echo esc_html__( 'Read-only index of automatic markdown mirrors. Every published URL listed here also serves /md/{slug}.md with title, link, and body text. These mirrors are not the AI hub (/llms.txt) and not the optional spokes (/ai-docs/). Configure those under Create → AI docs.', 'spokora' ); ?></p>
-			<p><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-llms' ) ); ?>"><?php echo esc_html__( 'Open AI docs (hub + spokes)', 'spokora' ); ?></a></p>
+			<h1><?php echo esc_html__( 'Markdown library', 'spokora-free' ); ?></h1>
+			<p><?php echo esc_html__( 'Read-only index of automatic markdown mirrors. Every published URL listed here also serves /md/{slug}.md with title, link, and body text. These mirrors are not the AI hub (/llms.txt) and not the optional spokes (/ai-docs/). Configure those under Create → AI docs.', 'spokora-free' ); ?></p>
+			<p><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-llms' ) ); ?>"><?php echo esc_html__( 'Open AI docs (hub + spokes)', 'spokora-free' ); ?></a></p>
 			<?php if ( ! $posts ) : ?>
-				<p><?php echo esc_html__( 'No published posts or pages yet.', 'spokora' ); ?></p>
+				<p><?php echo esc_html__( 'No published posts or pages yet.', 'spokora-free' ); ?></p>
 			<?php else : ?>
 				<table class="widefat striped" style="max-width:920px;">
 					<thead>
 						<tr>
-							<th scope="col"><?php echo esc_html__( 'Title', 'spokora' ); ?></th>
-							<th scope="col"><?php echo esc_html__( 'Markdown', 'spokora' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Title', 'spokora-free' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Markdown', 'spokora-free' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -74,7 +74,7 @@ class Spokora_Markdown {
 					</tbody>
 				</table>
 				<?php if ( 100 === count( $posts ) ) : ?>
-					<p><?php echo esc_html__( 'Showing the 100 most recently updated. Every other published page still has a markdown copy at the same kind of address.', 'spokora' ); ?></p>
+					<p><?php echo esc_html__( 'Showing the 100 most recently updated. Every other published page still has a markdown copy at the same kind of address.', 'spokora-free' ); ?></p>
 				<?php endif; ?>
 			<?php endif; ?>
 		</div>

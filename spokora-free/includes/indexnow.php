@@ -11,6 +11,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * IndexNow is opt-in (outbound POST to api.indexnow.org).
+ *
+ * Existing sites that already pinged keep it on.
+ *
+ * @return bool
+ */
+function spokora_indexnow_is_enabled() {
+	$stored = get_option( 'spokora_indexnow_enabled', 'unset' );
+	if ( 'unset' === $stored ) {
+		$last = get_option( 'spokora_indexnow_last', array() );
+		$on   = is_array( $last ) && ! empty( $last['url'] );
+		update_option( 'spokora_indexnow_enabled', $on ? '1' : '0', false );
+		return $on;
+	}
+	return '1' === (string) $stored || 'yes' === (string) $stored || 1 === $stored || true === $stored;
+}
+
+/**
  * Site key hosted at /{key}.txt.
  */
 function spokora_indexnow_key() {
@@ -37,7 +55,7 @@ function spokora_indexnow_key_url() {
  * Serve the key file.
  */
 function spokora_indexnow_maybe_serve() {
-	if ( is_admin() ) {
+	if ( is_admin() || ! spokora_indexnow_is_enabled() ) {
 		return;
 	}
 	$path = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) : '';
@@ -58,6 +76,9 @@ function spokora_indexnow_maybe_serve() {
  * @return int HTTP code, or 0 when the request was not waited on.
  */
 function spokora_indexnow_ping( $url, $blocking = false ) {
+	if ( ! spokora_indexnow_is_enabled() ) {
+		return 0;
+	}
 	$url = esc_url_raw( (string) $url );
 	if ( '' === $url ) {
 		return 0;
@@ -104,6 +125,9 @@ function spokora_indexnow_ping( $url, $blocking = false ) {
  * @param WP_Post $post Post.
  */
 function spokora_indexnow_on_status( $new, $old, $post ) {
+	if ( ! spokora_indexnow_is_enabled() ) {
+		return;
+	}
 	if ( ! $post instanceof WP_Post || wp_is_post_revision( $post ) || wp_is_post_autosave( $post ) ) {
 		return;
 	}

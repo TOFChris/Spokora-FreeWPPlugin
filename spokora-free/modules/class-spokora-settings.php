@@ -20,8 +20,8 @@ class Spokora_Settings_Engine {
     public function add_core_menu_page() {
         add_submenu_page(
             spokora_admin_menu_slug(),
-            __( 'Business Info', 'spokora' ),
-            __( 'Business Info', 'spokora' ),
+            __( 'Business Info', 'spokora-free' ),
+            __( 'Business Info', 'spokora-free' ),
             'manage_options',
             spokora_settings_page_slug(),
             array( $this, 'render_settings_page' )
@@ -149,13 +149,13 @@ class Spokora_Settings_Engine {
             <?php spokora_maybe_render_gemini_vault_hint(); ?>
             <div style="background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 4px solid #0056D2;">
                 
-                <h1 style="margin-top: 0; font-weight: 800; letter-spacing: -0.5px;"><?php echo esc_html__( 'Business Info', 'spokora' ); ?></h1>
-                <p style="color: #666; font-size: 16px;"><?php echo esc_html__( 'Organization schema, global SEO fallbacks, and site identity. Legacy plugin import lives under Configure → Import SEO.', 'spokora' ); ?></p>
+                <h1 style="margin-top: 0; font-weight: 800; letter-spacing: -0.5px;"><?php echo esc_html__( 'Business Info', 'spokora-free' ); ?></h1>
+                <p style="color: #666; font-size: 16px;"><?php echo esc_html__( 'Organization schema, global SEO fallbacks, and site identity. Legacy plugin import lives under Configure → Import SEO.', 'spokora-free' ); ?></p>
                 
                 <?php 
                 if ( isset( $_GET['migration'] ) && $_GET['migration'] == 'success' ) {
                     $count = isset( $_GET['count'] ) ? intval( $_GET['count'] ) : 0;
-                    echo '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px; border-left: 4px solid #28a745;"><strong>Success:</strong> Hijacked and imported ' . $count . ' SEO data points from legacy plugins. ' . esc_html( spokora_legacy_redirect_result_sentence() ) . '</div>';
+                    echo '<div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px; border-left: 4px solid #28a745;"><strong>Success:</strong> Imported ' . $count . ' SEO data points from legacy plugins. ' . esc_html( spokora_legacy_redirect_result_sentence() ) . '</div>';
                 }
                 if ( isset( $_GET['legacy_seo'] ) && 'deactivated' === $_GET['legacy_seo'] ) {
                     $count = isset( $_GET['count'] ) ? absint( $_GET['count'] ) : 0;
@@ -171,7 +171,7 @@ class Spokora_Settings_Engine {
                 if ( $legacy_active ) {
                     echo '<div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 4px; margin-bottom: 20px; border-left: 4px solid #ffc107;"><strong>Legacy SEO detected:</strong> ';
                     echo esc_html( implode( ', ', array_values( $legacy_active ) ) );
-                    echo '. Run <strong>Hijack Legacy SEO Data</strong> below, then deactivate when ready.</div>';
+                    echo '. Run <strong>Import legacy SEO data</strong> on Configure → Import SEO, then deactivate when ready.</div>';
                 }
                 ?>
 
@@ -180,17 +180,17 @@ class Spokora_Settings_Engine {
                 <form method="post" action="options.php">
                     <?php settings_fields( 'spokora_settings_group' ); ?>
 
-                    <h2 id="spokora-agency-roi" style="font-weight: 700; margin-top: 30px;"><?php echo esc_html__( 'Agency', 'spokora' ); ?></h2>
+                    <h2 id="spokora-agency-roi" style="font-weight: 700; margin-top: 30px;"><?php echo esc_html__( 'Agency', 'spokora-free' ); ?></h2>
                     <table class="form-table">
                         <tr>
-                            <th scope="row"><?php echo esc_html__( 'Agency ROI on dashboard', 'spokora' ); ?></th>
+                            <th scope="row"><?php echo esc_html__( 'Agency ROI on dashboard', 'spokora-free' ); ?></th>
                             <td>
                                 <input type="hidden" name="spokora_options[agency_roi_dashboard]" value="0" />
                                 <label>
                                     <input type="checkbox" name="spokora_options[agency_roi_dashboard]" value="1" <?php checked( ! isset( $options['agency_roi_dashboard'] ) || '1' === (string) ( $options['agency_roi_dashboard'] ?? '1' ) ); ?> />
-                                    <?php echo esc_html__( 'Show the Agency ROI snapshot at the top of Spokora → Dashboard (requires Agency admin / ROI module).', 'spokora' ); ?>
+                                    <?php echo esc_html__( 'Show the Agency ROI snapshot at the top of Spokora → Dashboard (requires Agency admin / ROI module).', 'spokora-free' ); ?>
                                 </label>
-                                <p class="description"><?php echo esc_html__( 'Hidden from the main WordPress dashboard. Client sites can leave this off; agencies use it for retainer proof.', 'spokora' ); ?></p>
+                                <p class="description"><?php echo esc_html__( 'Hidden from the main WordPress dashboard. Client sites can leave this off; agencies use it for retainer proof.', 'spokora-free' ); ?></p>
                             </td>
                         </tr>
                     </table>
@@ -303,9 +303,9 @@ class Spokora_Settings_Engine {
                 </form>
 
                 <p style="margin-top: 24px;">
-                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO from Yoast / Rank Math / AIOSEO', 'spokora' ); ?></a>
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO from Yoast / Rank Math / AIOSEO', 'spokora-free' ); ?></a>
                     ·
-                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-media-lab' ) ); ?>"><?php echo esc_html__( 'Media Lab', 'spokora' ); ?></a>
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-media-lab' ) ); ?>"><?php echo esc_html__( 'Media Lab', 'spokora-free' ); ?></a>
                 </p>
             </div>
         </div>

@@ -4,7 +4,7 @@
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4)](https://www.php.net/)
 
-**Spokora Free** is a complete, keyless SEO plugin for WordPress websites: titles and meta, JSON-LD schema, XML sitemaps, exact 301 redirects, migration from Yoast / Rank Math / AIOSEO / SEOPress, on-site backups, search SEO scoring, `/llms.txt` and markdown exports, IndexNow, cookie consent with optional GA4 after accept, and light performance tweaks.
+**Spokora Free** is a complete, keyless SEO plugin for WordPress websites: titles and meta, JSON-LD schema, XML sitemaps, exact 301 redirects, migration from Yoast / Rank Math / AIOSEO / SEOPress, on-site backups, search SEO scoring, `/llms.txt` and markdown exports, optional IndexNow, optional cookie banner with optional GA4 after accept, and light performance tweaks.
 
 No Spokora account. No license key. No API vault required to run SEO.
 
@@ -33,8 +33,8 @@ If you later need the full client-week toolkit (vault, dashboards, media lab, an
 | **Schema** | JSON-LD with sensible defaults and per-page overrides |
 | **Sitemap** | XML sitemap so you can drop a standalone sitemap plugin |
 | **Redirects** | Exact 301 redirect rules |
-| **Hijack** | Import titles, descriptions, and redirects from major SEO plugins (with confirmation before deactivating the old plugin) |
-| **Quick setup** | Guided setup: backup + Hijack when migrating, then business info |
+| **Import SEO** | Import titles, descriptions, and redirects from major SEO plugins (with confirmation before deactivating the old plugin) |
+| **Quick setup** | Guided setup: backup + import when migrating, then business info |
 | **Backups** | One-click database + `wp-content` zip (optional secret scrubbing); does not include `wp-config.php` |
 | **List Quick Edit** | SEO fields on Posts and Pages list screens |
 | **Cookies & privacy** | Banner with Reject / Accept; optional GA4 only after Accept |
@@ -83,7 +83,7 @@ Output: `dist/spokora-free-{version}.zip`.
 
 ## Updates
 
-Until Spokora Free is listed on WordPress.org, check for updates from **Plugins** (keyless check against spokora.com) or sign up at [spokora.com/updates](https://spokora.com/updates/). After directory listing, enable automatic updates like any other `.org` plugin.
+After WordPress.org listing, use **Plugins → Automatic updates** like any other directory plugin. Optional release emails: [spokora.com/updates](https://spokora.com/updates/). GitHub [Releases](https://github.com/TOFChris/Spokora-FreeWPPlugin/releases) stay in sync with the directory zip.
 
 ---
 

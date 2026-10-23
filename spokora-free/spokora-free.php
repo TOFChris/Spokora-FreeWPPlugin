@@ -2,9 +2,8 @@
 /**
  * Plugin Name: Spokora Free
  * Plugin URI: https://spokora.com
- * Description: Free SEO, schema, sitemap, and redirects for WordPress websites. No account. Updates from spokora.com without registering the site.
- * Version: 0.1.19
- * Update URI: https://spokora.com/spokora-free
+ * Description: Free SEO, schema, sitemap, and redirects for WordPress websites. No account, no license key.
+ * Version: 0.1.20
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Tested up to: 7.1
@@ -12,7 +11,7 @@
  * Author URI: https://thatonefirm.com
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: spokora
+ * Text Domain: spokora-free
  *
  * Do not run next to Spokora Pro (plugin slug spokora). Pro already includes this SEO surface.
  */
@@ -106,7 +105,7 @@ if ( spokora_free_pro_is_present() ) {
 					return;
 				}
 				echo '<div class="notice notice-info"><p>';
-				echo esc_html__( 'Spokora Pro is active, so Spokora Free stayed off. Pro already includes this SEO surface. Deactivate Free to avoid a duplicate plugin.', 'spokora' );
+				echo esc_html__( 'Spokora Pro is active, so Spokora Free stayed off. Pro already includes this SEO surface. Deactivate Free to avoid a duplicate plugin.', 'spokora-free' );
 				echo '</p></div>';
 			}
 		);
@@ -141,7 +140,6 @@ require_once SPOKORA_PLUGIN_DIR . 'includes/analytics-helpers.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/admin-ui-helpers.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/home-intro.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/admin-shell.php';
-require_once SPOKORA_PLUGIN_DIR . 'includes/plugin-updates.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/plugin-plugins-screen.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/pro-teaser.php';
 require_once SPOKORA_PLUGIN_DIR . 'includes/module-help.php';

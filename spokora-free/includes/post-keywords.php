@@ -222,17 +222,17 @@ function spokora_render_post_keyword_fields( $post ) {
 	$limit      = spokora_post_keyword_limit();
 
 	echo '<div class="spokora-keywords-panel" style="margin-bottom:16px;">';
-	echo '<h4 style="margin:0 0 8px;">' . esc_html__( 'Keyphrases', 'spokora' ) . '</h4>';
+	echo '<h4 style="margin:0 0 8px;">' . esc_html__( 'Keyphrases', 'spokora-free' ) . '</h4>';
 	echo '<p class="description" style="margin:0 0 10px;">' . esc_html(
 		sprintf(
 			/* translators: %d: max keyphrases */
-			__( 'Primary keyphrase drives on-page checks. Add up to %d total (one per line).', 'spokora' ),
+			__( 'Primary keyphrase drives on-page checks. Add up to %d total (one per line).', 'spokora-free' ),
 			$limit
 		)
 	) . '</p>';
-	echo '<label for="spokora_focus_keyword" style="font-weight:bold;display:block;">' . esc_html__( 'Primary keyphrase', 'spokora' ) . '</label>';
-	echo '<input type="text" id="spokora_focus_keyword" name="spokora_focus_keyword" value="' . esc_attr( $primary ) . '" style="width:100%;padding:8px;margin-top:5px;" placeholder="' . esc_attr__( 'e.g. cannabis flower tacoma', 'spokora' ) . '" />';
-	echo '<label for="spokora_additional_keywords" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Additional keyphrases', 'spokora' ) . '</label>';
-	echo '<textarea id="spokora_additional_keywords" name="spokora_additional_keywords" rows="3" style="width:100%;padding:8px;margin-top:5px;font-family:inherit;" placeholder="' . esc_attr__( 'One keyphrase per line', 'spokora' ) . '">' . esc_textarea( $additional ) . '</textarea>';
+	echo '<label for="spokora_focus_keyword" style="font-weight:bold;display:block;">' . esc_html__( 'Primary keyphrase', 'spokora-free' ) . '</label>';
+	echo '<input type="text" id="spokora_focus_keyword" name="spokora_focus_keyword" value="' . esc_attr( $primary ) . '" style="width:100%;padding:8px;margin-top:5px;" placeholder="' . esc_attr__( 'e.g. cannabis flower tacoma', 'spokora-free' ) . '" />';
+	echo '<label for="spokora_additional_keywords" style="font-weight:bold;display:block;margin-top:12px;">' . esc_html__( 'Additional keyphrases', 'spokora-free' ) . '</label>';
+	echo '<textarea id="spokora_additional_keywords" name="spokora_additional_keywords" rows="3" style="width:100%;padding:8px;margin-top:5px;font-family:inherit;" placeholder="' . esc_attr__( 'One keyphrase per line', 'spokora-free' ) . '">' . esc_textarea( $additional ) . '</textarea>';
 	echo '</div>';
 }

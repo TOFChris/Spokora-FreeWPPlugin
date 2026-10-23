@@ -4,6 +4,18 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.20] - 2026-10-23
+
+### Changed
+
+- **WordPress.org directory:** removed the spokora.com update checker, `Update URI`, and Plugins-row update panel. Updates go through WordPress.org after listing.
+- Text domain is **`spokora-free`** (matches the plugin slug).
+- Cookie banner and IndexNow are **opt-in** (existing cookie settings keep the banner; sites that already pinged IndexNow stay on).
+- Public UI uses **Import SEO** instead of Hijack.
+- Added `readme.txt` and `license.txt` in the plugin folder.
+
+---
+
 ## [0.1.19] - 2026-10-22
 
 ### Fixed

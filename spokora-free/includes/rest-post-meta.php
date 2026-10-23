@@ -89,10 +89,10 @@ function spokora_register_rest_scores_route() {
 			'callback'            => static function ( WP_REST_Request $request ) {
 				$post_id = (int) $request['id'];
 				if ( $post_id < 1 || ! get_post( $post_id ) ) {
-					return new WP_Error( 'spokora_missing_post', __( 'Post not found.', 'spokora' ), array( 'status' => 404 ) );
+					return new WP_Error( 'spokora_missing_post', __( 'Post not found.', 'spokora-free' ), array( 'status' => 404 ) );
 				}
 				if ( ! current_user_can( 'edit_post', $post_id ) ) {
-					return new WP_Error( 'spokora_forbidden', __( 'Cannot score this post.', 'spokora' ), array( 'status' => 403 ) );
+					return new WP_Error( 'spokora_forbidden', __( 'Cannot score this post.', 'spokora-free' ), array( 'status' => 403 ) );
 				}
 				if ( function_exists( 'spokora_compute_and_save_scores' ) ) {
 					return rest_ensure_response( spokora_compute_and_save_scores( $post_id ) );

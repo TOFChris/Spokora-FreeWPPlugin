@@ -42,7 +42,7 @@ if ( ! function_exists( 'spokora_consent_admin_menu_title' ) ) {
 	 * @return string
 	 */
 	function spokora_consent_admin_menu_title() {
-		return __( 'Cookies & privacy', 'spokora' );
+		return __( 'Cookies & privacy', 'spokora-free' );
 	}
 }
 
@@ -53,7 +53,7 @@ if ( ! function_exists( 'spokora_consent_admin_page_title' ) ) {
 	 * @return string
 	 */
 	function spokora_consent_admin_page_title() {
-		return __( 'Cookie banner & privacy', 'spokora' );
+		return __( 'Cookie banner & privacy', 'spokora-free' );
 	}
 }
 
@@ -142,36 +142,36 @@ if ( ! function_exists( 'spokora_consent_readiness_items' ) ) {
 		return array(
 			array(
 				'ok'           => $module_on,
-				'title'        => __( 'Cookie banner module is on', 'spokora' ),
-				'detail'       => __( 'Turn on Cookies & privacy under Modules so Spokora can show Reject and Accept on the public site.', 'spokora' ),
-				'action_label' => __( 'Open Modules', 'spokora' ),
+				'title'        => __( 'Cookie banner module is on', 'spokora-free' ),
+				'detail'       => __( 'Turn on Cookies & privacy under Modules so Spokora can show Reject and Accept on the public site.', 'spokora-free' ),
+				'action_label' => __( 'Open Modules', 'spokora-free' ),
 				'action_url'   => admin_url( 'admin.php?page=spokora-modules' ),
 			),
 			array(
 				'ok'           => $privacy_ok,
-				'title'        => __( 'Privacy policy is linked', 'spokora' ),
-				'detail'       => __( 'Assign a page under Settings → Privacy, or paste your policy URL below. The banner links to it.', 'spokora' ),
-				'action_label' => __( 'Privacy settings', 'spokora' ),
+				'title'        => __( 'Privacy policy is linked', 'spokora-free' ),
+				'detail'       => __( 'Assign a page under Settings → Privacy, or paste your policy URL below. The banner links to it.', 'spokora-free' ),
+				'action_label' => __( 'Privacy settings', 'spokora-free' ),
 				'action_url'   => admin_url( 'options-privacy.php' ),
 			),
 			array(
 				'ok'           => $banner_ok,
 				'title'        => $theme_banner
-					? __( 'Banner handled by your theme', 'spokora' )
-					: __( 'Banner will show on the front end', 'spokora' ),
+					? __( 'Banner handled by your theme', 'spokora-free' )
+					: __( 'Banner will show on the front end', 'spokora-free' ),
 				'detail'       => $theme_banner
-					? __( 'The Spokora theme already prints the same style of banner. Spokora Free will not duplicate it.', 'spokora' )
-					: __( 'Visitors get equal Reject and Accept choices. Analytics waits until Accept.', 'spokora' ),
-				'action_label' => __( 'Preview site', 'spokora' ),
+					? __( 'The Spokora theme already prints the same style of banner. Spokora Free will not duplicate it.', 'spokora-free' )
+					: __( 'Visitors get equal Reject and Accept choices. Analytics waits until Accept.', 'spokora-free' ),
+				'action_label' => __( 'Preview site', 'spokora-free' ),
 				'action_url'   => home_url( '/' ),
 			),
 			array(
 				'ok'           => true,
-				'title'        => __( 'Google Analytics (optional)', 'spokora' ),
+				'title'        => __( 'Google Analytics (optional)', 'spokora-free' ),
 				'detail'       => '' !== $ga_id
-					? __( 'GA4 is set and loads with Consent Mode — denied until the visitor accepts.', 'spokora' )
-					: __( 'No GA4 ID yet — fine if you do not use analytics. Paste a G- ID or Google’s tag in Banner settings.', 'spokora' ),
-				'action_label' => __( 'Banner settings', 'spokora' ),
+					? __( 'GA4 is set and loads with Consent Mode — denied until the visitor accepts.', 'spokora-free' )
+					: __( 'No GA4 ID yet — fine if you do not use analytics. Paste a G- ID or Google’s tag in Banner settings.', 'spokora-free' ),
+				'action_label' => __( 'Banner settings', 'spokora-free' ),
 				'action_url'   => admin_url( 'admin.php?page=spokora-consent#spokora-consent-banner' ),
 			),
 		);

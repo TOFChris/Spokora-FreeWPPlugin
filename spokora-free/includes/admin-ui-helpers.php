@@ -10,10 +10,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Plugin basename (folder/file).
+ *
+ * @return string
+ */
+function spokora_free_plugin_basename() {
+	if ( defined( 'SPOKORA_PLUGIN_FILE' ) ) {
+		return plugin_basename( SPOKORA_PLUGIN_FILE );
+	}
+	return 'spokora-free/spokora-free.php';
+}
+
+/**
  * Public product site.
  */
 function spokora_product_url() {
 	return apply_filters( 'spokora_product_url', 'https://spokora.com' );
+}
+
+/**
+ * WordPress.org plugin support (directory listing).
+ *
+ * @return string
+ */
+function spokora_wporg_support_url() {
+	return apply_filters( 'spokora_wporg_support_url', 'https://wordpress.org/support/plugin/spokora-free/' );
 }
 
 if ( ! function_exists( 'spokora_forum_url' ) ) {
@@ -58,19 +79,19 @@ function spokora_free_review_url() {
 function spokora_admin_areas() {
 	return array(
 		'create'   => array(
-			'label' => __( 'Create', 'spokora' ),
+			'label' => __( 'Create', 'spokora-free' ),
 			'pages' => array( 'spokora-llms' ),
 		),
 		'optimize' => array(
-			'label' => __( 'Optimize', 'spokora' ),
+			'label' => __( 'Optimize', 'spokora-free' ),
 			'pages' => array( 'spokora-seo-scores', 'spokora-redirects', 'spokora-indexnow' ),
 		),
 		'results'  => array(
-			'label' => __( 'Results', 'spokora' ),
+			'label' => __( 'Results', 'spokora-free' ),
 			'pages' => array( 'spokora-markdown' ),
 		),
 		'setup'    => array(
-			'label' => __( 'Configure', 'spokora' ),
+			'label' => __( 'Configure', 'spokora-free' ),
 			'pages' => array(
 				'spokora-setup',
 				'spokora-modules',
@@ -114,7 +135,7 @@ function spokora_enqueue_admin_menu( $hook ) {
 	}
 	$areas[] = array(
 		'id'    => 'more',
-		'label' => __( 'More', 'spokora' ),
+		'label' => __( 'More', 'spokora-free' ),
 		'pages' => array(),
 	);
 	wp_localize_script(

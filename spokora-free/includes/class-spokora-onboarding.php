@@ -48,8 +48,8 @@ class Spokora_Onboarding {
 	public function register_submenu() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'Quick setup', 'spokora' ),
-			__( 'Quick setup', 'spokora' ),
+			__( 'Quick setup', 'spokora-free' ),
+			__( 'Quick setup', 'spokora-free' ),
 			'manage_options',
 			'spokora-setup',
 			array( $this, 'render_wizard' ),
@@ -67,8 +67,8 @@ class Spokora_Onboarding {
 		}
 		array_unshift(
 			$links,
-			'<a href="' . esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ) . '">' . esc_html__( 'Quick setup', 'spokora' ) . '</a>',
-			'<a href="' . esc_url( admin_url( 'admin.php?page=spokora-help' ) ) . '">' . esc_html__( 'Help', 'spokora' ) . '</a>'
+			'<a href="' . esc_url( admin_url( 'admin.php?page=spokora-setup&step=1' ) ) . '">' . esc_html__( 'Quick setup', 'spokora-free' ) . '</a>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=spokora-help' ) ) . '">' . esc_html__( 'Help', 'spokora-free' ) . '</a>'
 		);
 		return $links;
 	}
@@ -88,7 +88,7 @@ class Spokora_Onboarding {
 		echo '<div class="notice notice-info"><p>';
 		echo wp_kses_post(
 			sprintf(
-				__( 'Spokora Free: run %1$sQuick setup%2$s for baseline SEO.', 'spokora' ),
+				__( 'Spokora Free: run %1$sQuick setup%2$s for baseline SEO.', 'spokora-free' ),
 				'<a href="' . esc_url( $url ) . '">',
 				'</a>'
 			)
@@ -111,7 +111,7 @@ class Spokora_Onboarding {
 
 	public function handle_profile() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'spokora' ) );
+			wp_die( esc_html__( 'Permission denied.', 'spokora-free' ) );
 		}
 		check_admin_referer( 'spokora_onboarding_profile' );
 		$raw = isset( $_POST['spokora_setup_profile'] ) ? sanitize_key( wp_unslash( $_POST['spokora_setup_profile'] ) ) : 'fresh';
@@ -125,7 +125,7 @@ class Spokora_Onboarding {
 
 	public function handle_business_info() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'spokora' ) );
+			wp_die( esc_html__( 'Permission denied.', 'spokora-free' ) );
 		}
 		check_admin_referer( 'spokora_onboarding_seed' );
 		$opts = $this->get_opts();
@@ -249,7 +249,7 @@ class Spokora_Onboarding {
 
 	public function handle_home_seo() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'spokora' ) );
+			wp_die( esc_html__( 'Permission denied.', 'spokora-free' ) );
 		}
 		check_admin_referer( 'spokora_onboarding_home_seo' );
 		$opts = $this->get_opts();
@@ -266,7 +266,7 @@ class Spokora_Onboarding {
 
 	public function handle_finish() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'spokora' ) );
+			wp_die( esc_html__( 'Permission denied.', 'spokora-free' ) );
 		}
 		check_admin_referer( 'spokora_onboarding_finish' );
 		update_option( 'spokora_onboarding_pending', '0' );
@@ -276,7 +276,7 @@ class Spokora_Onboarding {
 
 	public function handle_skip() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'spokora' ) );
+			wp_die( esc_html__( 'Permission denied.', 'spokora-free' ) );
 		}
 		check_admin_referer( 'spokora_onboarding_skip' );
 		update_option( 'spokora_onboarding_pending', '0' );
@@ -295,17 +295,17 @@ class Spokora_Onboarding {
 		$opts     = $this->get_opts();
 		$skip_url = wp_nonce_url( admin_url( 'admin-post.php?action=spokora_onboarding_skip' ), 'spokora_onboarding_skip' );
 		$names    = array(
-			'path'     => __( 'Your path', 'spokora' ),
-			'switcher' => __( 'Protect & hijack', 'spokora' ),
-			'business' => __( 'Business Info', 'spokora' ),
-			'home'     => __( 'Home page', 'spokora' ),
-			'live'     => __( 'Go live', 'spokora' ),
+			'path'     => __( 'Your path', 'spokora-free' ),
+			'switcher' => __( 'Backup & import', 'spokora-free' ),
+			'business' => __( 'Business Info', 'spokora-free' ),
+			'home'     => __( 'Home page', 'spokora-free' ),
+			'live'     => __( 'Go live', 'spokora-free' ),
 		);
 		$current  = $this->step_id_at( $step );
 		?>
 		<div class="wrap spokora-setup">
-			<h1><?php echo esc_html__( 'Spokora Free — Quick setup', 'spokora' ); ?></h1>
-			<p class="description"><?php echo esc_html__( 'No API keys. If you already have an SEO plugin, back up and hijack first. Then Business Info.', 'spokora' ); ?></p>
+			<h1><?php echo esc_html__( 'Spokora Free — Quick setup', 'spokora-free' ); ?></h1>
+			<p class="description"><?php echo esc_html__( 'No API keys. If you already have an SEO plugin, back up and import first. Then Business Info.', 'spokora-free' ); ?></p>
 			<?php if ( function_exists( 'spokora_self_hosted_admin_notice_text' ) ) : ?>
 				<div class="notice notice-warning inline"><p><?php echo esc_html( spokora_self_hosted_admin_notice_text() ); ?></p></div>
 			<?php endif; ?>
@@ -340,7 +340,7 @@ class Spokora_Onboarding {
 				}
 				?>
 			</div>
-			<p><a href="<?php echo esc_url( $skip_url ); ?>"><?php echo esc_html__( 'Dismiss this reminder', 'spokora' ); ?></a></p>
+			<p><a href="<?php echo esc_url( $skip_url ); ?>"><?php echo esc_html__( 'Dismiss this reminder', 'spokora-free' ); ?></a></p>
 			<style>
 				.spokora-setup__steps { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; list-style: none; margin: 1.25rem 0; padding: 0; font-weight: 600; }
 				.spokora-setup__steps li.is-current { color: #0056d2; }
@@ -354,17 +354,17 @@ class Spokora_Onboarding {
 	private function render_step_welcome() {
 		$profile = spokora_get_setup_profile();
 		?>
-		<h2><?php echo esc_html__( 'How are you setting this up?', 'spokora' ); ?></h2>
+		<h2><?php echo esc_html__( 'How are you setting this up?', 'spokora-free' ); ?></h2>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<?php wp_nonce_field( 'spokora_onboarding_profile' ); ?>
 			<input type="hidden" name="action" value="spokora_onboarding_profile" />
 			<button type="submit" class="spokora-setup__path" name="spokora_setup_profile" value="fresh">
-				<strong><?php echo esc_html__( 'Starting fresh', 'spokora' ); ?></strong><br />
-				<?php echo esc_html__( 'First SEO plugin on this site. Next: Business Info, then the home page.', 'spokora' ); ?>
+				<strong><?php echo esc_html__( 'Starting fresh', 'spokora-free' ); ?></strong><br />
+				<?php echo esc_html__( 'First SEO plugin on this site. Next: Business Info, then the home page.', 'spokora-free' ); ?>
 			</button>
 			<button type="submit" class="spokora-setup__path" name="spokora_setup_profile" value="agency">
-				<strong><?php echo esc_html__( 'I already have a setup', 'spokora' ); ?></strong><br />
-				<?php echo esc_html__( 'Yoast, Rank Math, AIOSEO, or SEOPress is already here. Next: download a backup, hijack SEO, then Business Info.', 'spokora' ); ?>
+				<strong><?php echo esc_html__( 'I already have a setup', 'spokora-free' ); ?></strong><br />
+				<?php echo esc_html__( 'Yoast, Rank Math, AIOSEO, or SEOPress is already here. Next: download a backup, import SEO, then Business Info.', 'spokora-free' ); ?>
 			</button>
 		</form>
 		<?php
@@ -375,15 +375,15 @@ class Spokora_Onboarding {
 		$legacy = function_exists( 'spokora_detect_active_legacy_seo_plugins' ) ? spokora_detect_active_legacy_seo_plugins() : array();
 		$next   = $this->setup_url( $this->step_number_for( 'business' ) );
 		?>
-		<h2><?php echo esc_html__( 'Protect the old setup, then hijack it', 'spokora' ); ?></h2>
-		<p><?php echo esc_html__( 'Do this before Business Info. Download a backup first. Then copy titles, descriptions, and exact 301s out of the old SEO plugin. You can come back to either button.', 'spokora' ); ?></p>
+		<h2><?php echo esc_html__( 'Protect the old setup, then import it', 'spokora-free' ); ?></h2>
+		<p><?php echo esc_html__( 'Do this before Business Info. Download a backup first. Then copy titles, descriptions, and exact 301s out of the old SEO plugin. You can come back to either button.', 'spokora-free' ); ?></p>
 		<?php if ( isset( $_GET['migration'] ) && 'success' === $_GET['migration'] ) : ?>
 			<div class="notice notice-success inline"><p>
 				<?php
 				echo esc_html(
 					sprintf(
 						/* translators: %d: fields imported */
-						__( 'Hijack finished. Imported %d SEO fields.', 'spokora' ),
+						__( 'Import finished. Imported %d SEO fields.', 'spokora-free' ),
 						isset( $_GET['count'] ) ? absint( $_GET['count'] ) : 0
 					)
 				);
@@ -392,40 +392,40 @@ class Spokora_Onboarding {
 		<?php endif; ?>
 		<?php if ( $legacy ) : ?>
 			<div class="notice notice-warning inline"><p>
-				<?php echo esc_html__( 'Detected:', 'spokora' ); ?>
+				<?php echo esc_html__( 'Detected:', 'spokora-free' ); ?>
 				<strong><?php echo esc_html( implode( ', ', array_values( $legacy ) ) ); ?></strong>
 			</p></div>
 		<?php else : ?>
-			<p class="description"><?php echo esc_html__( 'No Yoast, Rank Math, AIOSEO, or SEOPress is active. You can still download a backup, then continue.', 'spokora' ); ?></p>
+			<p class="description"><?php echo esc_html__( 'No Yoast, Rank Math, AIOSEO, or SEOPress is active. You can still download a backup, then continue.', 'spokora-free' ); ?></p>
 		<?php endif; ?>
 
 		<div class="spokora-setup__actions">
 			<section class="spokora-home-panel">
-				<h3><?php echo esc_html__( '1. Backup', 'spokora' ); ?></h3>
-				<p><?php echo esc_html__( 'One-button zip of the database and wp-content. Stay on this page until the download starts.', 'spokora' ); ?></p>
+				<h3><?php echo esc_html__( '1. Backup', 'spokora-free' ); ?></h3>
+				<p><?php echo esc_html__( 'One-button zip of the database and wp-content. Stay on this page until the download starts.', 'spokora-free' ); ?></p>
 				<?php
 				if ( function_exists( 'spokora_free_render_backup_form' ) ) {
 					spokora_free_render_backup_form();
 				} else {
-					echo '<p><a class="button" href="' . esc_url( admin_url( 'admin.php?page=spokora-backups' ) ) . '">' . esc_html__( 'Open Backups', 'spokora' ) . '</a></p>';
+					echo '<p><a class="button" href="' . esc_url( admin_url( 'admin.php?page=spokora-backups' ) ) . '">' . esc_html__( 'Open Backups', 'spokora-free' ) . '</a></p>';
 				}
 				?>
 			</section>
 			<section class="spokora-home-panel">
-				<h3><?php echo esc_html__( '2. Hijack SEO', 'spokora' ); ?></h3>
-				<p><?php echo esc_html__( 'Copy titles, descriptions, keyphrases, and exact 301s into Spokora. Turn the old plugin off later, after titles look right.', 'spokora' ); ?></p>
+				<h3><?php echo esc_html__( '2. Import SEO', 'spokora-free' ); ?></h3>
+				<p><?php echo esc_html__( 'Copy titles, descriptions, keyphrases, and exact 301s into Spokora. Turn the old plugin off later, after titles look right.', 'spokora-free' ); ?></p>
 				<form method="post" action="<?php echo esc_url( $this->setup_url( $this->step_number_for( 'switcher' ) ) ); ?>">
 					<?php wp_nonce_field( 'spokora_run_migration_action', 'spokora_migration_nonce' ); ?>
 					<input type="hidden" name="spokora_run_migration" value="1" />
 					<input type="hidden" name="spokora_setup_return" value="1" />
 					<input type="hidden" name="spokora_setup_step" value="<?php echo esc_attr( (string) $this->step_number_for( 'switcher' ) ); ?>" />
-					<?php submit_button( __( 'Hijack SEO', 'spokora' ), 'primary', 'submit', false ); ?>
+					<?php submit_button( __( 'Import SEO', 'spokora-free' ), 'primary', 'submit', false ); ?>
 				</form>
 			</section>
 		</div>
 		<p>
-			<a class="button button-primary" href="<?php echo esc_url( $next ); ?>"><?php echo esc_html__( 'Continue to Business Info', 'spokora' ); ?></a>
-			<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Full Import SEO screen', 'spokora' ); ?></a>
+			<a class="button button-primary" href="<?php echo esc_url( $next ); ?>"><?php echo esc_html__( 'Continue to Business Info', 'spokora-free' ); ?></a>
+			<a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Full Import SEO screen', 'spokora-free' ); ?></a>
 		</p>
 		<style>
 			.spokora-setup__actions { display: grid; gap: 1rem; margin: 1rem 0; }
@@ -443,18 +443,18 @@ class Spokora_Onboarding {
 		$v      = $this->business_info_values( $opts );
 		$err    = isset( $_GET['setup_err'] ) && 'org' === sanitize_key( wp_unslash( $_GET['setup_err'] ) );
 		?>
-		<h2><?php echo esc_html__( 'Business Info', 'spokora' ); ?></h2>
-		<p><?php echo esc_html__( 'This is the baseline. Schema and fallbacks use these fields. We pulled what WordPress already knows — check it, fill the blanks, then continue. Same data lives under Spokora → Business Info if you need to edit later.', 'spokora' ); ?></p>
+		<h2><?php echo esc_html__( 'Business Info', 'spokora-free' ); ?></h2>
+		<p><?php echo esc_html__( 'This is the baseline. Schema and fallbacks use these fields. We pulled what WordPress already knows — check it, fill the blanks, then continue. Same data lives under Spokora → Business Info if you need to edit later.', 'spokora-free' ); ?></p>
 		<?php if ( $err ) : ?>
-			<div class="notice notice-error inline"><p><?php echo esc_html__( 'Organization name is required before you go further.', 'spokora' ); ?></p></div>
+			<div class="notice notice-error inline"><p><?php echo esc_html__( 'Organization name is required before you go further.', 'spokora-free' ); ?></p></div>
 		<?php endif; ?>
 		<?php if ( $legacy ) : ?>
 			<div class="notice notice-warning inline"><p>
 				<?php
 				if ( 'agency' === spokora_get_setup_profile() ) {
-					echo esc_html__( 'A legacy SEO plugin is still active. If you have not hijacked yet, go back one step. Turn the old plugin off after titles look right.', 'spokora' );
+					echo esc_html__( 'A legacy SEO plugin is still active. If you have not imported yet, go back one step. Turn the old plugin off after titles look right.', 'spokora-free' );
 				} else {
-					echo esc_html__( 'A legacy SEO plugin is active. You can hijack later from Configure → Import SEO.', 'spokora' );
+					echo esc_html__( 'A legacy SEO plugin is active. You can import later from Configure → Import SEO.', 'spokora-free' );
 				}
 				?>
 				<strong><?php echo esc_html( implode( ', ', array_values( $legacy ) ) ); ?></strong>
@@ -464,57 +464,57 @@ class Spokora_Onboarding {
 			<?php wp_nonce_field( 'spokora_onboarding_seed' ); ?>
 			<input type="hidden" name="action" value="spokora_onboarding_seed" />
 			<p>
-				<label for="hwc_org_name"><strong><?php echo esc_html__( 'Organization name', 'spokora' ); ?></strong></label><br />
+				<label for="hwc_org_name"><strong><?php echo esc_html__( 'Organization name', 'spokora-free' ); ?></strong></label><br />
 				<input type="text" class="large-text" id="hwc_org_name" name="hwc_org_name" required value="<?php echo esc_attr( $v['hwc_org_name'] ); ?>" />
 			</p>
 			<p>
-				<label for="schema_type"><strong><?php echo esc_html__( 'Business type', 'spokora' ); ?></strong></label><br />
+				<label for="schema_type"><strong><?php echo esc_html__( 'Business type', 'spokora-free' ); ?></strong></label><br />
 				<select id="schema_type" name="schema_type">
-					<option value="ProfessionalService" <?php selected( $v['schema_type'], 'ProfessionalService' ); ?>><?php echo esc_html__( 'Professional Service', 'spokora' ); ?></option>
-					<option value="LocalBusiness" <?php selected( $v['schema_type'], 'LocalBusiness' ); ?>><?php echo esc_html__( 'Local Business', 'spokora' ); ?></option>
-					<option value="Organization" <?php selected( $v['schema_type'], 'Organization' ); ?>><?php echo esc_html__( 'Organization', 'spokora' ); ?></option>
-					<option value="RadioStation" <?php selected( $v['schema_type'], 'RadioStation' ); ?>><?php echo esc_html__( 'Radio Station', 'spokora' ); ?></option>
+					<option value="ProfessionalService" <?php selected( $v['schema_type'], 'ProfessionalService' ); ?>><?php echo esc_html__( 'Professional Service', 'spokora-free' ); ?></option>
+					<option value="LocalBusiness" <?php selected( $v['schema_type'], 'LocalBusiness' ); ?>><?php echo esc_html__( 'Local Business', 'spokora-free' ); ?></option>
+					<option value="Organization" <?php selected( $v['schema_type'], 'Organization' ); ?>><?php echo esc_html__( 'Organization', 'spokora-free' ); ?></option>
+					<option value="RadioStation" <?php selected( $v['schema_type'], 'RadioStation' ); ?>><?php echo esc_html__( 'Radio Station', 'spokora-free' ); ?></option>
 				</select>
 			</p>
 			<p>
-				<label for="global_desc"><strong><?php echo esc_html__( 'Global meta description', 'spokora' ); ?></strong></label><br />
+				<label for="global_desc"><strong><?php echo esc_html__( 'Global meta description', 'spokora-free' ); ?></strong></label><br />
 				<textarea class="large-text" rows="3" id="global_desc" name="global_desc"><?php echo esc_textarea( $v['global_desc'] ); ?></textarea>
 			</p>
 			<p>
-				<label for="hwc_public_email"><strong><?php echo esc_html__( 'Public email', 'spokora' ); ?></strong></label><br />
+				<label for="hwc_public_email"><strong><?php echo esc_html__( 'Public email', 'spokora-free' ); ?></strong></label><br />
 				<input type="email" class="large-text" id="hwc_public_email" name="hwc_public_email" value="<?php echo esc_attr( $v['hwc_public_email'] ); ?>" />
 			</p>
 			<p>
-				<label for="schema_phone"><strong><?php echo esc_html__( 'Phone', 'spokora' ); ?></strong></label><br />
+				<label for="schema_phone"><strong><?php echo esc_html__( 'Phone', 'spokora-free' ); ?></strong></label><br />
 				<input type="text" class="large-text" id="schema_phone" name="schema_phone" value="<?php echo esc_attr( $v['schema_phone'] ); ?>" />
 			</p>
 			<p>
-				<label for="schema_street"><strong><?php echo esc_html__( 'Street', 'spokora' ); ?></strong></label><br />
+				<label for="schema_street"><strong><?php echo esc_html__( 'Street', 'spokora-free' ); ?></strong></label><br />
 				<input type="text" class="large-text" id="schema_street" name="schema_street" value="<?php echo esc_attr( $v['schema_street'] ); ?>" />
 			</p>
 			<p>
-				<label for="schema_city"><strong><?php echo esc_html__( 'City', 'spokora' ); ?></strong></label><br />
+				<label for="schema_city"><strong><?php echo esc_html__( 'City', 'spokora-free' ); ?></strong></label><br />
 				<input type="text" class="large-text" id="schema_city" name="schema_city" value="<?php echo esc_attr( $v['schema_city'] ); ?>" />
 			</p>
 			<p>
-				<label for="schema_region"><strong><?php echo esc_html__( 'State', 'spokora' ); ?></strong></label><br />
+				<label for="schema_region"><strong><?php echo esc_html__( 'State', 'spokora-free' ); ?></strong></label><br />
 				<input type="text" id="schema_region" name="schema_region" value="<?php echo esc_attr( $v['schema_region'] ); ?>" />
-				<label for="schema_zip"><strong><?php echo esc_html__( 'Zip', 'spokora' ); ?></strong></label>
+				<label for="schema_zip"><strong><?php echo esc_html__( 'Zip', 'spokora-free' ); ?></strong></label>
 				<input type="text" id="schema_zip" name="schema_zip" value="<?php echo esc_attr( $v['schema_zip'] ); ?>" />
 			</p>
 			<p>
-				<label for="hwc_logo_url"><strong><?php echo esc_html__( 'Logo URL (512x512)', 'spokora' ); ?></strong></label><br />
+				<label for="hwc_logo_url"><strong><?php echo esc_html__( 'Logo URL (512x512)', 'spokora-free' ); ?></strong></label><br />
 				<input type="url" class="large-text" id="hwc_logo_url" name="hwc_logo_url" value="<?php echo esc_attr( $v['hwc_logo_url'] ); ?>" />
 			</p>
 			<p>
-				<label for="og_image"><strong><?php echo esc_html__( 'Default Open Graph image URL', 'spokora' ); ?></strong></label><br />
+				<label for="og_image"><strong><?php echo esc_html__( 'Default Open Graph image URL', 'spokora-free' ); ?></strong></label><br />
 				<input type="url" class="large-text" id="og_image" name="og_image" value="<?php echo esc_attr( $v['og_image'] ); ?>" />
 			</p>
 			<p>
-				<button type="submit" class="button button-primary"><?php echo esc_html__( 'Save Business Info & continue', 'spokora' ); ?></button>
-				<a class="button" href="<?php echo esc_url( $this->setup_url( $this->step_number_for( 'home' ) ) ); ?>"><?php echo esc_html__( 'Skip for now', 'spokora' ); ?></a>
+				<button type="submit" class="button button-primary"><?php echo esc_html__( 'Save Business Info & continue', 'spokora-free' ); ?></button>
+				<a class="button" href="<?php echo esc_url( $this->setup_url( $this->step_number_for( 'home' ) ) ); ?>"><?php echo esc_html__( 'Skip for now', 'spokora-free' ); ?></a>
 			</p>
-			<p class="description"><?php echo esc_html__( 'Skip only if you will fill Spokora → Business Info before you publish. Organization name is the one field we will not silently invent.', 'spokora' ); ?></p>
+			<p class="description"><?php echo esc_html__( 'Skip only if you will fill Spokora → Business Info before you publish. Organization name is the one field we will not silently invent.', 'spokora-free' ); ?></p>
 		</form>
 		<?php
 	}
@@ -532,37 +532,37 @@ class Spokora_Onboarding {
 			$desc = (string) $opts['global_desc'];
 		}
 		?>
-		<h2><?php echo esc_html__( 'Home page SEO', 'spokora' ); ?></h2>
-		<p><?php echo esc_html__( 'Front page only. Prefills from Business Info when these are empty.', 'spokora' ); ?></p>
+		<h2><?php echo esc_html__( 'Home page SEO', 'spokora-free' ); ?></h2>
+		<p><?php echo esc_html__( 'Front page only. Prefills from Business Info when these are empty.', 'spokora-free' ); ?></p>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<?php wp_nonce_field( 'spokora_onboarding_home_seo' ); ?>
 			<input type="hidden" name="action" value="spokora_onboarding_home_seo" />
-			<p><label for="hwc_home_title"><strong><?php echo esc_html__( 'Home page meta title', 'spokora' ); ?></strong></label><br />
+			<p><label for="hwc_home_title"><strong><?php echo esc_html__( 'Home page meta title', 'spokora-free' ); ?></strong></label><br />
 			<input type="text" class="large-text" id="hwc_home_title" name="hwc_home_title" value="<?php echo esc_attr( $title ); ?>" /></p>
-			<p><label for="hwc_home_desc"><strong><?php echo esc_html__( 'Home page meta description', 'spokora' ); ?></strong></label><br />
+			<p><label for="hwc_home_desc"><strong><?php echo esc_html__( 'Home page meta description', 'spokora-free' ); ?></strong></label><br />
 			<textarea class="large-text" rows="3" id="hwc_home_desc" name="hwc_home_desc"><?php echo esc_textarea( $desc ); ?></textarea></p>
-			<p><button type="submit" class="button button-primary"><?php echo esc_html__( 'Save & continue', 'spokora' ); ?></button>
-			<a class="button" href="<?php echo esc_url( $this->setup_url( $this->step_number_for( 'live' ) ) ); ?>"><?php echo esc_html__( 'Skip', 'spokora' ); ?></a></p>
+			<p><button type="submit" class="button button-primary"><?php echo esc_html__( 'Save & continue', 'spokora-free' ); ?></button>
+			<a class="button" href="<?php echo esc_url( $this->setup_url( $this->step_number_for( 'live' ) ) ); ?>"><?php echo esc_html__( 'Skip', 'spokora-free' ); ?></a></p>
 		</form>
 		<?php
 	}
 
 	private function render_step_finish() {
 		?>
-		<h2><?php echo esc_html__( 'Go live', 'spokora' ); ?></h2>
+		<h2><?php echo esc_html__( 'Go live', 'spokora-free' ); ?></h2>
 		<ul>
-			<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-settings' ) ); ?>"><?php echo esc_html__( 'Confirm Business Info', 'spokora' ); ?></a></li>
-			<li><a href="<?php echo esc_url( admin_url( 'options-permalink.php' ) ); ?>"><?php echo esc_html__( 'Settings → Permalinks → Save', 'spokora' ); ?></a></li>
+			<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-settings' ) ); ?>"><?php echo esc_html__( 'Confirm Business Info', 'spokora-free' ); ?></a></li>
+			<li><a href="<?php echo esc_url( admin_url( 'options-permalink.php' ) ); ?>"><?php echo esc_html__( 'Settings → Permalinks → Save', 'spokora-free' ); ?></a></li>
 			<?php if ( 'agency' === spokora_get_setup_profile() ) : ?>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO — if you skipped Hijack earlier', 'spokora' ); ?></a></li>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-backups' ) ); ?>"><?php echo esc_html__( 'Backups — download again anytime', 'spokora' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-legacy-import' ) ); ?>"><?php echo esc_html__( 'Import SEO — if you skipped import earlier', 'spokora-free' ); ?></a></li>
+				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=spokora-backups' ) ); ?>"><?php echo esc_html__( 'Backups — download again anytime', 'spokora-free' ); ?></a></li>
 			<?php endif; ?>
-			<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Check the front page', 'spokora' ); ?></a></li>
+			<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html__( 'Check the front page', 'spokora-free' ); ?></a></li>
 		</ul>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<?php wp_nonce_field( 'spokora_onboarding_finish' ); ?>
 			<input type="hidden" name="action" value="spokora_onboarding_finish" />
-			<p><button type="submit" class="button button-primary"><?php echo esc_html__( 'Finish setup', 'spokora' ); ?></button></p>
+			<p><button type="submit" class="button button-primary"><?php echo esc_html__( 'Finish setup', 'spokora-free' ); ?></button></p>
 		</form>
 		<?php
 		if ( function_exists( 'spokora_render_pro_teaser' ) ) {

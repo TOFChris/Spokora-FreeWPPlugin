@@ -45,11 +45,11 @@ class Spokora_List_Quick_Edit {
 		foreach ( $columns as $key => $label ) {
 			$out[ $key ] = $label;
 			if ( 'title' === $key ) {
-				$out['spokora_seo_score'] = __( 'SEO', 'spokora' );
+				$out['spokora_seo_score'] = __( 'SEO', 'spokora-free' );
 			}
 		}
 		if ( ! isset( $out['spokora_seo_score'] ) ) {
-			$out['spokora_seo_score'] = __( 'SEO', 'spokora' );
+			$out['spokora_seo_score'] = __( 'SEO', 'spokora-free' );
 		}
 		return $out;
 	}
@@ -110,53 +110,53 @@ class Spokora_List_Quick_Edit {
 		wp_nonce_field( 'spokora_llms_save_meta', 'spokora_llms_meta_nonce' );
 		?>
 		<fieldset class="inline-edit-col-left spokora-inline-edit" style="width:100%;">
-			<legend class="inline-edit-legend"><?php echo esc_html__( 'Spokora — SEO & AI', 'spokora' ); ?></legend>
+			<legend class="inline-edit-legend"><?php echo esc_html__( 'Spokora — SEO & AI', 'spokora-free' ); ?></legend>
 			<div class="inline-edit-col spokora-inline-edit__grid">
 				<label>
-					<span class="title"><?php echo esc_html__( 'SEO title', 'spokora' ); ?></span>
+					<span class="title"><?php echo esc_html__( 'SEO title', 'spokora-free' ); ?></span>
 					<span class="input-text-wrap"><input type="text" name="spokora_seo_title" value="" /></span>
 				</label>
 				<label>
-					<span class="title"><?php echo esc_html__( 'Meta description', 'spokora' ); ?></span>
+					<span class="title"><?php echo esc_html__( 'Meta description', 'spokora-free' ); ?></span>
 					<span class="input-text-wrap"><textarea name="spokora_seo_desc" rows="2"></textarea></span>
 				</label>
 				<label>
-					<span class="title"><?php echo esc_html__( 'Focus keyphrase', 'spokora' ); ?></span>
+					<span class="title"><?php echo esc_html__( 'Focus keyphrase', 'spokora-free' ); ?></span>
 					<span class="input-text-wrap"><input type="text" name="spokora_focus_keyword" value="" /></span>
 				</label>
 				<label>
-					<span class="title"><?php echo esc_html__( 'More keyphrases', 'spokora' ); ?></span>
-					<span class="input-text-wrap"><textarea name="spokora_additional_keywords" rows="2" placeholder="<?php echo esc_attr__( 'One per line', 'spokora' ); ?>"></textarea></span>
+					<span class="title"><?php echo esc_html__( 'More keyphrases', 'spokora-free' ); ?></span>
+					<span class="input-text-wrap"><textarea name="spokora_additional_keywords" rows="2" placeholder="<?php echo esc_attr__( 'One per line', 'spokora-free' ); ?>"></textarea></span>
 				</label>
 				<label>
-					<span class="title"><?php echo esc_html__( 'What is this?', 'spokora' ); ?></span>
+					<span class="title"><?php echo esc_html__( 'What is this?', 'spokora-free' ); ?></span>
 					<select name="spokora_content_kind">
-						<option value=""><?php echo esc_html__( 'Ordinary page or post', 'spokora' ); ?></option>
-						<option value="article"><?php echo esc_html__( 'Article', 'spokora' ); ?></option>
-						<option value="news"><?php echo esc_html__( 'News article', 'spokora' ); ?></option>
-						<option value="video"><?php echo esc_html__( 'Video', 'spokora' ); ?></option>
+						<option value=""><?php echo esc_html__( 'Ordinary page or post', 'spokora-free' ); ?></option>
+						<option value="article"><?php echo esc_html__( 'Article', 'spokora-free' ); ?></option>
+						<option value="news"><?php echo esc_html__( 'News article', 'spokora-free' ); ?></option>
+						<option value="video"><?php echo esc_html__( 'Video', 'spokora-free' ); ?></option>
 					</select>
 				</label>
 				<label class="alignleft">
 					<input type="checkbox" name="spokora_seo_score_exclude" value="1" />
-					<span class="checkbox-title"><?php echo esc_html__( 'Exclude from scoring', 'spokora' ); ?></span>
+					<span class="checkbox-title"><?php echo esc_html__( 'Exclude from scoring', 'spokora-free' ); ?></span>
 				</label>
 				<br class="clear" />
 				<label class="alignleft">
 					<input type="checkbox" name="spokora_llms_public" value="1" />
-					<span class="checkbox-title"><?php echo esc_html__( 'Public AI document', 'spokora' ); ?></span>
+					<span class="checkbox-title"><?php echo esc_html__( 'Public AI document', 'spokora-free' ); ?></span>
 				</label>
 				<label class="alignleft">
 					<input type="checkbox" name="spokora_llms_include" value="1" />
-					<span class="checkbox-title"><?php echo esc_html__( 'Include in llms hub', 'spokora' ); ?></span>
+					<span class="checkbox-title"><?php echo esc_html__( 'Include in llms hub', 'spokora-free' ); ?></span>
 				</label>
 				<br class="clear" />
 				<label>
-					<span class="title"><?php echo esc_html__( 'AI summary', 'spokora' ); ?></span>
+					<span class="title"><?php echo esc_html__( 'AI summary', 'spokora-free' ); ?></span>
 					<span class="input-text-wrap"><input type="text" name="spokora_llms_summary" value="" /></span>
 				</label>
 				<label>
-					<span class="title"><?php echo esc_html__( 'AI markdown', 'spokora' ); ?></span>
+					<span class="title"><?php echo esc_html__( 'AI markdown', 'spokora-free' ); ?></span>
 					<span class="input-text-wrap"><textarea name="spokora_llms_md" rows="4"></textarea></span>
 				</label>
 			</div>

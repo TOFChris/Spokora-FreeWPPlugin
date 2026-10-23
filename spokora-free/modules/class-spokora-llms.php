@@ -73,12 +73,12 @@ class Spokora_Llms_Engine {
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'spokora_ai_nonce' ),
 				'i18n'    => array(
-					'saveDraftFirst' => __( 'Save the post as a draft first.', 'spokora' ),
-					'working'        => __( 'Asking the model…', 'spokora' ),
-					'done'           => __( 'Draft ready. Review the summary and markdown, then Update or Publish.', 'spokora' ),
-					'doneFrom'       => __( 'Draft ready (content from:', 'spokora' ),
-					'noContent'      => __( 'No content source found. Add editor text or save a draft.', 'spokora' ),
-					'failed'         => __( 'Server communication failed.', 'spokora' ),
+					'saveDraftFirst' => __( 'Save the post as a draft first.', 'spokora-free' ),
+					'working'        => __( 'Asking the model…', 'spokora-free' ),
+					'done'           => __( 'Draft ready. Review the summary and markdown, then Update or Publish.', 'spokora-free' ),
+					'doneFrom'       => __( 'Draft ready (content from:', 'spokora-free' ),
+					'noContent'      => __( 'No content source found. Add editor text or save a draft.', 'spokora-free' ),
+					'failed'         => __( 'Server communication failed.', 'spokora-free' ),
 				),
 			)
 		);
@@ -355,7 +355,7 @@ class Spokora_Llms_Engine {
 		foreach ( spokora_llms_supported_post_types() as $screen ) {
 			add_meta_box(
 				'spokora_llms_meta_box',
-				__( 'AI / LLM documentation', 'spokora' ),
+				__( 'AI / LLM documentation', 'spokora-free' ),
 				array( $this, 'render_meta_box' ),
 				$screen,
 				'normal',
@@ -377,18 +377,18 @@ class Spokora_Llms_Engine {
 		$slug    = $post->post_name;
 		$preview = $slug ? home_url( '/ai-docs/' . rawurlencode( $slug ) . '.md' ) : '';
 
-		echo '<p class="description">' . esc_html__( 'Public AI documents appear in /llms.txt and at /ai-docs/{slug}.md when published.', 'spokora' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Public AI documents appear in /llms.txt and at /ai-docs/{slug}.md when published.', 'spokora-free' ) . '</p>';
 
 		$model_ok = function_exists( 'spokora_model_is_configured' ) && spokora_model_is_configured();
 		if ( $model_ok ) {
 			echo '<p class="spokora-llms-ai-actions" style="margin:12px 0 16px;">';
 			echo '<button type="button" id="spokora-llms-ai-trigger" class="button button-primary" style="background:#1a73e8;border-color:#1a73e8;">';
 			echo '<span class="dashicons dashicons-superhero" style="margin-top:3px;"></span> ';
-			echo esc_html__( 'Draft with the model', 'spokora' );
+			echo esc_html__( 'Draft with the model', 'spokora-free' );
 			echo '</button>';
 			echo '<span id="spokora-llms-ai-status" class="description" style="display:block;margin-top:8px;"></span>';
 			echo '<span class="description" style="display:block;margin-top:4px;">';
-			echo esc_html__( 'Uses the page title and editor content (or bundled HTML) to fill the summary and markdown below.', 'spokora' );
+			echo esc_html__( 'Uses the page title and editor content (or bundled HTML) to fill the summary and markdown below.', 'spokora-free' );
 			echo '</span></p>';
 		} elseif ( function_exists( 'spokora_maybe_render_gemini_vault_hint' ) ) {
 			echo '<div style="margin:12px 0 16px;">';
@@ -397,19 +397,19 @@ class Spokora_Llms_Engine {
 		}
 
 		echo '<p><label><input type="checkbox" name="spokora_llms_public" value="1" ' . checked( $public, true, false ) . ' /> ';
-		echo esc_html__( 'Public AI document', 'spokora' ) . '</label></p>';
+		echo esc_html__( 'Public AI document', 'spokora-free' ) . '</label></p>';
 
 		echo '<p><label><input type="checkbox" name="spokora_llms_include" value="1" ' . checked( $include || $public, true, false ) . ' /> ';
-		echo esc_html__( 'Include in llms hub index', 'spokora' ) . '</label></p>';
+		echo esc_html__( 'Include in llms hub index', 'spokora-free' ) . '</label></p>';
 
-		echo '<p><label for="spokora_llms_summary"><strong>' . esc_html__( 'Summary (one line for llms.txt)', 'spokora' ) . '</strong></label><br />';
+		echo '<p><label for="spokora_llms_summary"><strong>' . esc_html__( 'Summary (one line for llms.txt)', 'spokora-free' ) . '</strong></label><br />';
 		echo '<input type="text" id="spokora_llms_summary" name="spokora_llms_summary" value="' . esc_attr( $summary ) . '" style="width:100%;margin-top:4px;" /></p>';
 
-		echo '<p><label for="spokora_llms_md"><strong>' . esc_html__( 'Markdown body (/ai-docs/{slug}.md)', 'spokora' ) . '</strong></label><br />';
+		echo '<p><label for="spokora_llms_md"><strong>' . esc_html__( 'Markdown body (/ai-docs/{slug}.md)', 'spokora-free' ) . '</strong></label><br />';
 		echo '<textarea id="spokora_llms_md" name="spokora_llms_md" rows="12" style="width:100%;margin-top:4px;font-family:monospace;">' . esc_textarea( $md ) . '</textarea></p>';
 
 		if ( $preview && $public ) {
-			echo '<p><a href="' . esc_url( $preview ) . '" target="_blank" rel="noopener">' . esc_html__( 'Preview AI doc', 'spokora' ) . '</a></p>';
+			echo '<p><a href="' . esc_url( $preview ) . '" target="_blank" rel="noopener">' . esc_html__( 'Preview AI doc', 'spokora-free' ) . '</a></p>';
 		}
 	}
 
@@ -451,8 +451,8 @@ class Spokora_Llms_Engine {
 	public function admin_menu() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'AI docs', 'spokora' ),
-			__( 'AI docs', 'spokora' ),
+			__( 'AI docs', 'spokora-free' ),
+			__( 'AI docs', 'spokora-free' ),
 			'manage_options',
 			'spokora-llms',
 			array( $this, 'render_settings_page' )
@@ -473,33 +473,33 @@ class Spokora_Llms_Engine {
 		?>
 		<div class="wrap" style="max-width:880px;">
 			<?php spokora_render_subnav( 'llms' ); ?>
-			<h1><?php esc_html_e( 'AI docs', 'spokora' ); ?></h1>
+			<h1><?php esc_html_e( 'AI docs', 'spokora-free' ); ?></h1>
 			<?php
 			if ( function_exists( 'spokora_render_pro_teaser' ) ) {
 				spokora_render_pro_teaser( 'keys' );
 			}
 			?>
 			<div class="spokora-help__card" style="margin:16px 0 24px;">
-				<h2 style="margin-top:0;"><?php esc_html_e( 'What this is', 'spokora' ); ?></h2>
-				<p><?php esc_html_e( 'Agent-ready documentation has two layers on every site:', 'spokora' ); ?></p>
+				<h2 style="margin-top:0;"><?php esc_html_e( 'What this is', 'spokora-free' ); ?></h2>
+				<p><?php esc_html_e( 'Agent-ready documentation has two layers on every site:', 'spokora-free' ); ?></p>
 				<ul>
-					<li><strong><?php esc_html_e( 'Hub — /llms.txt', 'spokora' ); ?></strong> — <?php esc_html_e( 'One index file crawlers read first. You edit the preamble and vocabulary on this screen.', 'spokora' ); ?></li>
-					<li><strong><?php esc_html_e( 'Spokes — /ai-docs/{slug}.md', 'spokora' ); ?></strong> — <?php esc_html_e( 'Optional markdown copies of individual pages you flag as public AI documents in the editor.', 'spokora' ); ?></li>
+					<li><strong><?php esc_html_e( 'Hub — /llms.txt', 'spokora-free' ); ?></strong> — <?php esc_html_e( 'One index file crawlers read first. You edit the preamble and vocabulary on this screen.', 'spokora-free' ); ?></li>
+					<li><strong><?php esc_html_e( 'Spokes — /ai-docs/{slug}.md', 'spokora-free' ); ?></strong> — <?php esc_html_e( 'Optional markdown copies of individual pages you flag as public AI documents in the editor.', 'spokora-free' ); ?></li>
 				</ul>
-				<p><?php esc_html_e( 'Plain /md/{slug}.md mirrors (every published URL) are separate — see Results → Markdown library.', 'spokora' ); ?> <a href="<?php echo esc_url( $md_url ); ?>"><?php esc_html_e( 'Open markdown library', 'spokora' ); ?></a></p>
+				<p><?php esc_html_e( 'Plain /md/{slug}.md mirrors (every published URL) are separate — see Results → Markdown library.', 'spokora-free' ); ?> <a href="<?php echo esc_url( $md_url ); ?>"><?php esc_html_e( 'Open markdown library', 'spokora-free' ); ?></a></p>
 			</div>
 			<div class="spokora-help__card" style="margin-bottom:24px;">
-				<h2 style="margin-top:0;"><?php esc_html_e( 'Agency workflow', 'spokora' ); ?></h2>
+				<h2 style="margin-top:0;"><?php esc_html_e( 'Agency workflow', 'spokora-free' ); ?></h2>
 				<ol>
-					<li><?php esc_html_e( 'Save permalinks once so /llms.txt resolves.', 'spokora' ); ?></li>
-					<li><?php esc_html_e( 'Write the hub preamble and brand vocabulary below (or lock gold copy from a template site).', 'spokora' ); ?></li>
-					<li><?php esc_html_e( 'On each important page, open AI / LLM documentation in the editor → turn on “Public AI document” when that URL should have its own spoke.', 'spokora' ); ?></li>
+					<li><?php esc_html_e( 'Save permalinks once so /llms.txt resolves.', 'spokora-free' ); ?></li>
+					<li><?php esc_html_e( 'Write the hub preamble and brand vocabulary below (or lock gold copy from a template site).', 'spokora-free' ); ?></li>
+					<li><?php esc_html_e( 'On each important page, open AI / LLM documentation in the editor → turn on “Public AI document” when that URL should have its own spoke.', 'spokora-free' ); ?></li>
 					<li>
 						<?php
 						echo esc_html(
 							sprintf(
 								/* translators: %d: count of public AI docs */
-								_n( '%d public spoke is live now.', '%d public spokes are live now.', (int) $ai_public, 'spokora' ),
+								_n( '%d public spoke is live now.', '%d public spokes are live now.', (int) $ai_public, 'spokora-free' ),
 								(int) $ai_public
 							)
 						);
@@ -507,46 +507,46 @@ class Spokora_Llms_Engine {
 					</li>
 				</ol>
 			</div>
-			<h2><?php esc_html_e( 'Hub settings (/llms.txt)', 'spokora' ); ?></h2>
+			<h2><?php esc_html_e( 'Hub settings (/llms.txt)', 'spokora-free' ); ?></h2>
 			<p>
-				<?php esc_html_e( 'Preview:', 'spokora' ); ?>
+				<?php esc_html_e( 'Preview:', 'spokora-free' ); ?>
 				<a href="<?php echo esc_url( $base . '/llms.txt' ); ?>" target="_blank" rel="noopener"><code>/llms.txt</code></a>
 			</p>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'spokora_settings_group' ); ?>
 				<table class="form-table">
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Hub preamble', 'spokora' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Hub preamble', 'spokora-free' ); ?></th>
 						<td>
 							<textarea name="spokora_options[llms_preamble]" rows="14" style="width:100%;font-family:monospace;"><?php echo esc_textarea( $options['llms_preamble'] ?? '' ); ?></textarea>
-							<p class="description"><?php esc_html_e( 'Markdown-ish plain text inserted after site title and tagline. Use {{BASE_URL}} for absolute links. Fleet gold copy: lock preamble and turn off generated sections below.', 'spokora' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Markdown-ish plain text inserted after site title and tagline. Use {{BASE_URL}} for absolute links. Fleet gold copy: lock preamble and turn off generated sections below.', 'spokora-free' ); ?></p>
 							<p>
 								<input type="hidden" name="spokora_options[llms_preamble_locked]" value="0" />
 								<label><input type="checkbox" name="spokora_options[llms_preamble_locked]" value="1" <?php checked( isset( $options['llms_preamble_locked'] ) && (string) $options['llms_preamble_locked'] === '1' ); ?> />
-								<?php esc_html_e( 'Lock preamble & brand vocabulary (block accidental clear on save)', 'spokora' ); ?></label>
+								<?php esc_html_e( 'Lock preamble & brand vocabulary (block accidental clear on save)', 'spokora-free' ); ?></label>
 							</p>
 							<p>
 								<input type="hidden" name="spokora_options[llms_hub_generated_sections]" value="0" />
 								<label><input type="checkbox" name="spokora_options[llms_hub_generated_sections]" value="1" <?php checked( ! isset( $options['llms_hub_generated_sections'] ) || (string) $options['llms_hub_generated_sections'] !== '0' ); ?> />
-								<?php esc_html_e( 'Append plugin-generated hub sections (Deep-Dive, vocabulary, Human website)', 'spokora' ); ?></label>
+								<?php esc_html_e( 'Append plugin-generated hub sections (Deep-Dive, vocabulary, Human website)', 'spokora-free' ); ?></label>
 							</p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Brand vocabulary', 'spokora' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Brand vocabulary', 'spokora-free' ); ?></th>
 						<td>
 							<textarea name="spokora_options[llms_brand_vocab]" rows="8" style="width:100%;font-family:monospace;" placeholder="Term|Definition&#10;Another term|What it means"><?php echo esc_textarea( $options['llms_brand_vocab'] ?? '' ); ?></textarea>
-							<p class="description"><?php esc_html_e( 'One term per line: Term|Definition', 'spokora' ); ?></p>
+							<p class="description"><?php esc_html_e( 'One term per line: Term|Definition', 'spokora-free' ); ?></p>
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><?php esc_html_e( 'Contact URL (Human website)', 'spokora' ); ?></th>
+						<th scope="row"><?php esc_html_e( 'Contact URL (Human website)', 'spokora-free' ); ?></th>
 						<td>
 							<input type="text" name="spokora_options[llms_contact_url]" value="<?php echo esc_attr( $options['llms_contact_url'] ?? '' ); ?>" style="width:100%;" placeholder="/contact or https://example.com/contact" />
 						</td>
 					</tr>
 				</table>
-				<?php submit_button( __( 'Save LLMS settings', 'spokora' ) ); ?>
+				<?php submit_button( __( 'Save LLMS settings', 'spokora-free' ) ); ?>
 			</form>
 		</div>
 		<?php

@@ -14,7 +14,7 @@
 
 **Paragraph 1**
 
-This one is on the house. Titles, schema, sitemap, redirects — the SEO stack, no meter, no account. You do not register this site and you do not need a key. The plugin still checks spokora.com for a newer zip when you open Plugins or tap Check for updates. That is a version check, not a login. After we list on WordPress.org, you can also use automatic updates like any other .org plugin. Optional: sign up so we can email you when a build ships.
+This one is on the house. Titles, schema, sitemap, redirects — the SEO stack, no meter, no account. You do not register this site and you do not need a key. Updates come through WordPress like any other directory plugin. Optional: sign up so we can email you when a build ships.
 
 **Paragraph 2**
 
@@ -29,7 +29,7 @@ If it saves you a headache, the kindest thank-you is a Pro license when you need
 | Label | Purpose |
 |-------|---------|
 | Sign up for updates | `/updates/#signup` |
-| Support | forum.spokora.com |
+| Support | wordpress.org/support/plugin/spokora-free/ |
 | Updates | spokora.com/updates |
 | Leave a review | WP.org reviews URL |
 
@@ -70,19 +70,15 @@ Your license includes updates from spokora.com. When a new version ships, use **
 
 ## Spokora Free — **Plugins → Installed Plugins**
 
-**PHP:** `plugin/spokora-free/includes/plugin-plugins-screen.php` · updates `plugin-updates.php` · store REST `inc/free-download.php` (`/wp-json/spokora/v1/free-plugin-info`)
+**PHP:** `spokora-free/includes/plugin-plugins-screen.php`
 
-**UI:** Panel under the Spokora Free row. View details uses `plugins_api` slug `spokora-free`. Check for updates talks to spokora.com with **no license key**.
+**UI:** Quiet row meta (Home, Support on WordPress.org). No custom updater.
 
 ### Approved copy
 
 **Plugin list description**
 
-Free SEO, schema, sitemap, and redirects for WordPress websites. No account. Updates from spokora.com without registering the site. Built by That One Firm.
-
-**Panel**
-
-You do not register this site. Check for updates talks to spokora.com anyway. When a newer Free zip ships, WordPress can install it from this screen.
+Free SEO, schema, sitemap, and redirects for WordPress websites. No account, no license key. Built by That One Firm.
 
 ---
 

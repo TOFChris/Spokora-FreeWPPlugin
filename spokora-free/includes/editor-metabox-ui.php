@@ -97,7 +97,7 @@ function spokora_editor_metabox_brand_i18n() {
 		return;
 	}
 
-	$brand = __( 'Spokora', 'spokora' );
+	$brand = __( 'Spokora', 'spokora-free' );
 	wp_add_inline_script(
 		'wp-i18n',
 		'wp.i18n.setLocaleData( ' . wp_json_encode(
@@ -126,7 +126,7 @@ function spokora_editor_metabox_brand_gettext( $translated, $text, $domain ) {
 		return $translated;
 	}
 	if ( 'Meta boxes' === $text || 'Metaboxes' === $text ) {
-		return __( 'Spokora', 'spokora' );
+		return __( 'Spokora', 'spokora-free' );
 	}
 	return $translated;
 }
@@ -154,13 +154,13 @@ function spokora_enqueue_editor_metabox_ui( $hook = '' ) {
 		'spokora-editor-metabox-ui',
 		'spokoraEditorMetaboxUi',
 		array(
-			'brandLabel' => __( 'Spokora', 'spokora' ),
+			'brandLabel' => __( 'Spokora', 'spokora-free' ),
 			'boxOrder'   => array(
 				'spokora_seo_meta_box',
 				'spokora_llms_meta_box',
 			),
 			'metaLabels' => array(
-				__( 'Meta boxes', 'spokora' ),
+				__( 'Meta boxes', 'spokora-free' ),
 				'Meta boxes',
 				'Metaboxes',
 			),

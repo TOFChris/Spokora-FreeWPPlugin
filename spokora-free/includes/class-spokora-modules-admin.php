@@ -22,8 +22,8 @@ class Spokora_Modules_Admin {
 	public function add_submenu() {
 		add_submenu_page(
 			spokora_admin_menu_slug(),
-			__( 'Spokora Modules', 'spokora' ),
-			__( 'Modules', 'spokora' ),
+			__( 'Spokora Modules', 'spokora-free' ),
+			__( 'Modules', 'spokora-free' ),
 			'manage_options',
 			'spokora-modules',
 			array( $this, 'render_page' )
@@ -53,21 +53,21 @@ class Spokora_Modules_Admin {
 		$blurbs   = spokora_get_module_help_blurbs();
 
 		if ( isset( $_GET['settings-updated'] ) && 'true' === $_GET['settings-updated'] ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Module settings saved.', 'spokora' ) . '</p></div>';
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Module settings saved.', 'spokora-free' ) . '</p></div>';
 		}
 		?>
 		<div class="wrap">
 			<?php spokora_render_subnav( 'modules' ); ?>
-			<h1><?php echo esc_html__( 'Spokora Free — Modules', 'spokora' ); ?></h1>
-			<p class="description"><?php echo esc_html__( 'These are the SEO tools in Free. Settings stays on so import and site defaults remain available.', 'spokora' ); ?></p>
+			<h1><?php echo esc_html__( 'Spokora Free — Modules', 'spokora-free' ); ?></h1>
+			<p class="description"><?php echo esc_html__( 'These are the SEO tools in Free. Settings stays on so import and site defaults remain available.', 'spokora-free' ); ?></p>
 			<form method="post" action="options.php">
 				<?php settings_fields( 'spokora_modules_group' ); ?>
 				<table class="widefat striped" style="max-width: 720px;">
 					<thead>
 						<tr>
-							<th scope="col"><?php echo esc_html__( 'Enable', 'spokora' ); ?></th>
-							<th scope="col"><?php echo esc_html__( 'Module', 'spokora' ); ?></th>
-							<th scope="col"><?php echo esc_html__( 'Summary', 'spokora' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Enable', 'spokora-free' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Module', 'spokora-free' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Summary', 'spokora-free' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,17 +93,17 @@ class Spokora_Modules_Admin {
 						<?php endforeach; ?>
 					</tbody>
 				</table>
-				<?php submit_button( __( 'Save modules', 'spokora' ) ); ?>
+				<?php submit_button( __( 'Save modules', 'spokora-free' ) ); ?>
 			</form>
 			<?php if ( function_exists( 'spokora_pro_locked_modules' ) ) : ?>
-				<h2><?php echo esc_html__( 'In Spokora Pro', 'spokora' ); ?></h2>
-				<p class="description"><?php echo esc_html__( 'These stay off in Free on purpose. Checking them here would not load them — they are a preview of the paid plugin.', 'spokora' ); ?></p>
+				<h2><?php echo esc_html__( 'In Spokora Pro', 'spokora-free' ); ?></h2>
+				<p class="description"><?php echo esc_html__( 'These stay off in Free on purpose. Checking them here would not load them — they are a preview of the paid plugin.', 'spokora-free' ); ?></p>
 				<table class="widefat striped spokora-pro-locked" style="max-width: 720px;">
 					<thead>
 						<tr>
-							<th scope="col"><?php echo esc_html__( 'Enable', 'spokora' ); ?></th>
-							<th scope="col"><?php echo esc_html__( 'Module', 'spokora' ); ?></th>
-							<th scope="col"><?php echo esc_html__( 'Summary', 'spokora' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Enable', 'spokora-free' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Module', 'spokora-free' ); ?></th>
+							<th scope="col"><?php echo esc_html__( 'Summary', 'spokora-free' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -111,7 +111,7 @@ class Spokora_Modules_Admin {
 							<tr>
 								<td>
 									<input type="checkbox" disabled aria-disabled="true" />
-									<span class="spokora-pro-badge"><?php echo esc_html__( 'Pro', 'spokora' ); ?></span>
+									<span class="spokora-pro-badge"><?php echo esc_html__( 'Pro', 'spokora-free' ); ?></span>
 								</td>
 								<td><strong><?php echo esc_html( $meta['label'] ); ?></strong><br /><code><?php echo esc_html( $id ); ?></code></td>
 								<td><?php echo esc_html( $meta['summary'] ); ?></td>
