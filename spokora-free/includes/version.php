@@ -9,4 +9,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SPOKORA_VERSION', '0.1.22' );
+define( 'SPOKORA_VERSION', '0.1.23' );

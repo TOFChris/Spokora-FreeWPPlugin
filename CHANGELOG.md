@@ -4,6 +4,14 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.23] - 2026-10-23
+
+### Changed
+
+- Quick setup (step 3) and Business Info share a larger grouped **Business type** list: SaaS/apps/games, trades, retail, food, auto, education, government, and entertainment schema.org types.
+
+---
+
 ## [0.1.22] - 2026-10-23
 
 ### Security

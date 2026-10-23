@@ -138,10 +138,10 @@ class Spokora_Onboarding {
 		if ( isset( $_POST['global_desc'] ) ) {
 			$opts['global_desc'] = sanitize_textarea_field( wp_unslash( $_POST['global_desc'] ) );
 		}
-		$allowed_types = array( 'ProfessionalService', 'RadioStation', 'LocalBusiness', 'Organization' );
 		if ( isset( $_POST['schema_type'] ) ) {
-			$type = sanitize_text_field( wp_unslash( $_POST['schema_type'] ) );
-			$opts['schema_type'] = in_array( $type, $allowed_types, true ) ? $type : 'ProfessionalService';
+			$opts['schema_type'] = function_exists( 'spokora_sanitize_schema_type' )
+				? spokora_sanitize_schema_type( wp_unslash( $_POST['schema_type'] ) )
+				: 'ProfessionalService';
 		}
 		$org = isset( $opts['hwc_org_name'] ) ? trim( (string) $opts['hwc_org_name'] ) : '';
 		if ( '' === $org ) {
@@ -469,12 +469,21 @@ class Spokora_Onboarding {
 			</p>
 			<p>
 				<label for="schema_type"><strong><?php echo esc_html__( 'Business type', 'spokora-free' ); ?></strong></label><br />
-				<select id="schema_type" name="schema_type">
-					<option value="ProfessionalService" <?php selected( $v['schema_type'], 'ProfessionalService' ); ?>><?php echo esc_html__( 'Professional Service', 'spokora-free' ); ?></option>
-					<option value="LocalBusiness" <?php selected( $v['schema_type'], 'LocalBusiness' ); ?>><?php echo esc_html__( 'Local Business', 'spokora-free' ); ?></option>
-					<option value="Organization" <?php selected( $v['schema_type'], 'Organization' ); ?>><?php echo esc_html__( 'Organization', 'spokora-free' ); ?></option>
-					<option value="RadioStation" <?php selected( $v['schema_type'], 'RadioStation' ); ?>><?php echo esc_html__( 'Radio Station', 'spokora-free' ); ?></option>
-				</select>
+				<?php
+				if ( function_exists( 'spokora_render_schema_type_select' ) ) {
+					spokora_render_schema_type_select(
+						$v['schema_type'],
+						array(
+							'name'        => 'schema_type',
+							'id'          => 'schema_type',
+							'class'       => 'large-text',
+							'style'       => 'max-width: 100%; width: 32em;',
+							'text_domain' => 'spokora-free',
+						)
+					);
+				}
+				?>
+				<br /><span class="description"><?php echo esc_html__( 'Used as schema.org @type for your site-wide Organization entity in JSON-LD.', 'spokora-free' ); ?></span>
 			</p>
 			<p>
 				<label for="global_desc"><strong><?php echo esc_html__( 'Global meta description', 'spokora-free' ); ?></strong></label><br />

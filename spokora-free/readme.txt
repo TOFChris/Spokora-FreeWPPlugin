@@ -5,7 +5,7 @@ Tags: seo, schema, sitemap, redirects, xml-sitemap
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.22
+Stable tag: 0.1.23
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 
 == Changelog ==
 
+= 0.1.23 =
+* Broader Business type list on Quick setup and Business Info (software, trades, retail, and more schema.org types).
+
 = 0.1.22 =
 * Encode < and & in JSON-LD so custom schema cannot break out of the script tag.
 
@@ -97,6 +100,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 * Honest copy about version checks (removed in 0.1.20 for the directory).
 
 == Upgrade Notice ==
+
+= 0.1.23 =
+More business types in Quick setup and Business Info.
 
 = 0.1.22 =
 Submit this build.

@@ -233,14 +233,22 @@ class Spokora_Settings_Engine {
                     <h2 style="font-weight: 700; margin-top: 40px;">Advanced Entity Schema</h2>
                     <table class="form-table">
                         <tr>
-                            <th scope="row">Business Type</th>
+                            <th scope="row"><?php esc_html_e( 'Business type', 'spokora-free' ); ?></th>
                             <td>
-                                <select name="spokora_options[schema_type]" style="width: 100%;">
-                                    <option value="ProfessionalService" <?php selected( $options['schema_type'] ?? '', 'ProfessionalService' ); ?>>Professional Service</option>
-                                    <option value="RadioStation" <?php selected( $options['schema_type'] ?? '', 'RadioStation' ); ?>>Radio Station</option>
-                                    <option value="LocalBusiness" <?php selected( $options['schema_type'] ?? '', 'LocalBusiness' ); ?>>Local Business</option>
-                                    <option value="Organization" <?php selected( $options['schema_type'] ?? '', 'Organization' ); ?>>Organization</option>
-                                </select>
+                                <?php
+                                if ( function_exists( 'spokora_render_schema_type_select' ) ) {
+                                    spokora_render_schema_type_select(
+                                        isset( $options['schema_type'] ) ? (string) $options['schema_type'] : 'ProfessionalService',
+                                        array(
+                                            'name'        => 'spokora_options[schema_type]',
+                                            'id'          => 'spokora_schema_type',
+                                            'style'       => 'width: 100%; max-width: 36em;',
+                                            'text_domain' => 'spokora-free',
+                                        )
+                                    );
+                                }
+                                ?>
+                                <p class="description"><?php esc_html_e( 'Maps to schema.org @type on your global Organization JSON-LD. Pick the closest match (agency, SaaS, restaurant, clinic, etc.).', 'spokora-free' ); ?></p>
                             </td>
                         </tr>
                         <tr><th scope="row">Organization Name</th><td><input type="text" name="spokora_options[hwc_org_name]" value="<?php echo esc_attr( $options['hwc_org_name'] ?? '' ); ?>" style="width: 100%;" placeholder="Your organization" /></td></tr>
@@ -332,8 +340,16 @@ function spokora_sanitize_spokora_options( $value ) {
 		$merge = spokora_llms_merge_option_flags( $merge, $old, $value );
 	}
 	$textarea_keys = array( 'global_desc', 'hwc_home_desc', 'hwc_services', 'hwc_socials', 'hwc_global_schema_json', 'llms_preamble', 'llms_brand_vocab' );
+	if ( isset( $merge['schema_type'] ) ) {
+		$merge['schema_type'] = function_exists( 'spokora_sanitize_schema_type' )
+			? spokora_sanitize_schema_type( $merge['schema_type'] )
+			: sanitize_text_field( wp_unslash( (string) $merge['schema_type'] ) );
+	}
 	foreach ( $merge as $key => $val ) {
 		if ( ! is_string( $val ) ) {
+			continue;
+		}
+		if ( 'schema_type' === $key ) {
 			continue;
 		}
 		$u = wp_unslash( $val );
