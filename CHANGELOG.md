@@ -4,6 +4,14 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.21] - 2026-10-23
+
+### Fixed
+
+- `readme.txt` Contributors is **chrismcmanus** ([WordPress.org profile](https://profiles.wordpress.org/chrismcmanus/)).
+
+---
+
 ## [0.1.20] - 2026-10-23
 
 ### Changed

@@ -1,11 +1,11 @@
 === Spokora Free ===
-Contributors: tofchris
+Contributors: chrismcmanus
 Donate link: https://spokora.com/#licenses
 Tags: seo, schema, sitemap, redirects, xml-sitemap
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.20
+Stable tag: 0.1.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 
 == Changelog ==
 
+= 0.1.21 =
+* WordPress.org Contributors username: chrismcmanus.
+
 = 0.1.20 =
 * WordPress.org-ready: removed custom spokora.com updater and Update URI.
 * Text domain `spokora-free`.
@@ -91,6 +94,9 @@ No. It is off on new installs until you enable it under Cookies & privacy.
 * Honest copy about version checks (removed in 0.1.20 for the directory).
 
 == Upgrade Notice ==
+
+= 0.1.21 =
+Submit this build: WordPress.org account chrismcmanus.
 
 = 0.1.20 =
 Updates now come from WordPress.org. Custom checks against spokora.com are removed. Turn on Search ping or the cookie banner if you still want those.
