@@ -4,6 +4,14 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.19] - 2026-10-22
+
+### Fixed
+
+- **Activate Spokora Pro** while Free is still installed: Free steps aside on that request so WordPress can activate Pro without a duplicate-function error.
+
+---
+
 ## [0.1.18] - 2026-10-22
 
 ### Changed

@@ -3,7 +3,7 @@
  * Plugin Name: Spokora Free
  * Plugin URI: https://spokora.com
  * Description: Free SEO, schema, sitemap, and redirects for WordPress websites. No account. Updates from spokora.com without registering the site.
- * Version: 0.1.18
+ * Version: 0.1.19
  * Update URI: https://spokora.com/spokora-free
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -22,6 +22,63 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
+ * Plugin basename for Spokora Pro (Woo zip folder `spokora/`).
+ */
+function spokora_free_pro_plugin_file() {
+	return 'spokora/spokora.php';
+}
+
+/**
+ * @param string $plugin Plugin basename or path fragment from a request.
+ */
+function spokora_free_matches_pro_plugin_file( $plugin ) {
+	$plugin = (string) $plugin;
+	$pro    = spokora_free_pro_plugin_file();
+	if ( $pro === $plugin ) {
+		return true;
+	}
+	$suffix = '/' . $pro;
+	return strlen( $plugin ) >= strlen( $suffix ) && substr( $plugin, -strlen( $suffix ) ) === $suffix;
+}
+
+/**
+ * True when this HTTP request is activating Spokora Pro (Pro is not active yet).
+ */
+function spokora_free_is_pro_activation_request() {
+	if ( ! function_exists( 'wp_unslash' ) ) {
+		return false;
+	}
+	$candidates = array();
+	foreach ( array( 'plugin', 'checked', 'plugins' ) as $key ) {
+		if ( empty( $_REQUEST[ $key ] ) ) {
+			continue;
+		}
+		$val = wp_unslash( $_REQUEST[ $key ] );
+		if ( is_string( $val ) ) {
+			$candidates[] = $val;
+		} elseif ( is_array( $val ) ) {
+			foreach ( $val as $item ) {
+				if ( is_string( $item ) ) {
+					$candidates[] = $item;
+				}
+			}
+		}
+	}
+	foreach ( $candidates as $plugin ) {
+		if ( spokora_free_matches_pro_plugin_file( $plugin ) ) {
+			return true;
+		}
+	}
+	$action = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : '';
+	if ( in_array( $action, array( 'activate', 'activate-selected', 'activate-plugin' ), true ) ) {
+		if ( isset( $_REQUEST['slug'] ) && 'spokora' === sanitize_key( wp_unslash( $_REQUEST['slug'] ) ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Whether the paid Spokora plugin is already loaded or active.
  */
 function spokora_free_pro_is_present() {
@@ -31,24 +88,29 @@ function spokora_free_pro_is_present() {
 	if ( function_exists( 'spokora_is_license_server' ) ) {
 		return true;
 	}
+	if ( spokora_free_is_pro_activation_request() ) {
+		return true;
+	}
 	if ( ! function_exists( 'is_plugin_active' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	}
-	return is_plugin_active( 'spokora/spokora.php' );
+	return is_plugin_active( spokora_free_pro_plugin_file() );
 }
 
 if ( spokora_free_pro_is_present() ) {
-	add_action(
-		'admin_notices',
-		static function () {
-			if ( ! current_user_can( 'activate_plugins' ) ) {
-				return;
+	if ( ! spokora_free_is_pro_activation_request() ) {
+		add_action(
+			'admin_notices',
+			static function () {
+				if ( ! current_user_can( 'activate_plugins' ) ) {
+					return;
+				}
+				echo '<div class="notice notice-info"><p>';
+				echo esc_html__( 'Spokora Pro is active, so Spokora Free stayed off. Pro already includes this SEO surface. Deactivate Free to avoid a duplicate plugin.', 'spokora' );
+				echo '</p></div>';
 			}
-			echo '<div class="notice notice-info"><p>';
-			echo esc_html__( 'Spokora Pro is active, so Spokora Free stayed off. Pro already includes this SEO surface. Deactivate Free to avoid a duplicate plugin.', 'spokora' );
-			echo '</p></div>';
-		}
-	);
+		);
+	}
 	return;
 }
 
