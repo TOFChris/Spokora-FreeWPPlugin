@@ -4,6 +4,14 @@ All notable changes to **Spokora Free** in this repository are documented here.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.22] - 2026-10-23
+
+### Security
+
+- JSON-LD output uses `JSON_HEX_TAG | JSON_HEX_AMP` so a `</script>` in custom schema cannot break the tag.
+
+---
+
 ## [0.1.21] - 2026-10-23
 
 ### Fixed

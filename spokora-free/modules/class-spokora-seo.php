@@ -106,7 +106,7 @@ class SPOKORA_SEO {
 	 * @param mixed $data Decoded JSON (array) to output.
 	 */
 	private function print_ld_json_script( $data ) {
-		$json = wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+		$json = wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP );
 		if ( ! is_string( $json ) ) {
 			return;
 		}
